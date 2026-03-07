@@ -281,7 +281,32 @@
     border: 1px solid rgba(212,178,85,0.12);
     cursor: pointer; transition: transform .2s;
   }
-  .overlay-img-gallery img:hover { transform: scale(1.03); }
+  .overlay-img-gallery img:hover { transform: scale(1.03); cursor: pointer; }
+
+  /* ── LIGHTBOX ── */
+  .lightbox-backdrop {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(0,0,0,0.92);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity .25s ease;
+  }
+  .lightbox-backdrop.active { opacity: 1; pointer-events: auto; }
+  .lightbox-backdrop img {
+    max-width: 92vw; max-height: 88vh;
+    border-radius: 12px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    object-fit: contain;
+  }
+  .lightbox-close {
+    position: fixed; top: 18px; right: 22px;
+    width: 40px; height: 40px;
+    background: rgba(255,255,255,0.12); border: none;
+    border-radius: 50%; color: #fff; font-size: 22px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    z-index: 2001; transition: background .2s;
+  }
+  .lightbox-close:hover { background: rgba(255,255,255,0.25); }
   .overlay-hero-img {
     width: 100%; max-height: 300px; object-fit: cover;
     border-radius: 0;
@@ -730,6 +755,12 @@
   </div>
 </div>
 
+<!-- LIGHTBOX -->
+<div class="lightbox-backdrop" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox(null, true)">✕</button>
+  <img id="lightboxImg" src="" alt="Enlarged view" />
+</div>
+
 <script>
 const overlayData = {
   world: {
@@ -760,7 +791,7 @@ const overlayData = {
       'Quest state persistence across login sessions was spec\'d to handle server-sync edge cases (offline progress, version mismatch), ensuring players never "lose" tracked progress.'
     ],
     icon: '📋',
-    images: ['img/gameplay_town.jpg', 'img/ui_profile.jpg']
+    images: ['img/quest_ui.jpg']
   },
   records: {
     tag: 'Systems Design · Neon Studio',
@@ -775,7 +806,7 @@ const overlayData = {
       'Integrated with the Guild system so that guild-wide record milestones unlock shared rewards — tying individual achievement to social progression.'
     ],
     icon: '📖',
-    images: ['img/ui_codex.jpg', 'img/concept_mansion.jpg']
+    images: ['img/records_main.jpg', 'img/records_achieve.jpg']
   },
   guild: {
     tag: 'Social Systems · Neon Studio',
@@ -790,7 +821,7 @@ const overlayData = {
       'All 50+ system messages, error strings, and edge-case dialogues were written directly in the spec, eliminating copy-related back-and-forth with engineering.'
     ],
     icon: '🏰',
-    images: ['img/gameplay_forest.jpg']
+    images: ['img/guild_friends.jpg', 'img/guild_manage.jpg']
   },
   explore: {
     tag: 'Content Design · Neon Studio',
@@ -805,7 +836,7 @@ const overlayData = {
       'Completion percentage is displayed per-world on the main map screen, creating ambient motivation across regions the player hasn\'t fully explored yet.'
     ],
     icon: '🧭',
-    images: ['img/gameplay_waterway.jpg', 'img/gameplay_dungeon.jpg']
+    images: ['img/explore_missions.jpg', 'img/ui_codex.jpg']
   },
   map: {
     tag: 'UX / Navigation · Neon Studio',
@@ -867,9 +898,9 @@ function buildOverlay(data) {
   let headerHtml;
   if (data.images && data.images.length > 0) {
     if (data.images.length === 1) {
-      headerHtml = `<img class="overlay-hero-img" src="${data.images[0]}" alt="${data.title}" loading="lazy">`;
+      headerHtml = `<img class="overlay-hero-img" src="${data.images[0]}" alt="${data.title}" loading="lazy" onclick="openLightbox('${data.images[0]}')" style="cursor:pointer">`;
     } else {
-      const imgs = data.images.map(src => `<img src="${src}" alt="${data.title}" loading="lazy">`).join('');
+      const imgs = data.images.map(src => `<img src="${src}" alt="${data.title}" loading="lazy" onclick="openLightbox('${src}')">`).join('');
       headerHtml = `<div class="overlay-img-gallery">${imgs}</div>`;
     }
   } else {
@@ -913,7 +944,28 @@ function closeOverlay(e, force) {
   }
 }
 
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlay(null, true); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (document.getElementById('lightbox').classList.contains('active')) {
+      closeLightbox(null, true);
+    } else {
+      closeOverlay(null, true);
+    }
+  }
+});
+
+function openLightbox(src) {
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightboxImg').src = src;
+  lb.classList.add('active');
+}
+
+function closeLightbox(e, force) {
+  if (force || (e && e.target === document.getElementById('lightbox'))) {
+    document.getElementById('lightbox').classList.remove('active');
+    document.getElementById('lightboxImg').src = '';
+  }
+}
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach(el => { if (el.isIntersecting) { el.target.classList.add('visible'); } });
