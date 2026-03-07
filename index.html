@@ -4,6 +4,11 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Juwon Lee — Game Designer</title>
+<meta name="description" content="Portfolio of Juwon Lee, a game designer with 6 years of experience in mobile games. Sole level and systems designer on Chronomaze at Neon Studio." />
+<meta property="og:title" content="Juwon Lee — Game Designer" />
+<meta property="og:description" content="6 years shipping mobile games — from level layouts to full social ecosystems. Based in Essex, UK." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://atopos-game.github.io/Portfolio/" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -248,7 +253,7 @@
     border: 1px solid rgba(212,178,85,0.2);
     max-width: 820px; width: 100%;
     max-height: 90vh; overflow-y: auto;
-    position: relative;
+    position: relative; border-radius: 16px;
     transform: translateY(24px); transition: transform .3s;
   }
   .overlay-backdrop.open .overlay { transform: translateY(0); }
@@ -258,7 +263,7 @@
     background: none; border: 1px solid rgba(212,178,85,0.2);
     color: var(--muted); cursor: pointer; font-size: 18px;
     display: flex; align-items: center; justify-content: center;
-    transition: all .2s; z-index: 1;
+    transition: all .2s; z-index: 1; border-radius: 50%;
   }
   .overlay-close:hover { border-color: var(--gold); color: var(--gold); }
   .overlay-img-placeholder {
@@ -298,6 +303,14 @@
     color: var(--gold); margin-bottom: 10px;
   }
   .overlay-section p { font-size: 14px; color: #b0b7c4; line-height: 1.75; }
+  .overlay-pdf-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px; font-size: 13px; font-weight: 500;
+    color: var(--gold); border: 1px solid rgba(212,178,85,0.3);
+    border-radius: 20px; text-decoration: none; margin-top: 20px;
+    transition: all .2s;
+  }
+  .overlay-pdf-link:hover { background: rgba(212,178,85,0.08); border-color: var(--gold); }
   .design-notes-list { list-style: none; padding: 0; margin: 0; }
   .design-notes-list li {
     font-size: 14px; color: #b0b7c4; line-height: 1.75;
@@ -731,7 +744,8 @@ const overlayData = {
       'Each world was designed with escalating mechanical complexity, not just visual theming — so players felt genuine progression rather than cosmetic variety.'
     ],
     icon: '🗺️',
-    images: ['img/world_concept.jpg', 'img/world_map.jpg', 'img/bg_dante.jpg']
+    images: ['img/world_concept.jpg', 'img/world_map.jpg', 'img/bg_dante.jpg'],
+    pdf: 'pdf/WorldLevelDesign_CaseStudy.pdf'
   },
   quest: {
     tag: 'Systems Design · Neon Studio',
@@ -745,7 +759,8 @@ const overlayData = {
       'Full edge-case spec (50+ states) was written upfront to reduce back-and-forth with engineering during implementation.'
     ],
     icon: '📋',
-    images: ['img/quest_ui.jpg', 'img/hud.jpg']
+    images: ['img/quest_ui.jpg', 'img/hud.jpg'],
+    pdf: 'pdf/QuestGuide_CaseStudy.pdf'
   },
   records: {
     tag: 'Systems Design · Neon Studio',
@@ -759,7 +774,8 @@ const overlayData = {
       'The dual codex/achievement function was intentional: lore-driven players and completionists both find value in the same system.'
     ],
     icon: '📖',
-    images: ['img/records_main.jpg', 'img/records_achieve.jpg', 'img/codex_main.jpg']
+    images: ['img/records_main.jpg', 'img/records_achieve.jpg', 'img/codex_main.jpg'],
+    pdf: 'pdf/Records_CaseStudy.pdf'
   },
   guild: {
     tag: 'Social Systems · Neon Studio',
@@ -877,6 +893,7 @@ function buildOverlay(data) {
         <div class="overlay-section-title">Design Notes</div>
         <ul class="design-notes-list">${notesHtml}</ul>
       </div>
+      ${data.pdf ? `<a href="${data.pdf}" target="_blank" class="overlay-pdf-link">📄 View Full Case Study (PDF)</a>` : ''}
     </div>`;
 }
 
