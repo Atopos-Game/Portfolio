@@ -267,6 +267,20 @@
     display: flex; align-items: center; justify-content: center;
     font-size: 56px; opacity: 0.15;
   }
+  .overlay-img-gallery {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px; padding: 20px 20px 0;
+  }
+  .overlay-img-gallery img {
+    width: 100%; border-radius: 10px; object-fit: cover;
+    border: 1px solid rgba(212,178,85,0.12);
+    cursor: pointer; transition: transform .2s;
+  }
+  .overlay-img-gallery img:hover { transform: scale(1.03); }
+  .overlay-hero-img {
+    width: 100%; max-height: 300px; object-fit: cover;
+    border-radius: 0;
+  }
   .overlay-content { padding: 36px 40px 40px; }
   .overlay-tag {
     font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
@@ -716,7 +730,8 @@ const overlayData = {
       'Built a custom Excel tool to automate monster stat balancing across 200+ maps — eliminated manual calculation errors and cut placement time significantly.',
       'Each world was designed with escalating mechanical complexity, not just visual theming — so players felt genuine progression rather than cosmetic variety.'
     ],
-    icon: '🗺️'
+    icon: '🗺️',
+    images: ['img/world_concept.jpg', 'img/world_map.jpg', 'img/bg_dante.jpg']
   },
   quest: {
     tag: 'Systems Design · Neon Studio',
@@ -729,7 +744,8 @@ const overlayData = {
       'Integrated teleport shortcuts directly into the guide so players could jump to objective locations without opening a separate map screen.',
       'Full edge-case spec (50+ states) was written upfront to reduce back-and-forth with engineering during implementation.'
     ],
-    icon: '📋'
+    icon: '📋',
+    images: ['img/quest_ui.jpg', 'img/hud.jpg']
   },
   records: {
     tag: 'Systems Design · Neon Studio',
@@ -742,7 +758,8 @@ const overlayData = {
       'Visual completion indicators were added so players can gauge remaining content at a glance — this surfaces "almost done" motivation without requiring a separate progress screen.',
       'The dual codex/achievement function was intentional: lore-driven players and completionists both find value in the same system.'
     ],
-    icon: '📖'
+    icon: '📖',
+    images: ['img/records_main.jpg', 'img/records_achieve.jpg', 'img/codex_main.jpg']
   },
   guild: {
     tag: 'Social Systems · Neon Studio',
@@ -756,7 +773,8 @@ const overlayData = {
       'Deputy Guild Master role and attendance system were fully spec\'d but flagged as future dev — the spec was written to accommodate them without requiring a redesign later.',
       'All 50+ system messages and error strings were written in the spec, giving engineering clear copy without back-and-forth.'
     ],
-    icon: '🏰'
+    icon: '🏰',
+    images: ['img/guild_comm.jpg']
   },
   explore: {
     tag: 'Content Design · Neon Studio',
@@ -769,7 +787,8 @@ const overlayData = {
       'Corridor and transition zones receive missions too — rewarding thorough explorers rather than punishing them for finding optional paths.',
       'Shared fog state between Adventure Map and Exploration Missions means one data write drives both systems, reducing server load and eliminating sync bugs.'
     ],
-    icon: '🧭'
+    icon: '🧭',
+    images: ['img/explore_map.jpg', 'img/explore_target.jpg']
   },
   map: {
     tag: 'UX / Navigation · Neon Studio',
@@ -783,7 +802,8 @@ const overlayData = {
       'Indoor zones proxy the player icon to the last outdoor warp point — solving the "where am I?" problem for spaces not on the world graph.',
       'Bidirectional links between Map and Exploration Missions let players move freely between both systems without losing context.'
     ],
-    icon: '📍'
+    icon: '📍',
+    images: ['img/world_map.jpg', 'img/map_area.jpg', 'img/sealed_zone.jpg']
   },
   bingo: {
     tag: 'Event Design · Crowngames',
@@ -827,8 +847,19 @@ const overlayData = {
 
 function buildOverlay(data) {
   const notesHtml = data.designNotes.map(n => `<li>${n}</li>`).join('');
+  let headerHtml;
+  if (data.images && data.images.length > 0) {
+    if (data.images.length === 1) {
+      headerHtml = `<img class="overlay-hero-img" src="${data.images[0]}" alt="${data.title}" loading="lazy">`;
+    } else {
+      const imgs = data.images.map(src => `<img src="${src}" alt="${data.title}" loading="lazy">`).join('');
+      headerHtml = `<div class="overlay-img-gallery">${imgs}</div>`;
+    }
+  } else {
+    headerHtml = `<div class="overlay-img-placeholder">${data.icon}</div>`;
+  }
   return `
-    <div class="overlay-img-placeholder">${data.icon}</div>
+    ${headerHtml}
     <div class="overlay-content">
       <span class="overlay-tag">${data.tag}</span>
       <h2 class="overlay-title">${data.title}</h2>
