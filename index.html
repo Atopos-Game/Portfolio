@@ -6,22 +6,21 @@
 <title>Juwon Lee — Game Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #0b0c10;
-    --bg2: #111318;
-    --bg3: #181b22;
-    --gold: #c9a84c;
-    --gold-dim: #7d6630;
-    --gold-glow: rgba(201,168,76,0.12);
-    --white: #edeae2;
-    --muted: #6b7180;
-    --accent: #c9a84c;
+    --bg: #0d0f14;
+    --bg2: #13161d;
+    --bg3: #1a1e27;
+    --gold: #d4b255;
+    --gold-dim: #8a7038;
+    --gold-glow: rgba(212,178,85,0.10);
+    --white: #f0ede5;
+    --muted: #7d8290;
+    --accent: #d4b255;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -38,14 +37,14 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
     padding: 20px 48px;
-    background: rgba(11,12,16,0.85);
+    background: rgba(13,15,20,0.88);
     backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(201,168,76,0.08);
+    border-bottom: 1px solid rgba(212,178,85,0.08);
   }
   nav .logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800; font-size: 16px;
-    letter-spacing: 0.08em; text-transform: uppercase;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600; font-size: 13px;
+    letter-spacing: 0.06em; text-transform: uppercase;
     color: var(--gold);
   }
   nav ul { list-style: none; display: flex; gap: 36px; }
@@ -62,13 +61,12 @@
     min-height: 100vh;
     display: flex; align-items: center;
     padding: 120px 48px 80px;
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
   }
   #hero::before {
     content: '';
     position: absolute; inset: 0;
-    background: radial-gradient(ellipse 70% 60% at 60% 40%, rgba(201,168,76,0.07) 0%, transparent 70%);
+    background: radial-gradient(ellipse 70% 60% at 60% 40%, rgba(212,178,85,0.06) 0%, transparent 70%);
     pointer-events: none;
   }
   .hero-grid {
@@ -76,25 +74,38 @@
     max-width: 1200px; margin: 0 auto; width: 100%; align-items: center;
   }
   .hero-left { animation: fadeUp .9s ease both; }
+
+  .hero-tags { display: flex; gap: 10px; margin-bottom: 28px; flex-wrap: wrap; }
   .hero-tag {
     display: inline-flex; align-items: center; gap: 8px;
-    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 28px;
-    border: 1px solid rgba(201,168,76,0.25); padding: 6px 14px; border-radius: 2px;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(212,178,85,0.25); padding: 6px 14px; border-radius: 20px;
   }
   .hero-tag::before {
     content: ''; width: 6px; height: 6px;
     border-radius: 50%; background: var(--gold);
     animation: pulse 2s ease infinite;
   }
+  .visa-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase;
+    color: #5ddb6e;
+    border: 1px solid rgba(93,219,110,0.3); padding: 6px 14px; border-radius: 20px;
+    background: rgba(93,219,110,0.06);
+  }
+  .visa-badge::before {
+    content: '✓'; font-weight: 700; font-size: 10px;
+  }
+
   @keyframes pulse {
     0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
   }
   h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(46px, 5.5vw, 78px);
-    font-weight: 300; line-height: 1.05;
-    letter-spacing: -0.01em; margin-bottom: 24px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(42px, 5vw, 68px);
+    font-weight: 700; line-height: 1.1;
+    letter-spacing: -0.02em; margin-bottom: 24px;
   }
   h1 span { color: var(--gold); }
   .hero-sub {
@@ -106,15 +117,11 @@
     display: inline-flex; align-items: center; gap: 8px;
     padding: 12px 24px; font-size: 13px; font-weight: 500;
     letter-spacing: 0.04em; text-decoration: none;
-    border-radius: 2px; transition: all .2s;
+    border-radius: 20px; transition: all .2s;
   }
-  .btn-primary {
-    background: var(--gold); color: #0b0c10;
-  }
-  .btn-primary:hover { background: #e0bd62; }
-  .btn-outline {
-    border: 1px solid rgba(201,168,76,0.35); color: var(--white);
-  }
+  .btn-primary { background: var(--gold); color: #0b0c10; }
+  .btn-primary:hover { background: #e4c56a; }
+  .btn-outline { border: 1px solid rgba(212,178,85,0.35); color: var(--white); }
   .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
 
   .hero-right {
@@ -123,20 +130,19 @@
   }
   .stat-row {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
-    background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.1);
+    background: rgba(212,178,85,0.10); border: 1px solid rgba(212,178,85,0.10);
+    border-radius: 16px; overflow: hidden;
   }
-  .stat {
-    background: var(--bg2); padding: 24px 20px;
-    text-align: center;
-  }
+  .stat { background: var(--bg2); padding: 24px 20px; text-align: center; }
   .stat-num {
-    font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 28px; font-weight: 800;
     color: var(--gold); display: block; line-height: 1;
   }
   .stat-label { font-size: 11px; color: var(--muted); margin-top: 6px; letter-spacing: 0.04em; }
   .hero-desc-block {
-    background: var(--bg2); border: 1px solid rgba(201,168,76,0.1);
+    background: var(--bg2); border: 1px solid rgba(212,178,85,0.10);
     padding: 24px; font-size: 14px; color: var(--muted); line-height: 1.75;
+    border-radius: 14px;
   }
   .hero-desc-block strong { color: var(--white); font-weight: 500; }
 
@@ -153,11 +159,9 @@
     color: var(--gold); margin-bottom: 12px; display: block;
   }
   .section-title {
-    font-family: 'Syne', sans-serif; font-size: 36px; font-weight: 700;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 36px; font-weight: 700;
   }
-  .section-line {
-    width: 40px; height: 2px; background: var(--gold); margin-top: 16px;
-  }
+  .section-line { width: 40px; height: 2px; background: var(--gold); margin-top: 16px; }
 
   /* ── WORK ── */
   #work { background: var(--bg); }
@@ -166,173 +170,125 @@
   .studio-block { margin-bottom: 72px; }
   .studio-label {
     display: flex; align-items: center; gap: 20px;
-    margin-bottom: 32px;
+    margin-bottom: 12px;
   }
   .studio-name {
-    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 700;
     letter-spacing: 0.14em; text-transform: uppercase; color: var(--white);
   }
-  .studio-period {
-    font-size: 12px; color: var(--muted); letter-spacing: 0.04em;
-  }
-  .studio-line { flex: 1; height: 1px; background: rgba(201,168,76,0.12); }
+  .studio-period { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
+  .studio-line { flex: 1; height: 1px; background: rgba(212,178,85,0.12); }
 
-  /* ── CARD GRID ── */
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-  }
-  .card-grid.two-col {
-    grid-template-columns: repeat(3, 1fr);
+  /* category label */
+  .category-label {
+    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--gold-dim); margin: 28px 0 14px; padding-left: 4px;
   }
 
-  .card {
+  /* ── BAR LIST ── */
+  .bar-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .bar-item {
+    display: flex; align-items: center; gap: 20px;
     background: var(--bg2);
-    border: 1px solid rgba(201,168,76,0.06);
+    border: 1px solid rgba(212,178,85,0.06);
+    padding: 18px 24px;
     cursor: pointer;
-    overflow: hidden;
+    transition: border-color .25s, background .25s;
     position: relative;
-    transition: border-color .25s, transform .25s;
-    aspect-ratio: 4/3;
-    display: flex; flex-direction: column;
+    border-radius: 14px;
   }
-  .card:hover {
-    border-color: rgba(201,168,76,0.3);
-    transform: translateY(-3px);
-    z-index: 1;
-  }
-  .card:hover .card-thumb::after {
-    opacity: 0.4;
-  }
-  .card:hover .card-arrow { opacity: 1; transform: translate(0,0); }
-
-  .card-thumb {
-    flex: 1;
-    background: var(--bg3);
-    position: relative;
-    overflow: hidden;
-  }
-  .card-thumb img {
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: center top;
-    display: block;
-    transition: transform .4s ease;
-    filter: brightness(0.7);
-  }
-  .card:hover .card-thumb img { transform: scale(1.05); }
-  .card-thumb::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(to bottom, transparent 30%, rgba(11,12,16,0.7) 100%);
-    transition: opacity .25s;
-  }
-  .card-thumb.no-img {
-    display: flex; align-items: center; justify-content: center;
+  .bar-item:hover {
+    border-color: rgba(212,178,85,0.25);
     background: var(--bg3);
   }
-  .card-thumb.no-img .card-icon {
-    font-size: 36px; opacity: 0.18;
+  .bar-item:hover .bar-arrow { opacity: 1; color: var(--gold); }
+
+  .bar-icon {
+    width: 48px; height: 48px;
+    background: rgba(212,178,85,0.08);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
   }
 
-  .card-body {
-    padding: 16px 18px 18px;
-    background: var(--bg2);
-    position: relative;
+  .bar-content { flex: 1; }
+  .bar-role {
+    display: inline-block;
+    font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 4px;
+    background: rgba(212,178,85,0.10); padding: 3px 10px; border-radius: 20px;
+    font-weight: 500;
   }
-  .card-role {
-    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--gold-dim); margin-bottom: 5px;
+  .bar-title {
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 700;
+    color: var(--white); line-height: 1.3;
   }
-  .card-title {
-    font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700;
-    color: var(--white); line-height: 1.25;
+  .bar-desc {
+    font-size: 13px; color: var(--muted); margin-top: 3px; line-height: 1.5;
   }
-  .card-arrow {
-    position: absolute; bottom: 18px; right: 18px;
-    width: 28px; height: 28px;
-    border: 1px solid rgba(201,168,76,0.4);
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0; transform: translate(4px, 4px); transition: all .25s;
-    font-size: 13px; color: var(--gold);
+  .bar-arrow {
+    font-size: 14px; color: var(--muted); opacity: 0.4;
+    transition: all .2s; flex-shrink: 0;
   }
 
   /* ── OVERLAY ── */
   .overlay-backdrop {
     position: fixed; inset: 0; z-index: 200;
-    background: rgba(11,12,16,0.92);
+    background: rgba(13,15,20,0.92);
     backdrop-filter: blur(8px);
     display: flex; align-items: center; justify-content: center;
     padding: 40px;
-    opacity: 0; pointer-events: none;
-    transition: opacity .3s;
+    opacity: 0; pointer-events: none; transition: opacity .3s;
   }
-  .overlay-backdrop.open {
-    opacity: 1; pointer-events: all;
-  }
+  .overlay-backdrop.open { opacity: 1; pointer-events: all; }
   .overlay {
     background: var(--bg2);
-    border: 1px solid rgba(201,168,76,0.2);
+    border: 1px solid rgba(212,178,85,0.2);
     max-width: 820px; width: 100%;
     max-height: 90vh; overflow-y: auto;
     position: relative;
-    transform: translateY(24px);
-    transition: transform .3s;
+    transform: translateY(24px); transition: transform .3s;
   }
   .overlay-backdrop.open .overlay { transform: translateY(0); }
-
   .overlay-close {
     position: absolute; top: 20px; right: 20px;
     width: 36px; height: 36px;
-    background: none; border: 1px solid rgba(201,168,76,0.2);
+    background: none; border: 1px solid rgba(212,178,85,0.2);
     color: var(--muted); cursor: pointer; font-size: 18px;
     display: flex; align-items: center; justify-content: center;
     transition: all .2s; z-index: 1;
   }
   .overlay-close:hover { border-color: var(--gold); color: var(--gold); }
-
-  .overlay-img {
-    width: 100%; height: 260px; object-fit: cover;
-    object-position: center top; display: block;
-    filter: brightness(0.6);
-  }
   .overlay-img-placeholder {
     width: 100%; height: 200px;
     background: var(--bg3);
     display: flex; align-items: center; justify-content: center;
     font-size: 56px; opacity: 0.15;
   }
-
   .overlay-content { padding: 36px 40px 40px; }
   .overlay-tag {
     font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
     color: var(--gold); margin-bottom: 10px; display: block;
   }
   .overlay-title {
-    font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 700;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 26px; font-weight: 700;
     margin-bottom: 6px;
   }
-  .overlay-meta {
-    font-size: 13px; color: var(--muted); margin-bottom: 28px;
-  }
-  .overlay-divider {
-    height: 1px; background: rgba(201,168,76,0.12); margin-bottom: 28px;
-  }
+  .overlay-meta { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+  .overlay-divider { height: 1px; background: rgba(212,178,85,0.12); margin-bottom: 28px; }
   .overlay-section { margin-bottom: 24px; }
   .overlay-section-title {
     font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--gold); margin-bottom: 10px;
   }
-  .overlay-section p {
-    font-size: 14px; color: #aeb5c0; line-height: 1.75;
-  }
-  .design-notes-list {
-    list-style: none; padding: 0; margin: 0;
-  }
+  .overlay-section p { font-size: 14px; color: #b0b7c4; line-height: 1.75; }
+  .design-notes-list { list-style: none; padding: 0; margin: 0; }
   .design-notes-list li {
-    font-size: 14px; color: #aeb5c0; line-height: 1.75;
+    font-size: 14px; color: #b0b7c4; line-height: 1.75;
     padding: 8px 0 8px 16px; position: relative;
-    border-bottom: 1px solid rgba(201,168,76,0.06);
+    border-bottom: 1px solid rgba(212,178,85,0.06);
   }
   .design-notes-list li:last-child { border-bottom: none; }
   .design-notes-list li::before {
@@ -341,66 +297,60 @@
   }
 
   /* ── PROFILE ── */
-  #profile { background: var(--bg2); border-top: 1px solid rgba(201,168,76,0.08); }
+  #profile { background: var(--bg2); border-top: 1px solid rgba(212,178,85,0.08); }
   .profile-inner {
     max-width: 1200px; margin: 0 auto;
     display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
   }
   .profile-bio h3 {
-    font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 700;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-size: 28px; font-weight: 700;
     margin-bottom: 16px;
   }
   .profile-bio h3 span { color: var(--gold); }
   .profile-bio p {
     font-size: 14px; color: var(--muted); line-height: 1.8; margin-bottom: 16px;
   }
-  .profile-bio .btn { margin-top: 12px; }
-
   .profile-detail { display: flex; flex-direction: column; gap: 32px; }
-  .detail-block {}
   .detail-label {
     font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--gold); margin-bottom: 12px;
   }
   .skill-list { display: flex; flex-wrap: wrap; gap: 8px; }
   .skill-chip {
-    font-size: 12px; padding: 5px 12px;
-    background: rgba(201,168,76,0.05); border: 1px solid rgba(201,168,76,0.14);
-    color: var(--muted);
+    font-size: 12px; padding: 5px 14px;
+    background: rgba(212,178,85,0.05); border: 1px solid rgba(212,178,85,0.14);
+    color: var(--muted); border-radius: 20px;
   }
 
   /* ── CONTACT ── */
-  #contact { background: var(--bg2); border-top: 1px solid rgba(201,168,76,0.08); }
+  #contact { background: var(--bg2); border-top: 1px solid rgba(212,178,85,0.08); }
   .contact-inner {
     max-width: 1200px; margin: 0 auto;
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
-    background: rgba(201,168,76,0.08);
+    background: rgba(212,178,85,0.08);
   }
-  .contact-card {
-    background: var(--bg); padding: 40px 32px; text-align: center;
-  }
+  .contact-card { background: var(--bg); padding: 40px 32px; text-align: center; border-radius: 14px; }
   .contact-icon {
     font-size: 20px; color: var(--gold); margin-bottom: 14px;
-    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700;
   }
   .contact-label {
     font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--muted); margin-bottom: 10px;
   }
   .contact-value {
-    font-size: 14px; color: var(--white); text-decoration: none;
-    transition: color .2s;
+    font-size: 14px; color: var(--white); text-decoration: none; transition: color .2s;
   }
   .contact-value:hover { color: var(--gold); }
 
   /* ── FOOTER ── */
   footer {
     padding: 40px 48px;
-    border-top: 1px solid rgba(201,168,76,0.08);
+    border-top: 1px solid rgba(212,178,85,0.08);
     display: flex; align-items: center; justify-content: space-between;
   }
   .footer-logo {
-    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 14px;
+    font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 14px;
     letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold);
   }
   .footer-copy { font-size: 12px; color: var(--muted); }
@@ -414,20 +364,16 @@
     #hero { padding: 100px 24px 60px; }
     .hero-grid { grid-template-columns: 1fr; gap: 48px; }
     section { padding: 72px 24px; }
-    .card-grid { grid-template-columns: 1fr 1fr; }
     .profile-inner { grid-template-columns: 1fr; gap: 48px; }
     .contact-inner { grid-template-columns: 1fr; }
     footer { flex-direction: column; gap: 16px; text-align: center; }
-    .overlay-content { padding: 24px 24px 28px; }
   }
   @media (max-width: 600px) {
-    .card-grid { grid-template-columns: 1fr; }
     nav ul { display: none; }
     h1 { font-size: 36px; }
     .stat-row { grid-template-columns: repeat(3, 1fr); }
   }
 
-  /* scroll fade-in */
   .reveal {
     opacity: 0; transform: translateY(24px);
     transition: opacity .6s, transform .6s;
@@ -451,7 +397,10 @@
 <section id="hero">
   <div class="hero-grid">
     <div class="hero-left">
-      <div class="hero-tag">Game Designer · Seoul → London</div>
+      <div class="hero-tags">
+        <div class="hero-tag">Game Designer</div>
+        <div class="visa-badge">No Sponsorship Required</div>
+      </div>
       <h1>Designing<br/><span>Worlds.</span><br/>Building Systems.</h1>
       <p class="hero-sub">6 years shipping mobile games — from single-cell level layouts to full social ecosystems. Currently based in Buckhurst Hill, Essex, seeking opportunities in UK games.</p>
       <div class="hero-links">
@@ -475,7 +424,7 @@
         </div>
       </div>
       <div class="hero-desc-block">
-        Most recently at <strong>Neon Studio (Seoul)</strong> as sole level &amp; systems designer on <strong>Chronomaze</strong> — a 2D side-scrolling mobile MMORPG that reached 627K views on Bilibili PV before open beta. Before that, event design &amp; retention work at <strong>Crowngames</strong> lifted monthly retention by <strong>10%</strong>.
+        Most recently at <strong>Neon Studio</strong> as sole level &amp; systems designer on <strong>Chronomaze</strong> — a 2D side-scrolling mobile MMORPG that reached <strong>627K views</strong> on Bilibili PV before open beta. Before that, event design &amp; retention work at <strong>Crowngames</strong> lifted monthly retention by <strong>10%</strong>.
       </div>
     </div>
   </div>
@@ -494,64 +443,94 @@
     <div class="studio-block reveal">
       <div class="studio-label">
         <span class="studio-name">Neon Studio</span>
-        <span class="studio-period">2021 – 2025 · Seoul</span>
+        <span class="studio-period">2021 – 2025</span>
         <div class="studio-line"></div>
         <span class="studio-period">Chronomaze · Mobile MMORPG</span>
       </div>
-      <div class="card-grid">
-        <!-- Card 1: World & Level Design -->
-        <div class="card" onclick="openOverlay('world')">
-          <div class="card-thumb no-img"><span class="card-icon">🗺</span></div>
-          <div class="card-body">
-            <div class="card-role">Level Design</div>
-            <div class="card-title">World &amp; Level Design</div>
-            <div class="card-arrow">↗</div>
+
+      <div class="category-label">🌍 World & Level Design</div>
+      <div class="bar-list">
+        <div class="bar-item" onclick="openOverlay('world')">
+          <div class="bar-icon">🗺️</div>
+          <div class="bar-content">
+            <div class="bar-role">Level Design</div>
+            <div class="bar-title">World &amp; Level Design</div>
+            <div class="bar-desc">211+ field maps, 11 worlds, full encounter &amp; monster placement</div>
           </div>
+          <div class="bar-arrow">→</div>
         </div>
-        <!-- Card 2: Quest Guide -->
-        <div class="card" onclick="openOverlay('quest')">
-          <div class="card-thumb no-img"><span class="card-icon">📋</span></div>
-          <div class="card-body">
-            <div class="card-role">Systems Design</div>
-            <div class="card-title">Quest Guide System</div>
-            <div class="card-arrow">↗</div>
+        <div class="bar-item" onclick="openOverlay('map')">
+          <div class="bar-icon">📍</div>
+          <div class="bar-content">
+            <div class="bar-role">UX / Navigation</div>
+            <div class="bar-title">Map &amp; Minimap</div>
+            <div class="bar-desc">Fog-of-war, icon layering, Dimensional Gate travel across 200+ maps</div>
           </div>
+          <div class="bar-arrow">→</div>
         </div>
-        <!-- Card 3: Records -->
-        <div class="card" onclick="openOverlay('records')">
-          <div class="card-thumb no-img"><span class="card-icon">📜</span></div>
-          <div class="card-body">
-            <div class="card-role">Systems Design</div>
-            <div class="card-title">Records System</div>
-            <div class="card-arrow">↗</div>
+        <div class="bar-item" onclick="openOverlay('explore')">
+          <div class="bar-icon">🧭</div>
+          <div class="bar-content">
+            <div class="bar-role">Content Design</div>
+            <div class="bar-title">Exploration Missions</div>
+            <div class="bar-desc">650+ missions across 11 regions, always-active passive progression</div>
           </div>
+          <div class="bar-arrow">→</div>
         </div>
-        <!-- Card 4: Guild -->
-        <div class="card" onclick="openOverlay('guild')">
-          <div class="card-thumb no-img"><span class="card-icon">⚔️</span></div>
-          <div class="card-body">
-            <div class="card-role">Social Systems</div>
-            <div class="card-title">Guild System</div>
-            <div class="card-arrow">↗</div>
+      </div>
+
+      <div class="category-label">⚙️ Systems</div>
+      <div class="bar-list">
+        <div class="bar-item" onclick="openOverlay('guild')">
+          <div class="bar-icon">🏰</div>
+          <div class="bar-content">
+            <div class="bar-role">Social Systems</div>
+            <div class="bar-title">Guild System</div>
+            <div class="bar-desc">Formation, ranks, donation loops, guild room as real field map</div>
           </div>
+          <div class="bar-arrow">→</div>
         </div>
-        <!-- Card 5: Exploration Missions -->
-        <div class="card" onclick="openOverlay('explore')">
-          <div class="card-thumb no-img"><span class="card-icon">🧭</span></div>
-          <div class="card-body">
-            <div class="card-role">Content Design</div>
-            <div class="card-title">Exploration Missions</div>
-            <div class="card-arrow">↗</div>
+        <div class="bar-item" onclick="openOverlay('quest')">
+          <div class="bar-icon">📋</div>
+          <div class="bar-content">
+            <div class="bar-role">Systems Design</div>
+            <div class="bar-title">Quest Guide System</div>
+            <div class="bar-desc">Multi-objective tracker with priority sorting &amp; teleport integration</div>
           </div>
+          <div class="bar-arrow">→</div>
         </div>
-        <!-- Card 6: Map & Minimap -->
-        <div class="card" onclick="openOverlay('map')">
-          <div class="card-thumb no-img"><span class="card-icon">🧩</span></div>
-          <div class="card-body">
-            <div class="card-role">UX / Navigation</div>
-            <div class="card-title">Map &amp; Minimap</div>
-            <div class="card-arrow">↗</div>
+        <div class="bar-item" onclick="openOverlay('records')">
+          <div class="bar-icon">📖</div>
+          <div class="bar-content">
+            <div class="bar-role">Systems Design</div>
+            <div class="bar-title">Records System</div>
+            <div class="bar-desc">Hybrid achievement &amp; codex tracker, 46+ record types</div>
           </div>
+          <div class="bar-arrow">→</div>
+        </div>
+      </div>
+    </div>
+
+      <!-- Video / Links -->
+      <div class="category-label" style="margin-top: 32px;">🎬 Media</div>
+      <div class="bar-list">
+        <div class="bar-item" onclick="window.open('https://youtu.be/erDrlIZGAf4','_blank')">
+          <div class="bar-icon">▶️</div>
+          <div class="bar-content">
+            <div class="bar-role">Unity Demo</div>
+            <div class="bar-title">Chronomaze — Gameplay Demo</div>
+            <div class="bar-desc">9-min Unity editor walkthrough: world traversal, systems, and UI flow</div>
+          </div>
+          <div class="bar-arrow">↗</div>
+        </div>
+        <div class="bar-item" onclick="window.open('https://www.bilibili.com/video/BV1uj411s7at/','_blank')">
+          <div class="bar-icon">🎬</div>
+          <div class="bar-content">
+            <div class="bar-role">Official PV · 627K Views</div>
+            <div class="bar-title">Chronomaze — Bilibili PV</div>
+            <div class="bar-desc">Official promotion video on Bilibili with 627,000+ views</div>
+          </div>
+          <div class="bar-arrow">↗</div>
         </div>
       </div>
     </div>
@@ -560,37 +539,60 @@
     <div class="studio-block reveal">
       <div class="studio-label">
         <span class="studio-name">Crowngames</span>
-        <span class="studio-period">2019 – 2021 · Seoul</span>
+        <span class="studio-period">2019 – 2021</span>
         <div class="studio-line"></div>
-        <span class="studio-period">Slotica 5 · Social Casino</span>
+        <span class="studio-period">Slotica 5 &amp; Dual · Social Casino</span>
       </div>
-      <div class="card-grid" style="grid-template-columns: repeat(3,1fr);">
-        <!-- Card: Bingo Masters -->
-        <div class="card" onclick="openOverlay('bingo')">
-          <div class="card-thumb no-img"><span class="card-icon">🎯</span></div>
-          <div class="card-body">
-            <div class="card-role">Event Design</div>
-            <div class="card-title">Bingo Masters</div>
-            <div class="card-arrow">↗</div>
+
+      <div class="bar-list">
+        <div class="bar-item" onclick="openOverlay('bingo')">
+          <div class="bar-icon">🎯</div>
+          <div class="bar-content">
+            <div class="bar-role">Event Design</div>
+            <div class="bar-title">Bingo Masters</div>
+            <div class="bar-desc">Recurring bingo-card event driving daily engagement</div>
           </div>
+          <div class="bar-arrow">→</div>
         </div>
-        <!-- Card: Halloween -->
-        <div class="card" onclick="openOverlay('halloween')">
-          <div class="card-thumb no-img"><span class="card-icon">🎃</span></div>
-          <div class="card-body">
-            <div class="card-role">Event Design</div>
-            <div class="card-title">Halloween Event</div>
-            <div class="card-arrow">↗</div>
+        <div class="bar-item" onclick="openOverlay('halloween')">
+          <div class="bar-icon">🎃</div>
+          <div class="bar-content">
+            <div class="bar-role">Event Design</div>
+            <div class="bar-title">Halloween Event</div>
+            <div class="bar-desc">8-zone map event, pumpkin collection with escalating All Clear bonuses</div>
           </div>
+          <div class="bar-arrow">→</div>
         </div>
-        <!-- Card: Puppy -->
-        <div class="card" onclick="openOverlay('puppy')">
-          <div class="card-thumb no-img"><span class="card-icon">🐾</span></div>
-          <div class="card-body">
-            <div class="card-role">Event Design</div>
-            <div class="card-title">Puppy Event</div>
-            <div class="card-arrow">↗</div>
+        <div class="bar-item" onclick="openOverlay('puppy')">
+          <div class="bar-icon">🐶</div>
+          <div class="bar-content">
+            <div class="bar-role">Event Design</div>
+            <div class="bar-title">Puppy Event</div>
+            <div class="bar-desc">Care-based social event targeting session frequency</div>
           </div>
+          <div class="bar-arrow">→</div>
+        </div>
+      </div>
+
+      <div class="category-label" style="margin-top: 24px;">🔗 Live Games</div>
+      <div class="bar-list">
+        <div class="bar-item" onclick="window.open('https://apps.facebook.com/slotica_five/','_blank')">
+          <div class="bar-icon">🎰</div>
+          <div class="bar-content">
+            <div class="bar-role">Live Service</div>
+            <div class="bar-title">Slotica 5</div>
+            <div class="bar-desc">Social casino game — Facebook Instant Games</div>
+          </div>
+          <div class="bar-arrow">↗</div>
+        </div>
+        <div class="bar-item" onclick="window.open('https://www.facebook.com/gaming/play/491110406046537/','_blank')">
+          <div class="bar-icon">🃏</div>
+          <div class="bar-content">
+            <div class="bar-role">Live Service</div>
+            <div class="bar-title">Dual</div>
+            <div class="bar-desc">Social casino game — Facebook Gaming</div>
+          </div>
+          <div class="bar-arrow">↗</div>
         </div>
       </div>
     </div>
@@ -610,7 +612,7 @@
       <h3>Juwon <span>Lee</span></h3>
       <p>Game designer with 6 years of experience in mobile games. Sole level and systems designer on Chronomaze at Neon Studio — responsible for 200+ maps, 11 worlds, and 15 systems from concept to implementation.</p>
       <p>Before that, CS &amp; event design at Crowngames on Slotica 5, where iterative event work helped push monthly retention up 10%.</p>
-      <p>Based in Buckhurst Hill, Essex, UK on a Youth Mobility Scheme visa. Looking for a role where deep craft and clear design thinking are valued.</p>
+      <p>Based in Buckhurst Hill, Essex, UK. Eligible to work in the UK immediately — no sponsorship needed.</p>
       <div class="hero-links">
         <a href="https://www.linkedin.com/in/juwon-lee-5b3097219" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
         <a href="mailto:quierado@gmail.com" class="btn btn-outline">Email ↗</a>
@@ -714,7 +716,7 @@ const overlayData = {
       'Built a custom Excel tool to automate monster stat balancing across 200+ maps — eliminated manual calculation errors and cut placement time significantly.',
       'Each world was designed with escalating mechanical complexity, not just visual theming — so players felt genuine progression rather than cosmetic variety.'
     ],
-    icon: '🗺'
+    icon: '🗺️'
   },
   quest: {
     tag: 'Systems Design · Neon Studio',
@@ -740,7 +742,7 @@ const overlayData = {
       'Visual completion indicators were added so players can gauge remaining content at a glance — this surfaces "almost done" motivation without requiring a separate progress screen.',
       'The dual codex/achievement function was intentional: lore-driven players and completionists both find value in the same system.'
     ],
-    icon: '📜'
+    icon: '📖'
   },
   guild: {
     tag: 'Social Systems · Neon Studio',
@@ -754,7 +756,7 @@ const overlayData = {
       'Deputy Guild Master role and attendance system were fully spec\'d but flagged as future dev — the spec was written to accommodate them without requiring a redesign later.',
       'All 50+ system messages and error strings were written in the spec, giving engineering clear copy without back-and-forth.'
     ],
-    icon: '⚔️'
+    icon: '🏰'
   },
   explore: {
     tag: 'Content Design · Neon Studio',
@@ -781,7 +783,7 @@ const overlayData = {
       'Indoor zones proxy the player icon to the last outdoor warp point — solving the "where am I?" problem for spaces not on the world graph.',
       'Bidirectional links between Map and Exploration Missions let players move freely between both systems without losing context.'
     ],
-    icon: '🧩'
+    icon: '📍'
   },
   bingo: {
     tag: 'Event Design · Crowngames',
@@ -819,7 +821,7 @@ const overlayData = {
       'The care mechanic targets session frequency over session length — players come back multiple times per day in short bursts rather than grinding in one sitting.',
       'Diminishing daily multipliers prevent day-1 completion while keeping the reward curve visible enough that casual players stay motivated across the full event window.'
     ],
-    icon: '🐾'
+    icon: '🐶'
   }
 };
 
@@ -865,7 +867,6 @@ function closeOverlay(e, force) {
 
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlay(null, true); });
 
-// scroll reveal
 const observer = new IntersectionObserver(entries => {
   entries.forEach(el => { if (el.isIntersecting) { el.target.classList.add('visible'); } });
 }, { threshold: 0.1 });
