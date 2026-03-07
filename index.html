@@ -186,26 +186,57 @@
 
   /* ── SHOWCASE REEL ── */
   .showcase-reel {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
     margin: 20px 0 28px;
     border-radius: 14px;
     overflow: hidden;
+    position: relative;
+    cursor: pointer;
   }
   .showcase-reel video {
     width: 100%;
     aspect-ratio: 16/9;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 14px;
     border: 1px solid rgba(212,178,85,0.10);
+    display: block;
   }
-  @media (max-width: 900px) {
-    .showcase-reel { grid-template-columns: repeat(2, 1fr); }
+  .showcase-reel::after {
+    content: '⛶';
+    position: absolute; bottom: 14px; right: 14px;
+    width: 36px; height: 36px;
+    background: rgba(0,0,0,0.55);
+    border: 1px solid rgba(212,178,85,0.3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-size: 16px;
+    opacity: 0; transition: opacity .25s;
+    pointer-events: none;
   }
-  @media (max-width: 480px) {
-    .showcase-reel { grid-template-columns: 1fr; }
+  .showcase-reel:hover::after { opacity: 1; }
+
+  /* ── VIDEO LIGHTBOX ── */
+  .video-lightbox-backdrop {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(0,0,0,0.94);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity .25s ease;
   }
+  .video-lightbox-backdrop.active { opacity: 1; pointer-events: auto; }
+  .video-lightbox-backdrop video {
+    width: 92vw; max-width: 1400px; max-height: 88vh;
+    border-radius: 12px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+  }
+  .video-lightbox-close {
+    position: fixed; top: 18px; right: 22px;
+    width: 40px; height: 40px;
+    background: rgba(255,255,255,0.12); border: none;
+    border-radius: 50%; color: #fff; font-size: 22px;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    z-index: 2001; transition: background .2s;
+  }
+  .video-lightbox-close:hover { background: rgba(255,255,255,0.25); }
 
   /* category label */
   .category-label {
@@ -524,18 +555,9 @@
       </div>
 
       <!-- Showcase Reel -->
-      <div class="showcase-reel">
+      <div class="showcase-reel" onclick="openVideoLightbox()">
         <video autoplay muted loop playsinline>
-          <source src="video/clip_explore.webm" type="video/webm">
-        </video>
-        <video autoplay muted loop playsinline>
-          <source src="video/clip_combat.webm" type="video/webm">
-        </video>
-        <video autoplay muted loop playsinline>
-          <source src="video/clip_dungeon.webm" type="video/webm">
-        </video>
-        <video autoplay muted loop playsinline>
-          <source src="video/clip_sealed.webm" type="video/webm">
+          <source src="video/showcase_reel_v2.webm" type="video/webm">
         </video>
       </div>
 
@@ -600,10 +622,9 @@
           <div class="bar-arrow">→</div>
         </div>
       </div>
-    </div>
 
       <!-- Video / Links -->
-      <div class="category-label" style="margin-top: 32px;">🎬 Media</div>
+      <div class="category-label" style="margin-top: 32px;">🎬 Chronomaze — Video</div>
       <div class="bar-list">
         <div class="bar-item" onclick="window.open('https://youtu.be/erDrlIZGAf4','_blank')">
           <div class="bar-icon">▶️</div>
@@ -632,7 +653,7 @@
         <span class="studio-name">Crowngames</span>
         <span class="studio-period">2019 – 2021</span>
         <div class="studio-line"></div>
-        <span class="studio-period">Slotica 5 &amp; Dual · Social Casino</span>
+        <span class="studio-period">Slotica 5 &amp; Duel · Social Casino</span>
       </div>
 
       <div class="bar-list">
@@ -665,27 +686,6 @@
         </div>
       </div>
 
-      <div class="category-label" style="margin-top: 24px;">🔗 Live Games</div>
-      <div class="bar-list">
-        <div class="bar-item" onclick="window.open('https://apps.facebook.com/slotica_five/','_blank')">
-          <div class="bar-icon">🎰</div>
-          <div class="bar-content">
-            <div class="bar-role">Live Service</div>
-            <div class="bar-title">Slotica 5</div>
-            <div class="bar-desc">Social casino game — Facebook Instant Games</div>
-          </div>
-          <div class="bar-arrow">↗</div>
-        </div>
-        <div class="bar-item" onclick="window.open('https://www.facebook.com/gaming/play/491110406046537/','_blank')">
-          <div class="bar-icon">🃏</div>
-          <div class="bar-content">
-            <div class="bar-role">Live Service</div>
-            <div class="bar-title">Dual</div>
-            <div class="bar-desc">Social casino game — Facebook Gaming</div>
-          </div>
-          <div class="bar-arrow">↗</div>
-        </div>
-      </div>
     </div>
 
   </div>
@@ -792,6 +792,14 @@
     <button class="overlay-close" onclick="closeOverlay(null, true)">✕</button>
     <div id="overlayInner"></div>
   </div>
+</div>
+
+<!-- VIDEO LIGHTBOX -->
+<div class="video-lightbox-backdrop" id="videoLightbox" onclick="closeVideoLightbox(event)">
+  <button class="video-lightbox-close" onclick="closeVideoLightbox(null, true)">✕</button>
+  <video id="videoLightboxPlayer" controls autoplay loop>
+    <source src="video/showcase_reel_v2.webm" type="video/webm">
+  </video>
 </div>
 
 <!-- LIGHTBOX -->
@@ -903,7 +911,8 @@ const overlayData = {
       'Fill rate was tuned so casual players complete ~60% naturally, while completionists need deliberate extended sessions — serving both segments without alienating either.',
       'Event contributed to a broader 10% monthly retention improvement across the event portfolio at Crowngames.'
     ],
-    icon: '🎯'
+    icon: '🎯',
+    images: ['img/event_bingo_card.jpg', 'img/event_bingo_collection.jpg']
   },
   halloween: {
     tag: 'Event Design · Crowngames',
@@ -916,7 +925,8 @@ const overlayData = {
       'The All Clear mechanic (up to 3 rounds with scaling rewards) extends sessions for engaged players without punishing casual players who stop at round 1.',
       'Solo-authored the initial concept through 4 iterations before handoff — the core loop survived intact through production, validating early prototyping investment.'
     ],
-    icon: '🎃'
+    icon: '🎃',
+    images: ['img/event_halloween_map.jpg', 'img/event_halloween_gameplay.jpg']
   },
   puppy: {
     tag: 'Event Design · Crowngames',
@@ -928,7 +938,8 @@ const overlayData = {
       'The care mechanic targets session frequency over session length — short return visits rather than grinding marathons.',
       'Diminishing daily multipliers prevent early completion while maintaining visible progress for casual players across the full event window.'
     ],
-    icon: '🐶'
+    icon: '🐶',
+    images: ['img/event_puppy_lobby.jpg', 'img/event_puppy_flow.jpg']
   }
 };
 
@@ -985,13 +996,34 @@ function closeOverlay(e, force) {
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    if (document.getElementById('lightbox').classList.contains('active')) {
+    if (document.getElementById('videoLightbox').classList.contains('active')) {
+      closeVideoLightbox(null, true);
+    } else if (document.getElementById('lightbox').classList.contains('active')) {
       closeLightbox(null, true);
     } else {
       closeOverlay(null, true);
     }
   }
 });
+
+function openVideoLightbox() {
+  const vl = document.getElementById('videoLightbox');
+  const player = document.getElementById('videoLightboxPlayer');
+  vl.classList.add('active');
+  player.currentTime = 0;
+  player.play();
+  document.body.style.overflow = 'hidden';
+}
+
+function closeVideoLightbox(e, force) {
+  if (force || (e && e.target === document.getElementById('videoLightbox'))) {
+    const vl = document.getElementById('videoLightbox');
+    const player = document.getElementById('videoLightboxPlayer');
+    vl.classList.remove('active');
+    player.pause();
+    document.body.style.overflow = '';
+  }
+}
 
 function openLightbox(src) {
   const lb = document.getElementById('lightbox');
