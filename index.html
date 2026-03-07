@@ -4,19 +4,19 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Juwon Lee — Game Designer</title>
-<meta name="description" content="Portfolio of Juwon Lee, a game designer with 6 years of experience in mobile games. Sole level and systems designer on Chronomaze at Neon Studio." />
-<meta property="og:title" content="Juwon Lee — Game Designer" />
-<meta property="og:description" content="6 years shipping mobile games — from level layouts to full social ecosystems. Based in Essex, UK." />
+<meta name="description" content="Juwon Lee — Sole level and systems designer on Chronomaze (mobile MMORPG). 211+ maps, 15 systems, 6 years shipping mobile games. Based in Essex, UK." />
+<meta property="og:title" content="Juwon Lee — Game Designer | 6yr Mobile Games" />
+<meta property="og:description" content="Sole level & systems designer on Chronomaze. 211+ field maps, 15 systems designed end-to-end. Based in Essex, UK — no sponsorship required." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://atopos-game.github.io/Portfolio/" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80' font-family='sans-serif'>JL</text></svg>" />
 <meta property="og:image" content="https://atopos-game.github.io/Portfolio/video/poster.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Juwon Lee — Game Designer" />
-<meta name="twitter:description" content="6 years shipping mobile games — from level layouts to full social ecosystems. Based in Essex, UK." />
+<meta name="twitter:title" content="Juwon Lee — Game Designer | 6yr Mobile Games" />
+<meta name="twitter:description" content="Sole level & systems designer on Chronomaze. 211+ field maps, 15 systems designed end-to-end. Essex, UK." />
 <meta name="twitter:image" content="https://atopos-game.github.io/Portfolio/video/poster.jpg" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Juwon Lee","jobTitle":"Game Designer","url":"https://atopos-game.github.io/Portfolio/","email":"quierado@gmail.com","telephone":"+447384429912","address":{"@type":"PostalAddress","addressLocality":"Buckhurst Hill","addressRegion":"Essex","addressCountry":"GB"},"sameAs":["https://www.linkedin.com/in/juwon-lee-5b3097219"],"knowsAbout":["Level Design","Systems Design","Event Design","Mobile Games","Unity"]}
+{"@context":"https://schema.org","@type":"Person","name":"Juwon Lee","jobTitle":"Game Designer","url":"https://atopos-game.github.io/Portfolio/","email":"quierado@gmail.com","telephone":"+447384429912","address":{"@type":"PostalAddress","addressLocality":"Buckhurst Hill","addressRegion":"Essex","addressCountry":"GB"},"sameAs":["https://www.linkedin.com/in/juwon-lee-5b3097219"],"knowsAbout":["Level Design","Systems Design","Event Design","Mobile Games","Unity","Excel Automation"]}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -199,12 +199,16 @@
     border-radius: 14px;
     overflow: hidden;
     position: relative;
+    max-width: 720px;
   }
   .showcase-reel video {
     width: 100%;
+    max-height: 400px;
     border-radius: 14px;
     border: 1px solid rgba(212,178,85,0.10);
     display: block;
+    object-fit: contain;
+    background: #000;
   }
 
   /* category label */
@@ -274,7 +278,7 @@
   .overlay {
     background: var(--bg2);
     border: 1px solid rgba(212,178,85,0.2);
-    max-width: 820px; width: 100%;
+    max-width: 860px; width: 100%;
     max-height: 90vh; overflow-y: auto;
     position: relative; border-radius: 16px;
     transform: translateY(24px); transition: transform .3s;
@@ -289,12 +293,6 @@
     transition: all .2s; z-index: 1; border-radius: 50%;
   }
   .overlay-close:hover { border-color: var(--gold); color: var(--gold); }
-  .overlay-img-placeholder {
-    width: 100%; height: 200px;
-    background: var(--bg3);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 56px; opacity: 0.15;
-  }
   .overlay-img-gallery {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 10px; padding: 20px 20px 0;
@@ -304,7 +302,7 @@
     border: 1px solid rgba(212,178,85,0.12);
     cursor: pointer; transition: transform .2s;
   }
-  .overlay-img-gallery img:hover { transform: scale(1.03); cursor: pointer; }
+  .overlay-img-gallery img:hover { transform: scale(1.03); }
 
   /* ── LIGHTBOX ── */
   .lightbox-backdrop {
@@ -371,6 +369,65 @@
     color: var(--gold); font-weight: 500;
   }
 
+  /* ── OVERLAY DATA TABLE ── */
+  .overlay-table {
+    width: 100%; border-collapse: collapse; margin: 12px 0 16px;
+    font-size: 12px;
+  }
+  .overlay-table th {
+    background: rgba(212,178,85,0.12); color: var(--gold);
+    font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 8px 12px; text-align: left; font-weight: 600;
+    border-bottom: 1px solid rgba(212,178,85,0.2);
+  }
+  .overlay-table td {
+    padding: 7px 12px; color: #b0b7c4;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 12px; line-height: 1.5;
+  }
+  .overlay-table tr:hover td { background: rgba(212,178,85,0.04); }
+  .overlay-table .num { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; color: var(--white); }
+
+  /* ── OVERLAY FLOW DIAGRAM ── */
+  .flow-diagram {
+    display: flex; align-items: center; gap: 0; margin: 14px 0 18px;
+    flex-wrap: wrap; justify-content: center;
+  }
+  .flow-box {
+    background: rgba(212,178,85,0.08); border: 1px solid rgba(212,178,85,0.2);
+    padding: 10px 16px; border-radius: 10px; text-align: center;
+    font-size: 12px; color: var(--white); min-width: 100px;
+    line-height: 1.4;
+  }
+  .flow-box small { display: block; font-size: 10px; color: var(--muted); }
+  .flow-arrow { color: var(--gold); font-size: 18px; padding: 0 6px; flex-shrink: 0; }
+  .flow-box.highlight { border-color: var(--gold); background: rgba(212,178,85,0.15); }
+
+  /* dual loop diagram */
+  .dual-loop {
+    display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px;
+    align-items: center; margin: 14px 0 18px;
+  }
+  .loop-col { text-align: center; }
+  .loop-label {
+    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 8px;
+  }
+  .loop-items { display: flex; flex-direction: column; gap: 6px; }
+  .loop-item {
+    background: rgba(212,178,85,0.06); border: 1px solid rgba(212,178,85,0.12);
+    padding: 6px 12px; border-radius: 8px; font-size: 11px; color: #b0b7c4;
+  }
+  .loop-center {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    padding: 16px 12px;
+  }
+  .loop-action {
+    background: var(--gold); color: var(--bg); padding: 8px 16px;
+    border-radius: 20px; font-size: 11px; font-weight: 600;
+  }
+  .loop-arrows { font-size: 20px; color: var(--gold-dim); }
+
   /* ── PROFILE ── */
   #profile { background: var(--bg2); border-top: 1px solid rgba(212,178,85,0.08); }
   .profile-inner {
@@ -396,6 +453,38 @@
     background: rgba(212,178,85,0.05); border: 1px solid rgba(212,178,85,0.14);
     color: var(--muted); border-radius: 20px;
   }
+
+  /* ── CAREER TIMELINE ── */
+  .career-timeline {
+    margin: 24px 0 8px;
+    display: flex; flex-direction: column; gap: 0;
+    position: relative;
+    padding-left: 24px;
+  }
+  .career-timeline::before {
+    content: '';
+    position: absolute; left: 7px; top: 8px; bottom: 8px;
+    width: 2px; background: rgba(212,178,85,0.18);
+  }
+  .tl-item {
+    position: relative; padding: 0 0 20px 0;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute; left: -21px; top: 6px;
+    width: 10px; height: 10px;
+    border-radius: 50%; background: var(--gold);
+    border: 2px solid var(--bg2);
+  }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-role {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px; font-weight: 600; color: var(--white);
+    line-height: 1.3;
+  }
+  .tl-company { font-size: 13px; color: var(--gold); }
+  .tl-period { font-size: 11px; color: var(--muted); }
+  .tl-desc { font-size: 12px; color: var(--muted); margin-top: 2px; line-height: 1.5; }
 
   /* ── CONTACT ── */
   #contact { background: var(--bg2); border-top: 1px solid rgba(212,178,85,0.08); }
@@ -456,6 +545,13 @@
     .profile-inner { grid-template-columns: 1fr; gap: 48px; }
     .contact-inner { grid-template-columns: 1fr; }
     footer { flex-direction: column; gap: 16px; text-align: center; }
+    .overlay { max-width: 100%; margin: 0 12px; }
+    .overlay-content { padding: 24px 20px 28px; }
+    .overlay-table { font-size: 11px; }
+    .overlay-table th, .overlay-table td { padding: 5px 8px; }
+    .flow-diagram { gap: 4px; }
+    .flow-box { min-width: 80px; padding: 8px 10px; font-size: 11px; }
+    .dual-loop { grid-template-columns: 1fr; gap: 8px; }
   }
   /* mobile nav toggle */
   .nav-toggle {
@@ -481,6 +577,8 @@
     .nav-toggle { display: block; }
     h1 { font-size: 36px; }
     .stat-row { grid-template-columns: repeat(3, 1fr); }
+    .overlay-backdrop { padding: 16px 8px; }
+    .overlay-img-gallery { grid-template-columns: 1fr; }
   }
 
   .reveal {
@@ -512,9 +610,10 @@
         <div class="visa-badge">No Sponsorship Required</div>
       </div>
       <h1>Designing<br/><span>Worlds.</span><br/>Building Systems.</h1>
-      <p class="hero-sub">6 years shipping mobile games — from single-cell level layouts to full social ecosystems. Currently based in Buckhurst Hill, Essex, seeking opportunities in UK games.</p>
+      <p class="hero-sub">6 years shipping mobile games — from single-cell level layouts to full social ecosystems. Based in Essex, UK. Available immediately.</p>
       <div class="hero-links">
         <a href="#work" class="btn btn-primary">View Work</a>
+        <a href="CV_JuwonLee.pdf" download class="btn btn-outline">Download CV ↓</a>
         <a href="https://www.linkedin.com/in/juwon-lee-5b3097219" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
       </div>
     </div>
@@ -560,7 +659,7 @@
 
       <!-- Showcase Reel -->
       <div class="showcase-reel">
-        <video controls loop playsinline poster="video/poster.jpg" preload="metadata" aria-label="Chronomaze gameplay showcase reel">
+        <video controls loop playsinline poster="video/poster.jpg" preload="none" aria-label="Chronomaze gameplay showcase reel">
           <source src="video/showcase_reel_v3.webm" type="video/webm">
           <source src="video/showcase_reel_v3.mp4" type="video/mp4">
         </video>
@@ -723,9 +822,31 @@
       <p>Game designer with 6 years of experience in mobile games. Sole level and systems designer on Chronomaze at Neon Studio — responsible for 211+ maps, 11 worlds, and 15 systems from concept to implementation.</p>
       <p>Before that, CS &amp; event design at Crowngames on Slotica 5, where iterative event work helped push monthly retention up 10%.</p>
       <p>Based in Buckhurst Hill, Essex, UK. Eligible to work in the UK immediately — no sponsorship needed.</p>
-      <div class="hero-links">
+
+      <!-- Career Timeline -->
+      <div class="career-timeline">
+        <div class="tl-item">
+          <div class="tl-role">Game Designer</div>
+          <div class="tl-company">Neon Studio · Seoul</div>
+          <div class="tl-period">May 2021 – Jun 2025 · 4 yrs</div>
+          <div class="tl-desc">Chronomaze — sole level &amp; systems designer</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-role">Event Designer &amp; CS</div>
+          <div class="tl-company">Crowngames · Seoul</div>
+          <div class="tl-period">Feb 2019 – May 2021 · 2 yrs</div>
+          <div class="tl-desc">Slotica 5 — event planning &amp; retention</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-role">Retail Sales Manager</div>
+          <div class="tl-company">Happytel · Melbourne</div>
+          <div class="tl-period">Oct 2015 – Jan 2017</div>
+        </div>
+      </div>
+
+      <div class="hero-links" style="margin-top: 20px;">
+        <a href="CV_JuwonLee.pdf" download class="btn btn-outline">Download CV ↓</a>
         <a href="https://www.linkedin.com/in/juwon-lee-5b3097219" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
-        <a href="mailto:quierado@gmail.com" class="btn btn-outline">Email ↗</a>
       </div>
     </div>
     <div class="profile-detail reveal">
@@ -830,6 +951,30 @@ const overlayData = {
     meta: 'Chronomaze · Sole Designer · 2021–2025',
     overview: 'Sole level designer responsible for all 211+ field maps across 11 overworld regions in Chronomaze, a 2D side-scrolling mobile MMORPG. Each region — from the medieval hub town of Dante to the frozen Salt Mines and the mystical Sage\'s Library — was designed with its own encounter philosophy, environmental gimmicks, and pacing arc. Also took full ownership of the 63+ Sealed Zone stages (instanced dungeon content) mid-production after the previous designer left.',
     process: 'Full pipeline ownership from concept to live: layout blueprint → Unity collision/platform placement → monster & gimmick data → art direction handoff. Built a custom Excel automation tool that computed monster stat curves across 200+ maps, eliminating manual balancing errors. Iterated through two open beta cycles, adjusting difficulty curves and visual clarity based on playtest heatmaps and session-length data.',
+    dataTable: `<table class="overlay-table">
+      <tr><th>World</th><th>Role in Progression</th><th>Key Mechanic Introduced</th></tr>
+      <tr><td>Hermit\'s Forest</td><td>Tutorial — teaches move, jump, attack</td><td>Basic combat loop, linear path</td></tr>
+      <tr><td>Knight\'s Garden</td><td>First open zone — branching paths</td><td>Exploration, first side content</td></tr>
+      <tr><td>Dante Village</td><td>Central hub — social + commerce</td><td>NPC shops, guild room, mailbox</td></tr>
+      <tr><td>Spring Waterway</td><td>Vertical complexity — multi-layer</td><td>Levers, water gimmicks, hidden rooms</td></tr>
+      <tr><td>Salt Mine</td><td>Difficulty spike — resource pressure</td><td>Timed environmental hazards</td></tr>
+      <tr><td>Wicca Village</td><td>Secondary hub — mid-game services</td><td>Advanced crafting, Sealed Zone access</td></tr>
+      <tr><td>Mansion of Syllek</td><td>Puzzle-heavy — non-linear exploration</td><td>Investigation gimmicks, locked doors</td></tr>
+      <tr><td>Windy Valley</td><td>Traversal challenge — gliding zones</td><td>Gliding mechanic, vertical drops</td></tr>
+      <tr><td>Burning Forge</td><td>Endgame combat gauntlet</td><td>High-density encounters, elite mobs</td></tr>
+      <tr><td>Library of Sage</td><td>Lore-driven — narrative conclusion</td><td>Story-gated progression, boss arenas</td></tr>
+    </table>`,
+    flowDiagram: `<div class="flow-diagram">
+      <div class="flow-box">Layout Blueprint<small>Zone shape, paths, verticality</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">Unity Build<small>Collision, platforms, gimmick objects</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">Monster &amp; Data<small>Excel auto-balancing tool</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">Art Handoff<small>BG layers, parallax, lighting</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">Playtest Iteration<small>CBT1 → CBT2 adjustments</small></div>
+    </div>`,
     designNotes: [
       'Took over 63+ Sealed Zone stages mid-production — reverse-engineered the existing design logic and extended the content while maintaining tonal and mechanical consistency.',
       'Custom Excel tool automated monster stat balancing across 200+ maps, cutting placement time by roughly 40% and eliminating cross-zone inconsistencies.',
@@ -837,7 +982,7 @@ const overlayData = {
       'Collaborated directly with the art team on environmental storytelling — background layers, parallax depth, and lighting cues reinforce each zone\'s narrative without explicit text.'
     ],
     icon: '🗺️',
-    images: ['img/concept_library.jpg', 'img/gameplay_town.jpg', 'img/concept_saltmine.jpg']
+    images: ['img/world_overview_layout.jpg', 'img/concept_library.jpg', 'img/gameplay_town.jpg', 'img/concept_saltmine.jpg']
   },
   quest: {
     tag: 'Systems Design · Neon Studio',
@@ -845,6 +990,24 @@ const overlayData = {
     meta: 'Chronomaze · Sole Designer · 2021–2025',
     overview: 'Designed an always-visible in-game guide that aggregates main quests, side quests, and exploration goals into a single layered tracker. The core problem: players in early playtests consistently lost track of objectives after switching between content layers (main story → side quest → exploration), causing drop-off at the 20-minute mark.',
     process: 'Mapped the full new-player onboarding flow to pinpoint confusion hotspots, then designed a priority-sorted tracker — current main quest pinned at top, optional objectives below with collapsible sub-tasks. Integrated teleport shortcuts directly into the guide so players jump to objectives without opening a separate map. Wrote the full system spec covering 50+ edge cases (quest conflicts, unlock conditions, teleport eligibility) before handing off to engineering.',
+    dataTable: `<table class="overlay-table">
+      <tr><th>Quest Condition</th><th>Navigation Guide</th><th>Visual Effect</th><th>Minimap Display</th></tr>
+      <tr><td>Tutorial</td><td>—</td><td>—</td><td>— (scripted sequence)</td></tr>
+      <tr><td>Dialog</td><td>Arrow pointing to NPC</td><td>NPC highlight glow</td><td>NPC icon shown</td></tr>
+      <tr><td>Monster Kill</td><td>Arrow to target zone</td><td>Target monsters marked</td><td>Monster icon overlay</td></tr>
+      <tr><td>Item Collect</td><td>Arrow to item location</td><td>Item glow on ground</td><td>Item icon on map</td></tr>
+      <tr><td>Area Reach</td><td>Arrow to destination</td><td>Destination circle</td><td>Zone marker shown</td></tr>
+      <tr><td>Gimmick</td><td>Arrow to object</td><td>Interaction prompt</td><td>Gimmick icon shown</td></tr>
+      <tr><td>Dungeon Entry</td><td>Arrow to portal</td><td>Portal glow effect</td><td>Portal icon + teleport shortcut</td></tr>
+    </table>`,
+    flowDiagram: `<div class="flow-diagram">
+      <div class="flow-box">Main Quest (always pinned at top)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">Side Quests (collapsible, sorted by proximity)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">Exploration Goals (passive, ambient)</div>
+    </div>
+    <p style="font-size:12px;color:#7d8290;margin-top:8px;text-align:center;">Each layer has a 1-tap teleport shortcut — players jump to any tracked objective without opening the map.</p>`,
     designNotes: [
       'Priority sorting was the single most impactful decision — pinning the main quest eliminated the #1 confusion case without hiding optional content.',
       'Teleport integration inside the guide removed an extra navigation step, measurably reducing time-to-objective in playtest sessions.',
@@ -859,7 +1022,16 @@ const overlayData = {
     title: 'Records & Codex',
     meta: 'Chronomaze · Sole Designer · 2021–2025',
     overview: 'Designed a hybrid achievement tracker and in-game encyclopedia that logs player milestones, combat stats, collection progress, monster data, and world lore. The Records system serves two audiences simultaneously: completionists chasing 100% and lore-driven players building narrative context — both find value without either feeling like the system wasn\'t built for them.',
-    process: 'Categorised 46+ record types across four pillars — combat, exploration, social, and collection. Balanced reward frequency using non-linear milestone spacing: early achievements come fast to establish the habit loop, while later ones stretch out to sustain months of engagement. Visual completion indicators let players gauge remaining content at a glance, surfacing "almost done" motivation.',
+    process: 'Categorised 46+ record types across five pillars. Balanced reward frequency using non-linear milestone spacing: early achievements come fast to establish the habit loop, while later ones stretch out to sustain months of engagement. Visual completion indicators let players gauge remaining content at a glance, surfacing "almost done" motivation.',
+    dataTable: `<table class="overlay-table">
+      <tr><th>Pillar</th><th>What It Tracks</th><th>Entries</th><th>Why It Exists</th></tr>
+      <tr><td>Achievements</td><td>Progression milestones</td><td class="num">299</td><td>Core motivation loop — "what should I do next?"</td></tr>
+      <tr><td>Adventure Log</td><td>Story journal &amp; world lore</td><td class="num">417</td><td>Narrative context for lore-driven players</td></tr>
+      <tr><td>Constellations</td><td>Character relationship bonds</td><td class="num">236</td><td>Social progression tied to stat bonuses</td></tr>
+      <tr><td>Monster Codex</td><td>Bestiary: weaknesses, spawns, lore</td><td class="num">89</td><td>Doubles as a strategic tool, not just a lore dump</td></tr>
+      <tr><td>Character Codex</td><td>Hero profiles &amp; dialogues</td><td class="num">398</td><td>Collection incentive for gacha characters</td></tr>
+    </table>`,
+    flowDiagram: '',
     designNotes: [
       'Non-linear reward spacing was deliberately front-loaded — fast early milestones hook new players, while stretched later ones prevent reward inflation and sustain long-term pursuit.',
       'The monster codex doubles as a strategic tool — players check weaknesses and spawn locations, making the "lore" tab functionally useful rather than purely decorative.',
@@ -867,19 +1039,49 @@ const overlayData = {
       'Integrated with the Guild system so that guild-wide record milestones unlock shared rewards — tying individual achievement to social progression.'
     ],
     icon: '📖',
-    images: ['img/records_main.jpg', 'img/records_achieve.jpg']
+    images: ['img/records_main.jpg', 'img/records_achieve.jpg', 'img/records_codex.jpg']
   },
   guild: {
     tag: 'Social Systems · Neon Studio',
     title: 'Guild System',
     meta: 'Chronomaze · Sole Designer · 2021–2025',
     overview: 'Designed the full Guild system — formation, membership tiers, rank hierarchy, donation loops, a physical guild room, and a guild shop. The core design goal: create a daily login motivator tied to social identity, while simultaneously functioning as a currency sink to protect the broader game economy.',
-    process: 'The donation mechanic runs two parallel feedback loops from a single player action: a short loop (immediate personal reward) and a long loop (guild XP accumulation over time). The Guild Room was built as a real explorable field map rather than a UI panel — members physically gather in the same space, keeping the social experience consistent with the rest of the game world.',
+    process: 'The donation mechanic runs two parallel feedback loops from a single player action: a short loop (immediate personal reward) and a long loop (guild XP accumulation over time). The Guild Room was built as a real explorable field map rather than a UI panel — members physically gather in the same space, keeping the social experience consistent with the rest of the game world. Donations consume designated daily resources and reset at 6 AM server time, creating a natural daily touchpoint.',
+    dataTable: `<table class="overlay-table">
+      <tr><th>Design Decision</th><th>Reasoning</th></tr>
+      <tr><td>Donors always receive individual rewards</td><td>Avoids "sacrifice for the group" friction — participation rates stay high when every donation feels personally worthwhile</td></tr>
+      <tr><td>24-hour cooldown on leave/disband</td><td>Prevents guild-hopping exploits targeting early-join bonus rewards across multiple guilds</td></tr>
+      <tr><td>Guild Room as a real field map</td><td>Members physically gather in the same space — social presence feels consistent with the rest of the game world, not a detached UI panel</td></tr>
+      <tr><td>Daily reset at 6 AM server time</td><td>Creates a natural daily login anchor — "I should donate before reset" is a gentle retention hook</td></tr>
+      <tr><td>Guild shop uses guild-specific currency</td><td>Functions as a currency sink — protects the broader game economy while giving donors something exclusive to spend on</td></tr>
+    </table>`,
+    flowDiagram: `<div class="dual-loop">
+      <div class="loop-col">
+        <div class="loop-label">Short Loop — Donor Gets</div>
+        <div class="loop-items">
+          <div class="loop-item">Guild Points (shop currency)</div>
+          <div class="loop-item">Growth Materials</div>
+          <div class="loop-item">Random Reward Box</div>
+        </div>
+      </div>
+      <div class="loop-center">
+        <div class="loop-arrows">←</div>
+        <div class="loop-action">Daily Donate</div>
+        <div class="loop-arrows">→</div>
+      </div>
+      <div class="loop-col">
+        <div class="loop-label">Long Loop — Guild Gets</div>
+        <div class="loop-items">
+          <div class="loop-item">Guild EXP accumulates</div>
+          <div class="loop-item">Level up → stronger buffs</div>
+          <div class="loop-item">Max members increases</div>
+        </div>
+      </div>
+    </div>`,
     designNotes: [
-      'Individual donation always rewards the donor — deliberately avoiding "sacrifice for the group" structures that tank participation rates in similar systems.',
-      '24-hour cooldown after leaving/disbanding prevents guild-hopping exploits targeting early-join bonus rewards.',
       'Deputy Guild Master role and attendance tracking were fully spec\'d as future-dev features — the architecture was written to accommodate them without any redesign.',
-      'All 50+ system messages, error strings, and edge-case dialogues were written directly in the spec, eliminating copy-related back-and-forth with engineering.'
+      'All 50+ system messages, error strings, and edge-case dialogues were written directly in the spec, eliminating copy-related back-and-forth with engineering.',
+      'The guild level EXP curve scales at roughly 1.9× per level — fast enough that active guilds feel progress, slow enough that max level takes sustained collective effort over months.'
     ],
     icon: '🏰',
     images: ['img/guild_main.jpg', 'img/guild_join.jpg']
@@ -887,17 +1089,39 @@ const overlayData = {
   explore: {
     tag: 'Content Design · Neon Studio',
     title: 'Exploration Missions',
-    meta: 'Chronomaze · System Spec Author · 2021–2025',
+    meta: 'Chronomaze · Sole Designer · 2021–2025',
     overview: 'Designed the framework for 650+ exploration missions spanning all 11 world regions. A passive always-active progression layer — no opt-in, no accept button — that gives every map a persistent set of objectives, rewarding players for going off the beaten path and fully exploring each zone.',
-    process: 'Two-tier structure: world missions (50%/100% completion payouts per region) and zone missions (100% payout per map). Integrated directly with the fog-of-war system — the same per-map exploration data drives both Exploration Missions and the Adventure Map, avoiding data duplication. Reused the existing Quest framework (Quest_Adventure.xml) to ship without building new server-side architecture.',
+    process: 'Two-tier feedback loop: zone missions reward completing individual maps (read a diary, open chests, hunt specific monsters), while world missions reward reaching 50% and 100% regional completion with diamond payouts. This creates nested motivation — finishing one zone feels good on its own, but also visibly advances your progress toward the bigger world milestone. Integrated directly with the fog-of-war system so one data write drives both Exploration Missions and the Adventure Map, avoiding duplication. Reused the existing Quest framework (Quest_Adventure.xml) to ship without new server-side architecture.',
+    dataTable: `<table class="overlay-table">
+      <tr><th>Design Decision</th><th>Reasoning</th></tr>
+      <tr><td>Always active — no accept/abandon button</td><td>Eliminated an entire UI surface. For a small team, one less system to build and maintain. Players never miss missions they didn\'t know to accept.</td></tr>
+      <tr><td>Even corridor/transition zones get missions</td><td>Rewards thorough explorers. Prevents "empty hallway" feeling in connector maps that exist for pacing.</td></tr>
+      <tr><td>Two reward tiers per world (50% / 100%)</td><td>50% is reachable through normal play — casual players get something. 100% requires deliberate effort — completionists have a reason to return.</td></tr>
+      <tr><td>Zone missions use world-specific tasks</td><td>Knight\'s Garden: "Read Estelle\'s diary 3×". Salt Mine: "Open ore caches". Each world\'s missions reflect its narrative, not generic "kill 10 mobs".</td></tr>
+      <tr><td>Shared fog state with Adventure Map</td><td>One data write drives both systems. No sync bugs, no server duplication. The map literally shows your exploration progress.</td></tr>
+    </table>`,
+    flowDiagram: `<div class="flow-diagram">
+      <div class="flow-box">Explore any map zone</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">Zone tasks auto-complete</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">Zone reward (shards)</div>
+    </div>
+    <div class="flow-diagram" style="margin-top:6px;">
+      <div class="flow-box">Multiple zones completed</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">World hits 50% → 400 💎</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">World hits 100% → 700 💎</div>
+    </div>
+    <p style="font-size:12px;color:#7d8290;margin-top:8px;text-align:center;">Nested loops: zone-level satisfaction feeds into world-level milestones, creating ambient long-term motivation.</p>`,
     designNotes: [
-      'The "always active" rule was a deliberate engineering simplification — eliminating accept/abandon UI cut the implementation surface significantly for a small team.',
-      'Even corridor and transition zones receive missions — rewarding thorough explorers rather than punishing players who discover optional paths.',
-      'Shared fog state between the Adventure Map and Exploration Missions means one data write drives both systems, reducing server load and eliminating sync bugs.',
-      'Completion percentage is displayed per-world on the main map screen, creating ambient motivation across regions the player hasn\'t fully explored yet.'
+      'Completion percentage is displayed per-world on the main map screen, creating ambient motivation across regions the player hasn\'t fully explored yet.',
+      'The nested reward structure (zone → world) means every play session advances at least one visible progress bar, even if the player doesn\'t finish anything.',
+      'Reusing the Quest framework meant zero new server endpoints — the entire 650+ mission system shipped on existing infrastructure.'
     ],
     icon: '🧭',
-    images: ['img/explore_missions.jpg', 'img/ui_codex.jpg']
+    images: ['img/explore_targets_ui.jpg', 'img/explore_missions.jpg']
   },
   map: {
     tag: 'UX / Navigation · Neon Studio',
@@ -905,25 +1129,44 @@ const overlayData = {
     meta: 'Chronomaze · Sole Designer · 2021–2025',
     overview: 'Designed the full navigation system for a 200+ map world. Two components: a persistent HUD minimap for moment-to-moment local awareness, and a full-screen Adventure Map with fog-of-war reveal, icon layering, and Dimensional Gate fast-travel between regions.',
     process: 'The core challenge was managing information density across 200+ interconnected maps without overwhelming the player. Solved with a two-tier approach: region-level world map for macro navigation and planning, zone-level minimap for local play. Fog-of-war uses a greyscale shader on the base terrain image — no separate "fogged" asset required, so the art team only produces one image per zone.',
+    dataTable: `<table class="overlay-table">
+      <tr><th>Information Layer</th><th>HUD Minimap</th><th>Full-Screen Adventure Map</th></tr>
+      <tr><td>Player position</td><td>Real-time dot, always visible</td><td>Synced marker with region context</td></tr>
+      <tr><td>NPCs &amp; shops</td><td>Small icons near player</td><td>Named icons, clickable for details</td></tr>
+      <tr><td>Active monsters</td><td>Type-coded dots in range</td><td>Not shown — too much clutter at world scale</td></tr>
+      <tr><td>Quest objectives</td><td>Directional marker to nearest</td><td>All active quests shown with markers</td></tr>
+      <tr><td>Warp points</td><td>Icon when in range</td><td>All warp points shown, 1-tap teleport</td></tr>
+      <tr><td>Dimensional Gates</td><td>Not shown (local view only)</td><td>Cross-region travel — core navigation tool</td></tr>
+      <tr><td>Fog of War</td><td>Greyscale unexplored areas</td><td>Greyscale with exploration % per region</td></tr>
+    </table>
+    <p style="font-size:12px;color:#7d8290;margin-top:8px;">Icon priority when overlapping: Quest &gt; NPC &gt; Collectible &gt; Decoration. Without this explicit rule, engineers would make arbitrary stacking decisions in dense areas.</p>`,
+    flowDiagram: '',
     designNotes: [
       'Greyscale shader approach cut the art team\'s map asset workload in half — one image per zone instead of separate fogged/revealed versions.',
-      'Icon priority ordering was specified explicitly (quest > NPC > collectible > decoration) to handle dense-area overlap — without this, engineers would have made arbitrary stacking decisions.',
       'Indoor zones proxy the player icon to the last outdoor warp point — solving the "where am I?" problem for spaces that don\'t exist on the world graph.',
-      'Bidirectional linking between the Map and Exploration Missions UI lets players switch freely without losing navigation context.'
+      'Bidirectional linking between the Map and Exploration Missions UI lets players switch freely without losing navigation context.',
+      'The Dimensional Gate system allows players to fast-travel between any two unlocked gate points across the entire world — essential for a 200+ map game where backtracking would kill session flow.'
     ],
     icon: '📍',
-    images: ['img/map_adventure.jpg', 'img/map_dimensional.jpg']
+    images: ['img/map_fogofwar.jpg', 'img/explore_targets_ui.jpg', 'img/map_dimensional.jpg']
   },
   bingo: {
     tag: 'Event Design · Crowngames',
     title: 'Bingo Masters',
-    meta: 'Slotica 5 · Co-designed (Lead) · 2019–2021',
-    overview: 'Lead designer on Bingo Masters, a recurring limited-time event for Slotica 5. Players completed bingo cards through their normal slot-spin loop, driving sustained daily engagement over the event window without requiring any new gameplay mechanics to learn.',
-    process: 'Designed card structures, fill rate tuning, and tiered jackpot distribution. The bingo format was chosen specifically as a lightweight meta-layer that reframes existing player actions as progress toward a visible goal — no new mechanic, just a new reason to keep playing.',
+    meta: 'Slotica 5 · Co-designed · 2019–2021',
+    overview: 'Co-designed Bingo Masters, a recurring limited-time event for Slotica 5. Players completed bingo cards through their normal slot-spin loop, driving sustained daily engagement over the event window without requiring any new gameplay mechanics to learn.',
+    process: 'Designed card structures, fill rate tuning, and tiered jackpot distribution across 8 card levels and 5 bet tiers. The core design principle: the bingo format reframes actions players are already doing (spinning slots) as progress toward a visible, structured goal. No new mechanic to learn, no tutorial needed — just a new reason to keep playing. The full economy was modelled in a 21-sheet Excel workbook to validate that payout curves stayed within the game\'s existing margin targets.',
+    dataTable: `<table class="overlay-table">
+      <tr><th>Design Decision</th><th>Reasoning</th></tr>
+      <tr><td>Built on top of existing spin loop</td><td>Zero learning curve — players earn bingo currency by doing what they already do. Adoption is instant.</td></tr>
+      <tr><td>8 card levels × 5 bet tiers</td><td>Provides 40 distinct payout curves. High-bet players and low-bet players both feel the event is tuned for them.</td></tr>
+      <tr><td>~60% natural fill rate for casual players</td><td>Casuals get rewarded without changing behaviour. Completionists need to push for the remaining 40%, extending sessions.</td></tr>
+      <tr><td>Full economy in 21-sheet Excel model</td><td>Every payout was validated against existing margin targets before dev started — no late-stage rebalancing needed.</td></tr>
+    </table>`,
+    flowDiagram: '',
     designNotes: [
-      'The bingo format adds a reward layer on top of existing behaviour — zero learning curve, maximum engagement lift.',
-      'Fill rate was tuned so casual players complete ~60% naturally, while completionists need deliberate extended sessions — serving both segments without alienating either.',
-      'Event contributed to a broader 10% monthly retention improvement across the event portfolio at Crowngames.'
+      'The event contributed to a broader 10% monthly retention improvement across the event portfolio at Crowngames.',
+      'Recurring format — the bingo structure was designed to be re-skinnable, so it ran multiple times with minimal additional design work.'
     ],
     icon: '🎯',
     images: ['img/event_bingo_card.jpg', 'img/event_bingo_collection.jpg']
@@ -931,13 +1174,19 @@ const overlayData = {
   halloween: {
     tag: 'Event Design · Crowngames',
     title: 'Halloween Event',
-    meta: 'Slotica 5 · Co-designed (Lead) · Oct 2020',
-    overview: 'Lead designer on the Halloween 2020 event — an 8-zone map event running Oct 21 – Nov 3. Players collected pumpkins in each zone under individual time limits, with escalating All Clear bonuses for completing all zones up to 3 rounds.',
-    process: 'Solo-authored the full event concept through 4 iterations (v0.1–v0.4) before co-developing final balancing with the team lead. The 8-zone structure gave players a sense of geographic exploration within the slot-spin loop — each zone felt like a distinct location rather than a repeated template.',
+    meta: 'Slotica 5 · Co-designed · Oct 2020',
+    overview: 'Co-designed the Halloween 2020 event — an 8-zone map event running Oct 21 – Nov 3. Players collected pumpkins in each zone under individual time limits, with escalating bonuses for completing all 8 zones — up to 3 full rounds with scaling rewards.',
+    process: 'Authored the initial event concept through 4 design iterations (v0.1–v0.4) before co-developing final balancing with the team lead. The 8-zone structure gave players a sense of geographic exploration within the slot-spin loop — each zone felt like a distinct location rather than a repeated template. The core loop survived all 4 iterations intact, validating the upfront design investment.',
+    dataTable: `<table class="overlay-table">
+      <tr><th>Design Decision</th><th>Reasoning</th></tr>
+      <tr><td>8 distinct zones with individual time limits</td><td>Creates variety within a single event — each zone feels like a new challenge, not a copy. Mild urgency without frustration (tuned so average players clear with ~20% time remaining).</td></tr>
+      <tr><td>Full-clear bonus scales across 3 rounds</td><td>Round 1 is achievable for most players. Rounds 2–3 give engaged players a reason to keep going without punishing those who stop at round 1.</td></tr>
+      <tr><td>14-day event window</td><td>Long enough that casual players can finish round 1 at their own pace. Short enough to maintain urgency and FOMO.</td></tr>
+    </table>`,
+    flowDiagram: '',
     designNotes: [
       'Zone time limits created mild urgency without frustration — tuned so average players could clear with ~20% time remaining.',
-      'The All Clear mechanic (up to 3 rounds with scaling rewards) extends sessions for engaged players without punishing casual players who stop at round 1.',
-      'Solo-authored the initial concept through 4 iterations before handoff — the core loop survived intact through production, validating early prototyping investment.'
+      'The scaling reward structure (3 rounds) doubled as a natural difficulty curve — round 1 teaches the format, rounds 2–3 raise the stakes.'
     ],
     icon: '🎃',
     images: ['img/event_halloween_map.jpg', 'img/event_halloween_gameplay.jpg']
@@ -946,11 +1195,22 @@ const overlayData = {
     tag: 'Event Design · Crowngames',
     title: 'Puppy Event',
     meta: 'Slotica 5 · Co-designed · 2019–2021',
-    overview: 'Co-designed a care-based social casino event where players raised a virtual puppy through gameplay. Handled event balancing and reward table design, ensuring milestones aligned with natural session patterns rather than requiring behaviour change.',
-    process: 'The care format was selected to drive session frequency — players return multiple times daily to "feed" the puppy — rather than session length. Designed feeding/reward tables with diminishing daily multipliers to prevent day-1 completion burnout while keeping the reward curve visible enough for casual players.',
+    overview: 'Co-designed a care-based social casino event where players raised a virtual puppy through gameplay. Handled event balancing and reward table design, ensuring milestones aligned with natural session patterns.',
+    process: 'The care format was selected to drive session frequency rather than session length — players return multiple times daily to "feed" the puppy, creating short but frequent touchpoints instead of grinding marathons. Designed feeding and reward milestone tables that align with the game\'s existing session cadence.',
+    dataTable: '',
+    flowDiagram: `<div class="flow-diagram">
+      <div class="flow-box">Player returns to the game</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">Feeds puppy (short interaction)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">Puppy grows toward milestone</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">Milestone reward</div>
+    </div>
+    <p style="font-size:12px;color:#7d8290;margin-top:8px;text-align:center;">Designed to reward frequency of visits, not length of sessions — multiple short returns per day rather than one long grind.</p>`,
     designNotes: [
       'The care mechanic targets session frequency over session length — short return visits rather than grinding marathons.',
-      'Diminishing daily multipliers prevent early completion while maintaining visible progress for casual players across the full event window.'
+      'Milestone spacing was designed around the game\'s existing natural session cadence so players don\'t need to change their behaviour to progress.'
     ],
     icon: '🐶',
     images: ['img/event_puppy_lobby.jpg', 'img/event_puppy_flow.jpg']
@@ -968,8 +1228,23 @@ function buildOverlay(data) {
       headerHtml = `<div class="overlay-img-gallery">${imgs}</div>`;
     }
   } else {
-    headerHtml = `<div class="overlay-img-placeholder">${data.icon}</div>`;
+    headerHtml = '';
   }
+
+  let extraSections = '';
+  if (data.dataTable) {
+    extraSections += `<div class="overlay-section">
+      <div class="overlay-section-title">System Data</div>
+      ${data.dataTable}
+    </div>`;
+  }
+  if (data.flowDiagram) {
+    extraSections += `<div class="overlay-section">
+      <div class="overlay-section-title">Design Structure</div>
+      ${data.flowDiagram}
+    </div>`;
+  }
+
   return `
     ${headerHtml}
     <div class="overlay-content">
@@ -985,6 +1260,7 @@ function buildOverlay(data) {
         <div class="overlay-section-title">Process</div>
         <p>${data.process}</p>
       </div>
+      ${extraSections}
       <div class="overlay-section">
         <div class="overlay-section-title">Design Notes</div>
         <ul class="design-notes-list">${notesHtml}</ul>
