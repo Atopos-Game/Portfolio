@@ -194,49 +194,10 @@
   }
   .showcase-reel video {
     width: 100%;
-    aspect-ratio: 16/9;
-    object-fit: cover;
     border-radius: 14px;
     border: 1px solid rgba(212,178,85,0.10);
     display: block;
   }
-  .showcase-reel::after {
-    content: '⛶';
-    position: absolute; bottom: 14px; right: 14px;
-    width: 36px; height: 36px;
-    background: rgba(0,0,0,0.55);
-    border: 1px solid rgba(212,178,85,0.3);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--gold); font-size: 16px;
-    opacity: 0; transition: opacity .25s;
-    pointer-events: none;
-  }
-  .showcase-reel:hover::after { opacity: 1; }
-
-  /* ── VIDEO LIGHTBOX ── */
-  .video-lightbox-backdrop {
-    position: fixed; inset: 0; z-index: 2000;
-    background: rgba(0,0,0,0.94);
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0; pointer-events: none;
-    transition: opacity .25s ease;
-  }
-  .video-lightbox-backdrop.active { opacity: 1; pointer-events: auto; }
-  .video-lightbox-backdrop video {
-    width: 92vw; max-width: 1400px; max-height: 88vh;
-    border-radius: 12px;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.6);
-  }
-  .video-lightbox-close {
-    position: fixed; top: 18px; right: 22px;
-    width: 40px; height: 40px;
-    background: rgba(255,255,255,0.12); border: none;
-    border-radius: 50%; color: #fff; font-size: 22px;
-    cursor: pointer; display: flex; align-items: center; justify-content: center;
-    z-index: 2001; transition: background .2s;
-  }
-  .video-lightbox-close:hover { background: rgba(255,255,255,0.25); }
 
   /* category label */
   .category-label {
@@ -555,8 +516,8 @@
       </div>
 
       <!-- Showcase Reel -->
-      <div class="showcase-reel" onclick="openVideoLightbox()">
-        <video autoplay muted loop playsinline>
+      <div class="showcase-reel">
+        <video controls loop playsinline>
           <source src="video/showcase_reel_v3.webm" type="video/webm">
         </video>
       </div>
@@ -794,14 +755,6 @@
   </div>
 </div>
 
-<!-- VIDEO LIGHTBOX -->
-<div class="video-lightbox-backdrop" id="videoLightbox" onclick="closeVideoLightbox(event)">
-  <button class="video-lightbox-close" onclick="closeVideoLightbox(null, true)">✕</button>
-  <video id="videoLightboxPlayer" controls autoplay loop>
-    <source src="video/showcase_reel_v3.webm" type="video/webm">
-  </video>
-</div>
-
 <!-- LIGHTBOX -->
 <div class="lightbox-backdrop" id="lightbox" onclick="closeLightbox(event)">
   <button class="lightbox-close" onclick="closeLightbox(null, true)">✕</button>
@@ -996,34 +949,13 @@ function closeOverlay(e, force) {
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    if (document.getElementById('videoLightbox').classList.contains('active')) {
-      closeVideoLightbox(null, true);
-    } else if (document.getElementById('lightbox').classList.contains('active')) {
+    if (document.getElementById('lightbox').classList.contains('active')) {
       closeLightbox(null, true);
     } else {
       closeOverlay(null, true);
     }
   }
 });
-
-function openVideoLightbox() {
-  const vl = document.getElementById('videoLightbox');
-  const player = document.getElementById('videoLightboxPlayer');
-  vl.classList.add('active');
-  player.currentTime = 0;
-  player.play();
-  document.body.style.overflow = 'hidden';
-}
-
-function closeVideoLightbox(e, force) {
-  if (force || (e && e.target === document.getElementById('videoLightbox'))) {
-    const vl = document.getElementById('videoLightbox');
-    const player = document.getElementById('videoLightboxPlayer');
-    vl.classList.remove('active');
-    player.pause();
-    document.body.style.overflow = '';
-  }
-}
 
 function openLightbox(src) {
   const lb = document.getElementById('lightbox');
