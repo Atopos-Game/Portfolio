@@ -6,7 +6,7 @@
 <title>Juwon Lee — Game Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet" />
 <style>
   :root {
     --bg: #0b0c10;
@@ -91,10 +91,10 @@
     0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
   }
   h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(42px, 5vw, 72px);
-    font-weight: 800; line-height: 1.05;
-    letter-spacing: -0.02em; margin-bottom: 24px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(46px, 5.5vw, 78px);
+    font-weight: 300; line-height: 1.05;
+    letter-spacing: -0.01em; margin-bottom: 24px;
   }
   h1 span { color: var(--gold); }
   .hero-sub {
@@ -375,6 +375,30 @@
     color: var(--muted);
   }
 
+  /* ── CONTACT ── */
+  #contact { background: var(--bg2); border-top: 1px solid rgba(201,168,76,0.08); }
+  .contact-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    background: rgba(201,168,76,0.08);
+  }
+  .contact-card {
+    background: var(--bg); padding: 40px 32px; text-align: center;
+  }
+  .contact-icon {
+    font-size: 20px; color: var(--gold); margin-bottom: 14px;
+    font-family: 'Syne', sans-serif; font-weight: 700;
+  }
+  .contact-label {
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 10px;
+  }
+  .contact-value {
+    font-size: 14px; color: var(--white); text-decoration: none;
+    transition: color .2s;
+  }
+  .contact-value:hover { color: var(--gold); }
+
   /* ── FOOTER ── */
   footer {
     padding: 40px 48px;
@@ -398,6 +422,7 @@
     section { padding: 72px 24px; }
     .card-grid { grid-template-columns: 1fr 1fr; }
     .profile-inner { grid-template-columns: 1fr; gap: 48px; }
+    .contact-inner { grid-template-columns: 1fr; }
     footer { flex-direction: column; gap: 16px; text-align: center; }
     .overlay-content { padding: 24px 24px 28px; }
     .overlay-kpi { grid-template-columns: repeat(3, 1fr); }
@@ -425,7 +450,7 @@
   <ul>
     <li><a href="#work">Work</a></li>
     <li><a href="#profile">Profile</a></li>
-    <li><a href="mailto:quierado@gmail.com">Contact</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
@@ -435,7 +460,7 @@
     <div class="hero-left">
       <div class="hero-tag">Game Designer · Seoul → London</div>
       <h1>Designing<br/><span>Worlds.</span><br/>Building Systems.</h1>
-      <p class="hero-sub">6 years shipping mobile games — from single-cell level layouts to full social ecosystems. Currently based in Essex, seeking opportunities in UK games.</p>
+      <p class="hero-sub">6 years shipping mobile games — from single-cell level layouts to full social ecosystems. Currently based in Buckhurst Hill, Essex, seeking opportunities in UK games.</p>
       <div class="hero-links">
         <a href="#work" class="btn btn-primary">View Work</a>
         <a href="https://www.linkedin.com/in/juwon-lee-5b3097219" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
@@ -458,6 +483,65 @@
       </div>
       <div class="hero-desc-block">
         Most recently at <strong>Neon Studio (Seoul)</strong> as sole level &amp; systems designer on <strong>Chronomaze</strong> — a 2D side-scrolling mobile MMORPG that reached 627K views on Bilibili PV before open beta. Before that, event design &amp; retention work at <strong>Crowngames</strong> lifted monthly retention by <strong>10%</strong>.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILE -->
+<section id="profile">
+  <div class="section-header reveal">
+    <span class="section-label">About</span>
+    <h2 class="section-title">Profile</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="profile-inner">
+    <div class="profile-bio reveal">
+      <h3>Juwon <span>Lee</span></h3>
+      <p>Game designer with 6 years of experience in mobile games. Sole level and systems designer on Chronomaze at Neon Studio — responsible for 200+ maps, 11 worlds, and 15 systems from concept to implementation.</p>
+      <p>Before that, CS &amp; event design at Crowngames on Slotica 5, where iterative event work helped push monthly retention up 10%.</p>
+      <p>Based in Buckhurst Hill, Essex, UK on a Youth Mobility Scheme visa. Looking for a role where deep craft and clear design thinking are valued.</p>
+      <div class="hero-links">
+        <a href="https://www.linkedin.com/in/juwon-lee-5b3097219" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+        <a href="mailto:quierado@gmail.com" class="btn btn-outline">Email ↗</a>
+      </div>
+    </div>
+    <div class="profile-detail reveal">
+      <div class="detail-block">
+        <div class="detail-label">Experience</div>
+        <div class="skill-list">
+          <span class="skill-chip">Level Design</span>
+          <span class="skill-chip">Systems Design</span>
+          <span class="skill-chip">Event Design</span>
+          <span class="skill-chip">Economy Design</span>
+          <span class="skill-chip">UX Flow</span>
+          <span class="skill-chip">Retention Design</span>
+        </div>
+      </div>
+      <div class="detail-block">
+        <div class="detail-label">Tools</div>
+        <div class="skill-list">
+          <span class="skill-chip">Unity</span>
+          <span class="skill-chip">Excel (Advanced, Automation)</span>
+          <span class="skill-chip">TortoiseSVN</span>
+          <span class="skill-chip">XML</span>
+          <span class="skill-chip">PowerPoint</span>
+        </div>
+      </div>
+      <div class="detail-block">
+        <div class="detail-label">Languages</div>
+        <div class="skill-list">
+          <span class="skill-chip">Korean — Native</span>
+          <span class="skill-chip">English — Professional</span>
+          <span class="skill-chip">Japanese — Conversational</span>
+        </div>
+      </div>
+      <div class="detail-block">
+        <div class="detail-label">Location</div>
+        <div class="skill-list">
+          <span class="skill-chip">Buckhurst Hill, Essex, UK</span>
+          <span class="skill-chip">Youth Mobility Visa (until Nov 2027)</span>
+        </div>
       </div>
     </div>
   </div>
@@ -580,60 +664,28 @@
   </div>
 </section>
 
-<!-- PROFILE -->
-<section id="profile">
+<!-- CONTACT -->
+<section id="contact">
   <div class="section-header reveal">
-    <span class="section-label">About</span>
-    <h2 class="section-title">Profile</h2>
+    <span class="section-label">Get in Touch</span>
+    <h2 class="section-title">Contact</h2>
     <div class="section-line"></div>
   </div>
-  <div class="profile-inner">
-    <div class="profile-bio reveal">
-      <h3>Juwon <span>Lee</span></h3>
-      <p>Game designer with 6 years of experience in mobile games. Sole level and systems designer on Chronomaze at Neon Studio — responsible for 200+ maps, 11 worlds, and 15 systems from concept to implementation.</p>
-      <p>Before that, CS &amp; event design at Crowngames on Slotica 5, where iterative event work helped push monthly retention up 10%.</p>
-      <p>Based in Essex, UK on a Youth Mobility Scheme visa. Looking for a role where deep craft and clear design thinking are valued.</p>
-      <div class="hero-links">
-        <a href="https://www.linkedin.com/in/juwon-lee-5b3097219" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
-        <a href="mailto:quierado@gmail.com" class="btn btn-outline">Email ↗</a>
-      </div>
+  <div class="contact-inner reveal">
+    <div class="contact-card">
+      <div class="contact-icon">✉</div>
+      <div class="contact-label">Email</div>
+      <a href="mailto:quierado@gmail.com" class="contact-value">quierado@gmail.com</a>
     </div>
-    <div class="profile-detail reveal">
-      <div class="detail-block">
-        <div class="detail-label">Experience</div>
-        <div class="skill-list">
-          <span class="skill-chip">Level Design</span>
-          <span class="skill-chip">Systems Design</span>
-          <span class="skill-chip">Event Design</span>
-          <span class="skill-chip">Economy Design</span>
-          <span class="skill-chip">UX Flow</span>
-          <span class="skill-chip">Retention Design</span>
-        </div>
-      </div>
-      <div class="detail-block">
-        <div class="detail-label">Tools</div>
-        <div class="skill-list">
-          <span class="skill-chip">Excel / Sheets</span>
-          <span class="skill-chip">Confluence / Notion</span>
-          <span class="skill-chip">Figma</span>
-          <span class="skill-chip">JIRA</span>
-        </div>
-      </div>
-      <div class="detail-block">
-        <div class="detail-label">Languages</div>
-        <div class="skill-list">
-          <span class="skill-chip">Korean — Native</span>
-          <span class="skill-chip">English — Professional</span>
-          <span class="skill-chip">Japanese — Conversational</span>
-        </div>
-      </div>
-      <div class="detail-block">
-        <div class="detail-label">Location</div>
-        <div class="skill-list">
-          <span class="skill-chip">Essex, UK</span>
-          <span class="skill-chip">Youth Mobility Visa (until Nov 2027)</span>
-        </div>
-      </div>
+    <div class="contact-card">
+      <div class="contact-icon">☎</div>
+      <div class="contact-label">Phone</div>
+      <a href="tel:+447384429912" class="contact-value">+44 7384 429912</a>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">in</div>
+      <div class="contact-label">LinkedIn</div>
+      <a href="https://www.linkedin.com/in/juwon-lee-5b3097219" target="_blank" class="contact-value">juwon-lee-5b3097219</a>
     </div>
   </div>
 </section>
@@ -641,10 +693,11 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">JL</div>
-  <div class="footer-copy">© 2025 Juwon Lee</div>
+  <div class="footer-copy">© 2026 Juwon Lee</div>
   <div class="footer-links">
     <a href="https://www.linkedin.com/in/juwon-lee-5b3097219" target="_blank">LinkedIn</a>
     <a href="mailto:quierado@gmail.com">Email</a>
+    <a href="tel:+447384429912">+44 7384 429912</a>
   </div>
 </footer>
 
@@ -807,10 +860,6 @@ function buildOverlay(data) {
       <div class="overlay-section">
         <div class="overlay-section-title">Process</div>
         <p>${data.process}</p>
-      </div>
-      <div class="overlay-section">
-        <div class="overlay-section-title">Key Metrics</div>
-        <div class="overlay-kpi">${kpiHtml}</div>
       </div>
       <div class="overlay-section">
         <div class="overlay-section-title">Tags</div>
