@@ -9,6 +9,8 @@
 <meta property="og:description" content="6 years shipping mobile games — from level layouts to full social ecosystems. Based in Essex, UK." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://atopos-game.github.io/Portfolio/" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80' font-family='sans-serif'>JL</text></svg>" />
+<meta property="og:image" content="https://atopos-game.github.io/Portfolio/video/poster.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -157,7 +159,7 @@
   }
 
   /* ── SECTION ── */
-  section { padding: 100px 48px; }
+  section { padding: 100px 48px; scroll-margin-top: 70px; }
   .section-header { max-width: 1200px; margin: 0 auto 56px; }
   .section-label {
     font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
@@ -190,7 +192,6 @@
     border-radius: 14px;
     overflow: hidden;
     position: relative;
-    cursor: pointer;
   }
   .showcase-reel video {
     width: 100%;
@@ -435,8 +436,28 @@
     .contact-inner { grid-template-columns: 1fr; }
     footer { flex-direction: column; gap: 16px; text-align: center; }
   }
+  /* mobile nav toggle */
+  .nav-toggle {
+    display: none; background: none; border: none;
+    color: var(--white); font-size: 22px; cursor: pointer;
+    padding: 4px 8px; line-height: 1;
+  }
   @media (max-width: 600px) {
-    nav ul { display: none; }
+    nav ul {
+      display: none;
+      position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; gap: 0;
+      background: rgba(13,15,20,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(212,178,85,0.12);
+      padding: 8px 0;
+    }
+    nav ul.open { display: flex; }
+    nav ul li a {
+      display: block; padding: 14px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .nav-toggle { display: block; }
     h1 { font-size: 36px; }
     .stat-row { grid-template-columns: repeat(3, 1fr); }
   }
@@ -453,10 +474,11 @@
 <!-- NAV -->
 <nav>
   <div class="logo">Juwon Lee</div>
+  <button class="nav-toggle" onclick="document.querySelector('nav ul').classList.toggle('open')" aria-label="Menu">☰</button>
   <ul>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#profile">Profile</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#work" onclick="document.querySelector('nav ul').classList.remove('open')">Work</a></li>
+    <li><a href="#profile" onclick="document.querySelector('nav ul').classList.remove('open')">Profile</a></li>
+    <li><a href="#contact" onclick="document.querySelector('nav ul').classList.remove('open')">Contact</a></li>
   </ul>
 </nav>
 
@@ -517,8 +539,9 @@
 
       <!-- Showcase Reel -->
       <div class="showcase-reel">
-        <video controls loop playsinline>
+        <video controls loop playsinline poster="video/poster.jpg" preload="metadata">
           <source src="video/showcase_reel_v3.webm" type="video/webm">
+          <source src="video/showcase_reel_v3.mp4" type="video/mp4">
         </video>
       </div>
 
@@ -662,7 +685,7 @@
   <div class="profile-inner">
     <div class="profile-bio reveal">
       <h3>Juwon <span>Lee</span></h3>
-      <p>Game designer with 6 years of experience in mobile games. Sole level and systems designer on Chronomaze at Neon Studio — responsible for 200+ maps, 11 worlds, and 15 systems from concept to implementation.</p>
+      <p>Game designer with 6 years of experience in mobile games. Sole level and systems designer on Chronomaze at Neon Studio — responsible for 211+ maps, 11 worlds, and 15 systems from concept to implementation.</p>
       <p>Before that, CS &amp; event design at Crowngames on Slotica 5, where iterative event work helped push monthly retention up 10%.</p>
       <p>Based in Buckhurst Hill, Essex, UK. Eligible to work in the UK immediately — no sponsorship needed.</p>
       <div class="hero-links">
