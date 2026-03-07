@@ -326,25 +326,19 @@
   .overlay-section p {
     font-size: 14px; color: #aeb5c0; line-height: 1.75;
   }
-  .overlay-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
-  .tag-chip {
-    font-size: 11px; letter-spacing: 0.06em;
-    padding: 4px 10px; background: rgba(201,168,76,0.07);
-    border: 1px solid rgba(201,168,76,0.18); color: var(--gold);
-    border-radius: 1px;
+  .design-notes-list {
+    list-style: none; padding: 0; margin: 0;
   }
-  .overlay-kpi {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
-    background: rgba(201,168,76,0.08); margin-top: 12px;
+  .design-notes-list li {
+    font-size: 14px; color: #aeb5c0; line-height: 1.75;
+    padding: 8px 0 8px 16px; position: relative;
+    border-bottom: 1px solid rgba(201,168,76,0.06);
   }
-  .kpi-item {
-    background: var(--bg3); padding: 18px 16px; text-align: center;
+  .design-notes-list li:last-child { border-bottom: none; }
+  .design-notes-list li::before {
+    content: '—'; position: absolute; left: 0;
+    color: var(--gold); font-weight: 500;
   }
-  .kpi-num {
-    font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700;
-    color: var(--gold); display: block; line-height: 1;
-  }
-  .kpi-label { font-size: 11px; color: var(--muted); margin-top: 4px; }
 
   /* ── PROFILE ── */
   #profile { background: var(--bg2); border-top: 1px solid rgba(201,168,76,0.08); }
@@ -425,7 +419,6 @@
     .contact-inner { grid-template-columns: 1fr; }
     footer { flex-direction: column; gap: 16px; text-align: center; }
     .overlay-content { padding: 24px 24px 28px; }
-    .overlay-kpi { grid-template-columns: repeat(3, 1fr); }
   }
   @media (max-width: 600px) {
     .card-grid { grid-template-columns: 1fr; }
@@ -483,65 +476,6 @@
       </div>
       <div class="hero-desc-block">
         Most recently at <strong>Neon Studio (Seoul)</strong> as sole level &amp; systems designer on <strong>Chronomaze</strong> — a 2D side-scrolling mobile MMORPG that reached 627K views on Bilibili PV before open beta. Before that, event design &amp; retention work at <strong>Crowngames</strong> lifted monthly retention by <strong>10%</strong>.
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROFILE -->
-<section id="profile">
-  <div class="section-header reveal">
-    <span class="section-label">About</span>
-    <h2 class="section-title">Profile</h2>
-    <div class="section-line"></div>
-  </div>
-  <div class="profile-inner">
-    <div class="profile-bio reveal">
-      <h3>Juwon <span>Lee</span></h3>
-      <p>Game designer with 6 years of experience in mobile games. Sole level and systems designer on Chronomaze at Neon Studio — responsible for 200+ maps, 11 worlds, and 15 systems from concept to implementation.</p>
-      <p>Before that, CS &amp; event design at Crowngames on Slotica 5, where iterative event work helped push monthly retention up 10%.</p>
-      <p>Based in Buckhurst Hill, Essex, UK on a Youth Mobility Scheme visa. Looking for a role where deep craft and clear design thinking are valued.</p>
-      <div class="hero-links">
-        <a href="https://www.linkedin.com/in/juwon-lee-5b3097219" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
-        <a href="mailto:quierado@gmail.com" class="btn btn-outline">Email ↗</a>
-      </div>
-    </div>
-    <div class="profile-detail reveal">
-      <div class="detail-block">
-        <div class="detail-label">Experience</div>
-        <div class="skill-list">
-          <span class="skill-chip">Level Design</span>
-          <span class="skill-chip">Systems Design</span>
-          <span class="skill-chip">Event Design</span>
-          <span class="skill-chip">Economy Design</span>
-          <span class="skill-chip">UX Flow</span>
-          <span class="skill-chip">Retention Design</span>
-        </div>
-      </div>
-      <div class="detail-block">
-        <div class="detail-label">Tools</div>
-        <div class="skill-list">
-          <span class="skill-chip">Unity</span>
-          <span class="skill-chip">Excel (Advanced, Automation)</span>
-          <span class="skill-chip">TortoiseSVN</span>
-          <span class="skill-chip">XML</span>
-          <span class="skill-chip">PowerPoint</span>
-        </div>
-      </div>
-      <div class="detail-block">
-        <div class="detail-label">Languages</div>
-        <div class="skill-list">
-          <span class="skill-chip">Korean — Native</span>
-          <span class="skill-chip">English — Professional</span>
-          <span class="skill-chip">Japanese — Conversational</span>
-        </div>
-      </div>
-      <div class="detail-block">
-        <div class="detail-label">Location</div>
-        <div class="skill-list">
-          <span class="skill-chip">Buckhurst Hill, Essex, UK</span>
-          <span class="skill-chip">Youth Mobility Visa (until Nov 2027)</span>
-        </div>
       </div>
     </div>
   </div>
@@ -664,6 +598,64 @@
   </div>
 </section>
 
+<!-- PROFILE -->
+<section id="profile">
+  <div class="section-header reveal">
+    <span class="section-label">About</span>
+    <h2 class="section-title">Profile</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="profile-inner">
+    <div class="profile-bio reveal">
+      <h3>Juwon <span>Lee</span></h3>
+      <p>Game designer with 6 years of experience in mobile games. Sole level and systems designer on Chronomaze at Neon Studio — responsible for 200+ maps, 11 worlds, and 15 systems from concept to implementation.</p>
+      <p>Before that, CS &amp; event design at Crowngames on Slotica 5, where iterative event work helped push monthly retention up 10%.</p>
+      <p>Based in Buckhurst Hill, Essex, UK on a Youth Mobility Scheme visa. Looking for a role where deep craft and clear design thinking are valued.</p>
+      <div class="hero-links">
+        <a href="https://www.linkedin.com/in/juwon-lee-5b3097219" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+        <a href="mailto:quierado@gmail.com" class="btn btn-outline">Email ↗</a>
+      </div>
+    </div>
+    <div class="profile-detail reveal">
+      <div class="detail-block">
+        <div class="detail-label">Experience</div>
+        <div class="skill-list">
+          <span class="skill-chip">Level Design</span>
+          <span class="skill-chip">Systems Design</span>
+          <span class="skill-chip">Event Design</span>
+          <span class="skill-chip">Economy Design</span>
+          <span class="skill-chip">UX Flow</span>
+          <span class="skill-chip">Retention Design</span>
+        </div>
+      </div>
+      <div class="detail-block">
+        <div class="detail-label">Tools</div>
+        <div class="skill-list">
+          <span class="skill-chip">Unity</span>
+          <span class="skill-chip">Excel (Advanced, Automation)</span>
+          <span class="skill-chip">TortoiseSVN</span>
+          <span class="skill-chip">XML</span>
+          <span class="skill-chip">PowerPoint</span>
+        </div>
+      </div>
+      <div class="detail-block">
+        <div class="detail-label">Languages</div>
+        <div class="skill-list">
+          <span class="skill-chip">Korean — Native</span>
+          <span class="skill-chip">English — Professional</span>
+          <span class="skill-chip">Japanese — Conversational</span>
+        </div>
+      </div>
+      <div class="detail-block">
+        <div class="detail-label">Location</div>
+        <div class="skill-list">
+          <span class="skill-chip">Buckhurst Hill, Essex, UK</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-header reveal">
@@ -715,137 +707,124 @@ const overlayData = {
     tag: 'Level Design · Neon Studio',
     title: 'World & Level Design',
     meta: 'Chronomaze · Sole Designer · 2021–2025',
-    kpi: [
-      { num: '211+', label: 'Field Maps' },
-      { num: '11', label: 'Worlds' },
-      { num: '63+', label: 'Sealed Stages' }
+    overview: 'Designed all 211+ field maps and 11 overworld regions for Chronomaze as the sole level designer. Built encounter layouts, monster placement data, pacing arcs per world, and the full Sealed Zones progression branch (63+ stages).',
+    process: 'Full pipeline ownership: layout blueprint → Unity collision placement → monster & gimmick placement → art handoff. Built Excel automation tools for monster stat balancing across all maps. Iterated on playtest feedback across two open betas, adjusting difficulty curves and visual clarity.',
+    designNotes: [
+      'Took over 63+ Sealed Zone stages mid-production when the previous designer left — reverse-engineered the existing design logic and maintained consistency while extending the content.',
+      'Built a custom Excel tool to automate monster stat balancing across 200+ maps — eliminated manual calculation errors and cut placement time significantly.',
+      'Each world was designed with escalating mechanical complexity, not just visual theming — so players felt genuine progression rather than cosmetic variety.'
     ],
-    overview: 'Designed all 211+ field maps and 11 overworld regions for Chronomaze as the sole level designer. Built encounter layouts, monster placement data, pacing arcs per world, and the full Sealed Zones progression branch (63+ stages). Each world was designed with a distinct visual theme and escalating mechanical challenges, with the Sealed Zones acting as a high-skill alternative path unlocking after main-story completion.',
-    process: 'Started with top-down world maps defining zone identity, then produced individual map layouts in spreadsheet form — annotating enemy density, gimmick placement, choke points and rest areas. Iterated on playtest feedback across two open betas, adjusting difficulty curves and visual clarity.',
-    tags: ['Solo', 'Level Layout', 'Monster Placement', 'Pacing', 'Sealed Zones', 'World Map'],
     icon: '🗺'
   },
   quest: {
     tag: 'Systems Design · Neon Studio',
     title: 'Quest Guide System',
     meta: 'Chronomaze · Sole Designer · 2021–2025',
-    kpi: [
-      { num: '1', label: 'Unified Guide UX' },
-      { num: '↓', label: 'Player Confusion' },
-      { num: 'Solo', label: 'Design & Spec' }
-    ],
     overview: 'Designed an in-game guide system that aggregates multiple objective types (main quest, side quests, exploration goals) into a single always-visible tracker. The problem it solved: players in early playtests consistently lost track of objectives after switching between content layers.',
     process: 'Mapped the full onboarding flow to identify confusion points, then spec\'d a layered tracker with priority sorting — current main quest pinned top, optional objectives listed below with collapsible sub-tasks. Wrote full system documentation including edge cases (quest conflict resolution, teleport integration, unlock conditions).',
-    tags: ['Solo', 'UX Design', 'Onboarding', 'Quest Flow', 'Player Guidance'],
+    designNotes: [
+      'Priority sorting was the key decision — pinning the main quest at top eliminated the most common confusion case without hiding optional content.',
+      'Integrated teleport shortcuts directly into the guide so players could jump to objective locations without opening a separate map screen.',
+      'Full edge-case spec (50+ states) was written upfront to reduce back-and-forth with engineering during implementation.'
+    ],
     icon: '📋'
   },
   records: {
     tag: 'Systems Design · Neon Studio',
     title: 'Records System',
     meta: 'Chronomaze · Sole Designer · 2021–2025',
-    kpi: [
-      { num: '46+', label: 'Record Categories' },
-      { num: '3', label: 'Reward Tiers' },
-      { num: 'Solo', label: 'Design & Spec' }
-    ],
     overview: 'Designed the in-game Records system — a hybrid achievement and codex tracker that logs player milestones, combat history, collection progress, and world exploration. Served dual purpose: long-term retention tool and in-game lore encyclopedia.',
-    process: 'Categorised 46+ record types across combat, exploration, social, and collection pillars. Balanced reward frequency to avoid inflation — tiered rewards (common / rare / legendary) distributed at psychologically spaced milestones. Included visual completion indicators so players can gauge remaining content at a glance.',
-    tags: ['Solo', 'Achievement System', 'Retention', 'Lore', 'Collection Tracking'],
+    process: 'Categorised 46+ record types across combat, exploration, social, and collection pillars. Balanced reward frequency to avoid inflation — tiered rewards (common / rare / legendary) distributed at psychologically spaced milestones.',
+    designNotes: [
+      'Tiered reward spacing was deliberately non-linear — early milestones come fast to hook players, later ones stretch out to sustain long-term engagement.',
+      'Visual completion indicators were added so players can gauge remaining content at a glance — this surfaces "almost done" motivation without requiring a separate progress screen.',
+      'The dual codex/achievement function was intentional: lore-driven players and completionists both find value in the same system.'
+    ],
     icon: '📜'
   },
   guild: {
     tag: 'Social Systems · Neon Studio',
     title: 'Guild System',
     meta: 'Chronomaze · Sole Designer · 2021–2025',
-    kpi: [
-      { num: '1', label: 'Economy Sink' },
-      { num: '↑', label: 'Social Retention' },
-      { num: 'Solo', label: 'Design & Spec' }
+    overview: 'Designed the full Guild system — formation, membership, ranks, donation, guild room, and guild shop. Core design goal: create a daily login motivation tied to social activity, while simultaneously serving as a currency sink to protect economy health.',
+    process: 'The donation mechanic runs two parallel feedback loops off one action: a short loop (personal reward today) and a long loop (guild levelling over time). The Guild Room was built as a real field map rather than a UI panel — members actually meet in the same space, keeping the social experience consistent with the rest of the game.',
+    designNotes: [
+      'Donation rewards the individual every time — deliberately avoiding a structure where players sacrifice personal gain for collective progress. This keeps participation self-motivated.',
+      '24-hour cooldown after leaving/disbanding is an anti-abuse measure, preventing guild-hopping to exploit early-join rewards.',
+      'Deputy Guild Master role and attendance system were fully spec\'d but flagged as future dev — the spec was written to accommodate them without requiring a redesign later.',
+      'All 50+ system messages and error strings were written in the spec, giving engineering clear copy without back-and-forth.'
     ],
-    overview: 'Designed the full Guild system — formation, membership, ranks, and a donation mechanic that serves as a currency sink. The core design goal was creating a reason to return daily that is social rather than content-driven: players log in to contribute to their guild, not just to complete tasks.',
-    process: 'Identified currency accumulation as an economy health problem. Donation mechanic solved two problems simultaneously — giving players a social obligation (helping guildmates level up the guild hall) while draining surplus in-game currency. Guild hall upgrade milestones were tuned to require collective contribution rather than single-player whaling.',
-    tags: ['Solo', 'Social Systems', 'Economy Design', 'Retention', 'Currency Sink'],
     icon: '⚔️'
   },
   explore: {
     tag: 'Content Design · Neon Studio',
     title: 'Exploration Missions',
-    meta: 'Chronomaze · Sole Designer · 2021–2025',
-    kpi: [
-      { num: '650+', label: 'Missions' },
-      { num: '11', label: 'World Regions' },
-      { num: 'Solo', label: 'Design & Data' }
+    meta: 'Chronomaze · System Spec Author · 2021–2025',
+    overview: 'Designed the system framework for 650+ exploration missions across all 11 world regions. A passive always-active progression layer — no opt-in required — that gives every map a persistent set of objectives and rewards players for going off the beaten path.',
+    process: 'Two-tier structure: world missions (50%/100% completion payouts) and zone missions (100% payout). Integrated directly with the map fog system — the same per-map exploration data drives both systems, avoiding duplication. Reused the existing Quest framework (Quest_Adventure.xml) to avoid building new data architecture.',
+    designNotes: [
+      'The "always active" rule was a deliberate engineering simplification — eliminating accept/abandon UI reduced the implementation surface significantly for a small team.',
+      'Corridor and transition zones receive missions too — rewarding thorough explorers rather than punishing them for finding optional paths.',
+      'Shared fog state between Adventure Map and Exploration Missions means one data write drives both systems, reducing server load and eliminating sync bugs.'
     ],
-    overview: 'Designed and authored 650+ exploration missions distributed across all 11 world regions. Exploration missions function as a secondary long-term loop — rewarding players who fully investigate each area with lore, rare drops, and completion bonuses.',
-    process: 'Built a scalable mission template system so new zones could be populated quickly without per-mission design overhead. Balanced density per region based on map complexity and expected player dwell time. Missions were categorised by type (collect, defeat, discover, interact) to ensure variety across each region\'s mission pool.',
-    tags: ['Solo', 'Content Design', 'Long-term Loop', 'Exploration', 'Collectibles'],
     icon: '🧭'
   },
   map: {
     tag: 'UX / Navigation · Neon Studio',
     title: 'Map & Minimap',
     meta: 'Chronomaze · Sole Designer · 2021–2025',
-    kpi: [
-      { num: '11', label: 'World Maps' },
-      { num: '2', label: 'View Modes' },
-      { num: 'Solo', label: 'Design & Spec' }
+    overview: 'Designed the full map and minimap navigation system for a 200+ map world. Two components: a persistent HUD minimap for local awareness, and a full-screen Adventure Map with fog-of-war, icon layering, and Dimensional Gate travel.',
+    process: 'The core challenge was information density across 200+ maps. Solved with a two-tier approach: region-level world map for macro navigation, zone-level minimap for local play. Fog-of-war uses a greyscale shader on the base terrain image — no separate fog asset needed, so the art team only produces one image per zone.',
+    designNotes: [
+      'Greyscale shader approach means the art team produces one map image per zone — no separate "fogged" version required, cutting asset workload in half.',
+      'Icon priority ordering was specified explicitly to handle overlapping cases in dense areas — without this, engineers would have made arbitrary stacking decisions.',
+      'Indoor zones proxy the player icon to the last outdoor warp point — solving the "where am I?" problem for spaces not on the world graph.',
+      'Bidirectional links between Map and Exploration Missions let players move freely between both systems without losing context.'
     ],
-    overview: 'Designed the map and minimap navigation system — covering both the persistent world map (11 regions, warp points, region unlock states) and the in-field minimap (enemy indicators, terrain boundaries, POI markers).',
-    process: 'Main challenge was information density — the world had 200+ maps, but the navigation UI needed to remain readable without overwhelming players. Solved with a two-tier system: region-level world map for macro navigation, zone-level minimap for local awareness. Warp point logic was spec\'d alongside the Exploration Missions system to ensure teleport availability matched expected player progression.',
-    tags: ['Solo', 'Navigation UX', 'World Map', 'Minimap', 'Warp System'],
     icon: '🧩'
   },
   bingo: {
     tag: 'Event Design · Crowngames',
     title: 'Bingo Masters',
     meta: 'Slotica 5 · Co-designed (Lead) · 2019–2021',
-    kpi: [
-      { num: '+10%', label: 'Retention Lift' },
-      { num: '↑', label: 'Daily Engagement' },
-      { num: 'Lead', label: 'Event Designer' }
+    overview: 'Lead designer on Bingo Masters, a recurring limited-time event for Slotica 5. Players completed bingo cards through normal gameplay loops, driving sustained daily engagement over the event window.',
+    process: 'Designed card structures, fill rate tuning, and jackpot tier distribution. Bingo format was chosen as a lightweight meta-layer that didn\'t require players to change their natural spin behaviour — it reframed existing actions as progress toward a visible goal.',
+    designNotes: [
+      'The bingo format works because it adds a reward layer on top of existing behaviour — no new mechanic to learn, just a new reason to keep playing.',
+      'Fill rate was tuned so casual players could complete ~60% naturally, while completionists needed deliberate extended sessions — serving both segments.',
+      'Event contributed to a broader 10% monthly retention improvement across the event portfolio.'
     ],
-    overview: 'Lead designer on Bingo Masters, a recurring limited-time event for Slotica 5 (social casino mobile). Players completed bingo cards through normal gameplay loops, driving sustained daily engagement over the event window.',
-    process: 'Designed card structures, fill rate tuning, and jackpot tier distribution. Bingo format was chosen as a lightweight meta-layer that didn\'t require players to change their natural spin behaviour — it simply reframed existing actions as progress toward a visible goal. Event contributed to the broader 10% monthly retention improvement across the event portfolio.',
-    tags: ['Co-designed', 'Event Design', 'Retention', 'Social Casino', 'Meta-loop'],
     icon: '🎯'
   },
   halloween: {
     tag: 'Event Design · Crowngames',
     title: 'Halloween Event',
     meta: 'Slotica 5 · Co-designed (Lead) · Oct 2020',
-    kpi: [
-      { num: '8', label: 'Zones' },
-      { num: '3', label: 'All Clear Tiers' },
-      { num: 'Lead', label: 'Initial Design' }
-    ],
     overview: 'Lead designer on the Halloween 2020 event — an 8-zone map event running Oct 21 – Nov 3. Players collected pumpkins in each zone under individual time limits, with escalating All Clear bonuses for completing all zones up to 3 times.',
-    process: 'Designed the full event flow solo across v0.1–v0.4 before handoff. The 8-zone structure was chosen to give players a sense of geographic exploration within the spin loop. Zone time limits were tuned to create mild urgency without frustration, and the All Clear mechanic (rewarding full map sweeps up to 3 rounds) was designed to maximise session extension for engaged players without punishing casual play.',
-    tags: ['Solo initial draft', 'Event Design', 'Map Layout', 'Pumpkin Collection', 'Scaling Rewards'],
+    process: 'Designed the full event flow solo across v0.1–v0.4 before co-developing balancing with the team lead. The 8-zone structure gave players a sense of geographic exploration within the spin loop.',
+    designNotes: [
+      'Zone time limits created mild urgency without frustration — tuned so average players could clear with ~20% time remaining.',
+      'The All Clear mechanic (up to 3 rounds with scaling rewards) was designed to extend sessions for engaged players without punishing casual ones who stop at round 1.',
+      'Solo-authored the initial concept through 4 iterations (v0.1–v0.4) before handoff to co-development — the core loop survived intact through production.'
+    ],
     icon: '🎃'
   },
   puppy: {
     tag: 'Event Design · Crowngames',
     title: 'Puppy Event',
     meta: 'Slotica 5 · Co-designed · 2019–2021',
-    kpi: [
-      { num: '↑', label: 'Player Sentiment' },
-      { num: '↑', label: 'Session Frequency' },
-      { num: 'Co-design', label: 'Balancing Lead' }
-    ],
     overview: 'Co-designed the Puppy Event — a care-based social casino event where players raised a virtual puppy through gameplay. Handled event balancing and table design, ensuring reward milestones aligned with natural session patterns.',
-    process: 'Puppy care format was selected to drive session frequency (players return to "feed" the puppy) rather than session length. Designed the feeding/reward tables with diminishing daily multipliers to prevent early-completionist burnout while keeping casual players engaged across the full event window.',
-    tags: ['Co-designed', 'Balancing', 'Session Loop', 'Social Casino', 'Table Design'],
+    process: 'Puppy care format was selected to drive session frequency (players return to "feed" the puppy) rather than session length. Designed feeding/reward tables with diminishing daily multipliers to prevent early-completionist burnout.',
+    designNotes: [
+      'The care mechanic targets session frequency over session length — players come back multiple times per day in short bursts rather than grinding in one sitting.',
+      'Diminishing daily multipliers prevent day-1 completion while keeping the reward curve visible enough that casual players stay motivated across the full event window.'
+    ],
     icon: '🐾'
   }
 };
 
 function buildOverlay(data) {
-  const kpiHtml = data.kpi.map(k => `
-    <div class="kpi-item">
-      <span class="kpi-num">${k.num}</span>
-      <div class="kpi-label">${k.label}</div>
-    </div>`).join('');
-  const tagsHtml = data.tags.map(t => `<span class="tag-chip">${t}</span>`).join('');
+  const notesHtml = data.designNotes.map(n => `<li>${n}</li>`).join('');
   return `
     <div class="overlay-img-placeholder">${data.icon}</div>
     <div class="overlay-content">
@@ -862,8 +841,8 @@ function buildOverlay(data) {
         <p>${data.process}</p>
       </div>
       <div class="overlay-section">
-        <div class="overlay-section-title">Tags</div>
-        <div class="overlay-tags">${tagsHtml}</div>
+        <div class="overlay-section-title">Design Notes</div>
+        <ul class="design-notes-list">${notesHtml}</ul>
       </div>
     </div>`;
 }
