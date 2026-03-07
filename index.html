@@ -11,6 +11,13 @@
 <meta property="og:url" content="https://atopos-game.github.io/Portfolio/" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80' font-family='sans-serif'>JL</text></svg>" />
 <meta property="og:image" content="https://atopos-game.github.io/Portfolio/video/poster.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Juwon Lee — Game Designer" />
+<meta name="twitter:description" content="6 years shipping mobile games — from level layouts to full social ecosystems. Based in Essex, UK." />
+<meta name="twitter:image" content="https://atopos-game.github.io/Portfolio/video/poster.jpg" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Juwon Lee","jobTitle":"Game Designer","url":"https://atopos-game.github.io/Portfolio/","email":"quierado@gmail.com","telephone":"+447384429912","address":{"@type":"PostalAddress","addressLocality":"Buckhurst Hill","addressRegion":"Essex","addressCountry":"GB"},"sameAs":["https://www.linkedin.com/in/juwon-lee-5b3097219"],"knowsAbout":["Level Design","Systems Design","Event Design","Mobile Games","Unity"]}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -426,6 +433,20 @@
   .footer-links a { font-size: 12px; color: var(--muted); text-decoration: none; }
   .footer-links a:hover { color: var(--gold); }
 
+  /* ── BACK TO TOP ── */
+  #backToTop {
+    position: fixed; bottom: 32px; right: 32px; z-index: 900;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--gold); color: var(--bg); border: none;
+    font-size: 20px; cursor: pointer;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.3s, transform 0.3s, background 0.2s;
+    pointer-events: none;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  }
+  #backToTop.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+  #backToTop:hover { background: #e8c45e; }
+
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
     nav { padding: 16px 24px; }
@@ -539,7 +560,7 @@
 
       <!-- Showcase Reel -->
       <div class="showcase-reel">
-        <video controls loop playsinline poster="video/poster.jpg" preload="metadata">
+        <video controls loop playsinline poster="video/poster.jpg" preload="metadata" aria-label="Chronomaze gameplay showcase reel">
           <source src="video/showcase_reel_v3.webm" type="video/webm">
           <source src="video/showcase_reel_v3.mp4" type="video/mp4">
         </video>
@@ -673,7 +694,7 @@
       <!-- Play Link -->
       <div class="category-label" style="margin-top: 32px;">🎮 Play Slotica 5</div>
       <div class="bar-list">
-        <div class="bar-item" onclick="window.open('https://www.facebook.com/gaming/play/491110406046537/','_blank')">
+        <div class="bar-item" onclick="window.open('https://apps.facebook.com/slotica_five/','_blank')">
           <div class="bar-icon">🎰</div>
           <div class="bar-content">
             <div class="bar-role">Live Product</div>
@@ -772,6 +793,9 @@
     </div>
   </div>
 </section>
+
+<!-- BACK TO TOP -->
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
 
 <!-- FOOTER -->
 <footer>
@@ -1011,6 +1035,12 @@ const observer = new IntersectionObserver(entries => {
   entries.forEach(el => { if (el.isIntersecting) { el.target.classList.add('visible'); } });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Back to top button
+const btt = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  btt.classList.toggle('show', window.scrollY > 600);
+});
 </script>
 </body>
 </html>
