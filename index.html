@@ -184,6 +184,29 @@
   .studio-period { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
   .studio-line { flex: 1; height: 1px; background: rgba(212,178,85,0.12); }
 
+  /* ── SHOWCASE REEL ── */
+  .showcase-reel {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 20px 0 28px;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .showcase-reel video {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid rgba(212,178,85,0.10);
+  }
+  @media (max-width: 900px) {
+    .showcase-reel { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .showcase-reel { grid-template-columns: 1fr; }
+  }
+
   /* category label */
   .category-label {
     font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
@@ -498,6 +521,22 @@
         <span class="studio-period">2021 – 2025</span>
         <div class="studio-line"></div>
         <span class="studio-period">Chronomaze · Mobile MMORPG</span>
+      </div>
+
+      <!-- Showcase Reel -->
+      <div class="showcase-reel">
+        <video autoplay muted loop playsinline>
+          <source src="video/clip_explore.webm" type="video/webm">
+        </video>
+        <video autoplay muted loop playsinline>
+          <source src="video/clip_combat.webm" type="video/webm">
+        </video>
+        <video autoplay muted loop playsinline>
+          <source src="video/clip_dungeon.webm" type="video/webm">
+        </video>
+        <video autoplay muted loop playsinline>
+          <source src="video/clip_sealed.webm" type="video/webm">
+        </video>
       </div>
 
       <div class="category-label">🌍 World & Level Design</div>
