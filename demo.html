@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chronomaze — Playable Demo | Juwon Lee</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0a0a12; overflow: hidden; font-family: 'Segoe UI', sans-serif; }
+#game-container { display: flex; justify-content: center; align-items: center; width: 100vw; height: 100vh; }
+canvas { image-rendering: pixelated; }
+#loading { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0a0a12;
+  display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 100; color: #fff; }
+#loading h1 { font-size: 28px; margin-bottom: 12px; letter-spacing: 2px; }
+#loading p { font-size: 14px; color: #888; margin-bottom: 24px; }
+.load-bar { width: 240px; height: 4px; background: #222; border-radius: 2px; overflow: hidden; }
+.load-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #6a5acd, #ff6b9d); transition: width 0.3s; }
+#back-link { position: fixed; top: 16px; left: 16px; z-index: 50; color: #888; text-decoration: none;
+  font-size: 13px; transition: color 0.2s; }
+#back-link:hover { color: #fff; }
+#controls-hint { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); z-index: 50;
+  color: #555; font-size: 12px; text-align: center; pointer-events: none; }
+</style>
+</head>
+<body>
+<a id="back-link" href="index.html">&larr; Back to Portfolio</a>
+<div id="loading">
+  <h1>CHRONOMAZE</h1>
+  <p>Loading Vertical Slice Demo...</p>
+  <div class="load-bar"><div class="load-fill" id="load-fill"></div></div>
+</div>
+<div id="game-container"></div>
+<div id="controls-hint">Arrow Keys / WASD: Move &nbsp;|&nbsp; Space: Jump &nbsp;|&nbsp; Z: Attack &nbsp;|&nbsp; Q: Quest Guide &nbsp;|&nbsp; M: Minimap &nbsp;|&nbsp; Tab: Records</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.60.0/phaser.min.js"></script>
+<script>
+// ============================================================
+// CHRONOMAZE VERTICAL SLICE DEMO
+// Designed by Juwon Lee | Demo built with Phaser 3
+// ============================================================
+
+const TILE = 32;
+const SCALE = 2;
+const GRAVITY = 900;
+const PLAYER_SPEED = 160;
+const JUMP_VELOCITY = -380;
+
+// ---- Texture Generation (procedural pixel art) ----
+function createTextures(scene) {
+  // Player
+  const pg = scene.make.graphics({add: false});
+  // Body
+  pg.fillStyle(0x4488ff); pg.fillRect(4,4,8,8);
+  // Head
+  pg.fillStyle(0xffcc99); pg.fillRect(5,0,6,5);
+  // Eyes
+  pg.fillStyle(0x222222); pg.fillRect(8,2,1,1); pg.fillRect(10,2,1,1);
+  // Legs
+  pg.fillStyle(0x3366cc); pg.fillRect(5,12,3,4); pg.fillRect(8,12,3,4);
+  // Sword
+  pg.fillStyle(0xcccccc); pg.fillRect(13,3,2,9);
+  pg.fillStyle(0xffcc00); pg.fillRect(12,8,4,2);
+  pg.generateTexture('player', 16, 16);
+  pg.destroy();
+
+  // Enemy Slime
+  const eg = scene.make.graphics({add: false});
+  eg.fillStyle(0x44dd44); eg.fillRect(2,6,12,8);
+  eg.fillStyle(0x33bb33); eg.fillRect(1,8,14,6);
+  eg.fillStyle(0x22aa22); eg.fillRect(0,10,16,4);
+  eg.fillStyle(0xffffff); eg.fillRect(4,7,3,3); eg.fillRect(9,7,3,3);
+  eg.fillStyle(0x222222); eg.fillRect(5,8,2,2); eg.fillRect(10,8,2,2);
+  eg.generateTexture('slime', 16, 16);
+  eg.destroy();
+
+  // Boss
+  const bg = scene.make.graphics({add: false});
+  bg.fillStyle(0xcc2244);
+  bg.fillRect(4,0,24,28); bg.fillRect(2,4,28,20); bg.fillRect(0,8,32,16);
+  bg.fillStyle(0xff4466); bg.fillRect(6,4,20,18);
+  bg.fillStyle(0xffffff); bg.fillRect(8,8,5,5); bg.fillRect(19,8,5,5);
+  bg.fillStyle(0xff0000); bg.fillRect(10,9,3,3); bg.fillRect(21,9,3,3);
+  bg.fillStyle(0xffffff); bg.fillRect(12,18,8,3);
+  bg.generateTexture('boss', 32, 32);
+  bg.destroy();
+
+  // NPC
+  const ng = scene.make.graphics({add: false});
+  ng.fillStyle(0xff9933); ng.fillRect(4,4,8,8);
+  ng.fillStyle(0xffcc99); ng.fillRect(5,0,6,5);
+  ng.fillStyle(0x222222); ng.fillRect(7,2,1,1); ng.fillRect(10,2,1,1);
+  ng.fillStyle(0xff6600); ng.fillRect(5,12,3,4); ng.fillRect(8,12,3,4);
+  ng.fillStyle(0xffff00); ng.fillRect(5,-2,6,3);
+  ng.generateTexture('npc', 16, 16);
+  ng.destroy();
+
+  // Tiles
+  const tileColors = {
+    'ground':   { top: 0x66aa44, body: 0x885533 },
+    'stone':    { top: 0x888888, body: 0x666666 },
+    'dungeon':  { top: 0x555566, body: 0x333344 },
+    'platform': { top: 0x77aa55, body: 0x558833 },
+    'brick':    { top: 0x996644, body: 0x774422 },
+    'sealed':   { top: 0x8844aa, body: 0x663388 },
+  };
+  for (const [name, c] of Object.entries(tileColors)) {
+    const tg = scene.make.graphics({add: false});
+    tg.fillStyle(c.body); tg.fillRect(0,0,TILE,TILE);
+    tg.fillStyle(c.top); tg.fillRect(0,0,TILE,6);
+    tg.lineStyle(1, 0x00000033); tg.strokeRect(0,0,TILE,TILE);
+    tg.generateTexture('tile_'+name, TILE, TILE);
+    tg.destroy();
+  }
+
+  // Sky / backgrounds
+  ['sky_town:0x88ccff:0x4488cc', 'sky_forest:0x446633:0x223311', 'sky_dungeon:0x111122:0x0a0a18'].forEach(s => {
+    const [name, c1, c2] = s.split(':');
+    const sg = scene.make.graphics({add: false});
+    for (let y = 0; y < 600; y++) {
+      const t = y / 600;
+      const r1 = (parseInt(c1.slice(2),16)>>16)&0xff, g1 = (parseInt(c1.slice(2),16)>>8)&0xff, b1 = parseInt(c1.slice(2),16)&0xff;
+      const r2 = (parseInt(c2.slice(2),16)>>16)&0xff, g2 = (parseInt(c2.slice(2),16)>>8)&0xff, b2 = parseInt(c2.slice(2),16)&0xff;
+      sg.fillStyle(Phaser.Display.Color.GetColor(
+        Math.round(r1+(r2-r1)*t), Math.round(g1+(g2-g1)*t), Math.round(b1+(b2-b1)*t)
+      ));
+      sg.fillRect(0, y, 800, 1);
+    }
+    sg.generateTexture(name, 800, 600);
+    sg.destroy();
+  });
+
+  // Portal
+  const portG = scene.make.graphics({add: false});
+  portG.fillStyle(0x6a5acd, 0.6); portG.fillCircle(8,8,8);
+  portG.fillStyle(0xffffff, 0.3); portG.fillCircle(8,8,4);
+  portG.generateTexture('portal', 16, 16);
+  portG.destroy();
+
+  // Collectible (star)
+  const sg2 = scene.make.graphics({add: false});
+  sg2.fillStyle(0xffdd00); sg2.fillRect(6,0,4,16); sg2.fillRect(0,6,16,4);
+  sg2.fillRect(3,3,10,10);
+  sg2.fillStyle(0xffff88); sg2.fillRect(6,4,4,8); sg2.fillRect(4,6,8,4);
+  sg2.generateTexture('star', 16, 16);
+  sg2.destroy();
+
+  // Seal crystal
+  const scg = scene.make.graphics({add: false});
+  scg.fillStyle(0xaa44ff); scg.fillRect(4,2,8,12);
+  scg.fillStyle(0xcc88ff); scg.fillRect(5,3,6,4);
+  scg.fillStyle(0x8822cc); scg.fillRect(3,0,10,3);
+  scg.generateTexture('seal_crystal', 16, 16);
+  scg.destroy();
+
+  // Heart
+  const hg = scene.make.graphics({add: false});
+  hg.fillStyle(0xff3344); hg.fillRect(1,2,4,4); hg.fillRect(5,2,4,4);
+  hg.fillRect(0,4,10,3); hg.fillRect(1,7,8,2); hg.fillRect(2,9,6,1); hg.fillRect(3,10,4,1); hg.fillRect(4,11,2,1);
+  hg.generateTexture('heart', 10, 12);
+  hg.destroy();
+
+  // Attack slash
+  const asg = scene.make.graphics({add: false});
+  asg.fillStyle(0xffffff, 0.8);
+  asg.fillRect(0,4,24,4); asg.fillRect(4,0,4,12); asg.fillRect(2,2,8,8);
+  asg.generateTexture('slash', 24, 12);
+  asg.destroy();
+
+  // Quest marker !
+  const qg = scene.make.graphics({add: false});
+  qg.fillStyle(0xffdd00); qg.fillRect(6,0,4,8); qg.fillRect(6,10,4,3);
+  qg.generateTexture('quest_marker', 16, 14);
+  qg.destroy();
+}
+
+// ---- Map Data ----
+const MAPS = {
+  town: {
+    name: "Aethoria Town",
+    sky: 'sky_town',
+    width: 50, height: 19,
+    tileType: 'ground',
+    platforms: [
+      // ground
+      ...Array.from({length:50}, (_,i) => ({x:i, y:18, t:'ground'})),
+      ...Array.from({length:50}, (_,i) => ({x:i, y:17, t:'brick'})),
+      // raised platforms
+      {x:8,y:14,t:'platform'},{x:9,y:14,t:'platform'},{x:10,y:14,t:'platform'},{x:11,y:14,t:'platform'},
+      {x:20,y:13,t:'platform'},{x:21,y:13,t:'platform'},{x:22,y:13,t:'platform'},
+      {x:30,y:12,t:'platform'},{x:31,y:12,t:'platform'},{x:32,y:12,t:'platform'},{x:33,y:12,t:'platform'},
+      // buildings (decorative blocks)
+      ...Array.from({length:4}, (_,i) => ({x:3+i,y:16,t:'brick'})),
+      ...Array.from({length:4}, (_,i) => ({x:3+i,y:15,t:'brick'})),
+      ...Array.from({length:4}, (_,i) => ({x:3+i,y:14,t:'brick'})),
+      ...Array.from({length:5}, (_,i) => ({x:14+i,y:16,t:'brick'})),
+      ...Array.from({length:5}, (_,i) => ({x:14+i,y:15,t:'brick'})),
+      ...Array.from({length:3}, (_,i) => ({x:38+i,y:16,t:'brick'})),
+      ...Array.from({length:3}, (_,i) => ({x:38+i,y:15,t:'brick'})),
+      ...Array.from({length:3}, (_,i) => ({x:38+i,y:14,t:'brick'})),
+    ],
+    npcs: [
+      {x:5*TILE, y:13*TILE, name:"Elder Mira", dialog: "Welcome to Aethoria, adventurer.\nThe forest east of town has been\noverrun by slimes. Defeat 3 of them!", quest:'kill_slimes'},
+      {x:16*TILE, y:14*TILE, name:"Merchant Bao", dialog: "I sell potions and gear...\nbut this is just a demo!\nTry the Sealed Dungeon later."},
+      {x:39*TILE, y:13*TILE, name:"Guard Kai", dialog: "The Sealed Dungeon lies beyond\nthe forest. You need a\nSeal Crystal to enter."},
+    ],
+    portals: [
+      {x:48*TILE, y:16*TILE, target:'forest', spawnX:2*TILE, spawnY:14*TILE, label:'→ Enchanted Forest'},
+    ],
+    enemies: [],
+    stars: [{x:9*TILE,y:12*TILE},{x:21*TILE,y:11*TILE},{x:31*TILE,y:10*TILE}],
+    playerSpawn: {x:2*TILE, y:15*TILE},
+  },
+  forest: {
+    name: "Enchanted Forest",
+    sky: 'sky_forest',
+    width: 60, height: 19,
+    tileType: 'ground',
+    platforms: [
+      ...Array.from({length:60}, (_,i) => ({x:i, y:18, t:'ground'})),
+      ...Array.from({length:60}, (_,i) => ({x:i, y:17, t:'ground'})),
+      // terrain variation
+      ...Array.from({length:6}, (_,i) => ({x:8+i, y:16, t:'ground'})),
+      ...Array.from({length:4}, (_,i) => ({x:9+i, y:15, t:'ground'})),
+      // floating platforms
+      {x:18,y:14,t:'platform'},{x:19,y:14,t:'platform'},{x:20,y:14,t:'platform'},
+      {x:25,y:12,t:'platform'},{x:26,y:12,t:'platform'},
+      {x:32,y:13,t:'platform'},{x:33,y:13,t:'platform'},{x:34,y:13,t:'platform'},
+      {x:40,y:11,t:'platform'},{x:41,y:11,t:'platform'},{x:42,y:11,t:'platform'},
+      // hill near dungeon
+      ...Array.from({length:8}, (_,i) => ({x:50+i, y:16, t:'stone'})),
+      ...Array.from({length:6}, (_,i) => ({x:51+i, y:15, t:'stone'})),
+      ...Array.from({length:4}, (_,i) => ({x:52+i, y:14, t:'stone'})),
+    ],
+    npcs: [
+      {x:4*TILE, y:16*TILE, name:"Scout Lena", dialog: "Be careful! The slimes here\nare aggressive. Defeat them\nand find the Seal Crystal!"},
+    ],
+    portals: [
+      {x:1*TILE, y:16*TILE, target:'town', spawnX:46*TILE, spawnY:15*TILE, label:'← Aethoria Town'},
+      {x:56*TILE, y:13*TILE, target:'dungeon', spawnX:2*TILE, spawnY:14*TILE, label:'→ Sealed Dungeon', requireSeal:true},
+    ],
+    enemies: [
+      {x:15*TILE, y:16*TILE}, {x:22*TILE, y:16*TILE}, {x:30*TILE, y:16*TILE},
+      {x:36*TILE, y:16*TILE}, {x:44*TILE, y:16*TILE},
+    ],
+    stars: [{x:19*TILE,y:12*TILE},{x:25*TILE,y:10*TILE},{x:41*TILE,y:9*TILE}],
+    sealCrystal: {x:42*TILE, y:9*TILE},
+    playerSpawn: {x:3*TILE, y:15*TILE},
+  },
+  dungeon: {
+    name: "Sealed Dungeon — Thornspire",
+    sky: 'sky_dungeon',
+    width: 50, height: 19,
+    tileType: 'dungeon',
+    platforms: [
+      ...Array.from({length:50}, (_,i) => ({x:i, y:18, t:'dungeon'})),
+      ...Array.from({length:50}, (_,i) => ({x:i, y:17, t:'dungeon'})),
+      // walls
+      ...Array.from({length:19}, (_,i) => ({x:0, y:i, t:'dungeon'})),
+      ...Array.from({length:19}, (_,i) => ({x:49, y:i, t:'dungeon'})),
+      // ceiling
+      ...Array.from({length:50}, (_,i) => ({x:i, y:0, t:'dungeon'})),
+      ...Array.from({length:50}, (_,i) => ({x:i, y:1, t:'dungeon'})),
+      // platforms inside
+      {x:6,y:15,t:'sealed'},{x:7,y:15,t:'sealed'},{x:8,y:15,t:'sealed'},
+      {x:12,y:13,t:'sealed'},{x:13,y:13,t:'sealed'},{x:14,y:13,t:'sealed'},{x:15,y:13,t:'sealed'},
+      {x:20,y:11,t:'sealed'},{x:21,y:11,t:'sealed'},{x:22,y:11,t:'sealed'},
+      {x:28,y:14,t:'sealed'},{x:29,y:14,t:'sealed'},{x:30,y:14,t:'sealed'},
+      {x:35,y:12,t:'sealed'},{x:36,y:12,t:'sealed'},{x:37,y:12,t:'sealed'},{x:38,y:12,t:'sealed'},
+      {x:42,y:10,t:'sealed'},{x:43,y:10,t:'sealed'},{x:44,y:10,t:'sealed'},
+    ],
+    npcs: [],
+    portals: [
+      {x:1*TILE, y:16*TILE, target:'forest', spawnX:54*TILE, spawnY:13*TILE, label:'← Enchanted Forest'},
+    ],
+    enemies: [
+      {x:10*TILE, y:16*TILE}, {x:18*TILE, y:16*TILE}, {x:25*TILE, y:16*TILE},
+      {x:33*TILE, y:16*TILE}, {x:40*TILE, y:16*TILE},
+    ],
+    boss: {x:45*TILE, y:14*TILE},
+    stars: [{x:13*TILE,y:11*TILE},{x:21*TILE,y:9*TILE},{x:36*TILE,y:10*TILE}],
+    playerSpawn: {x:3*TILE, y:15*TILE},
+  },
+};
+
+// ---- Game State ----
+const STATE = {
+  hp: 5, maxHp: 5,
+  stars: 0,
+  hasSealCrystal: false,
+  questActive: false, questComplete: false,
+  slimesKilled: 0, slimesNeeded: 3,
+  bossDefeated: false,
+  currentMap: 'town',
+  explored: { town: false, forest: false, dungeon: false },
+  showQuest: false,
+  showMinimap: false,
+  showRecords: false,
+  records: [],
+  mapsVisited: new Set(['town']),
+};
+
+// ---- MAIN SCENE ----
+class GameScene extends Phaser.Scene {
+  constructor() { super('GameScene'); }
+
+  create() {
+    createTextures(this);
+    this.loadMap('town');
+
+    // Input
+    this.cursors = this.input.keyboard.createCursorKeys();
+    this.keys = this.input.keyboard.addKeys({
+      w:'W', a:'A', s:'S', d:'D',
+      z:'Z', space:'SPACE',
+      q:'Q', m:'M', tab:'TAB', esc:'ESC',
+    });
+
+    // UI Camera (fixed)
+    this.uiCam = this.cameras.add(0,0, this.scale.width, this.scale.height);
+    this.uiCam.setScroll(0,0);
+
+    // Hide loading
+    document.getElementById('loading').style.display = 'none';
+  }
+
+  loadMap(mapId, spawnX, spawnY) {
+    // Cleanup
+    if (this.bgImage) this.bgImage.destroy();
+    if (this.tileGroup) this.tileGroup.clear(true, true);
+    if (this.enemyGroup) this.enemyGroup.clear(true, true);
+    if (this.starGroup) this.starGroup.clear(true, true);
+    if (this.portalGroup) this.portalGroup.clear(true, true);
+    if (this.npcGroup) this.npcGroup.clear(true, true);
+    if (this.player) this.player.destroy();
+    if (this.bossSprite) { this.bossSprite.destroy(); this.bossSprite = null; }
+    if (this.sealCrystalSprite) { this.sealCrystalSprite.destroy(); this.sealCrystalSprite = null; }
+    if (this.dialogBox) { this.dialogBox.destroy(); this.dialogBox = null; }
+    if (this.dialogText) { this.dialogText.destroy(); this.dialogText = null; }
+    if (this.questMarkers) { this.questMarkers.forEach(m => m.destroy()); }
+    this.questMarkers = [];
+
+    const map = MAPS[mapId];
+    STATE.currentMap = mapId;
+    STATE.explored[mapId] = true;
+    STATE.mapsVisited.add(mapId);
+    this.addRecord(`Discovered: ${map.name}`);
+
+    // Background
+    this.bgImage = this.add.image(0, 0, map.sky).setOrigin(0).setScrollFactor(0.2);
+
+    // World bounds
+    const worldW = map.width * TILE;
+    const worldH = map.height * TILE;
+    this.physics.world.setBounds(0, 0, worldW, worldH);
+
+    // Tiles
+    this.tileGroup = this.physics.add.staticGroup();
+    for (const p of map.platforms) {
+      this.tileGroup.create(p.x * TILE + TILE/2, p.y * TILE + TILE/2, 'tile_' + p.t);
+    }
+
+    // Player
+    const sx = spawnX || map.playerSpawn.x;
+    const sy = spawnY || map.playerSpawn.y;
+    this.player = this.physics.add.sprite(sx, sy, 'player').setScale(SCALE).setDepth(10);
+    this.player.setCollideWorldBounds(true);
+    this.player.body.setSize(12, 14);
+    this.physics.add.collider(this.player, this.tileGroup);
+    this.player.facingRight = true;
+    this.isAttacking = false;
+
+    // Camera
+    this.cameras.main.setBounds(0, 0, worldW, worldH);
+    this.cameras.main.startFollow(this.player, true, 0.1, 0.1);
+
+    // Stars
+    this.starGroup = this.physics.add.group();
+    for (const s of (map.stars || [])) {
+      const star = this.starGroup.create(s.x, s.y, 'star').setScale(SCALE);
+      star.body.setAllowGravity(false);
+      this.tweens.add({ targets: star, y: s.y - 8, duration: 800, yoyo: true, repeat: -1 });
+    }
+    this.physics.add.overlap(this.player, this.starGroup, this.collectStar, null, this);
+
+    // Enemies
+    this.enemyGroup = this.physics.add.group();
+    for (const e of (map.enemies || [])) {
+      const enemy = this.enemyGroup.create(e.x, e.y, 'slime').setScale(SCALE);
+      enemy.hp = 2;
+      enemy.setCollideWorldBounds(true);
+      enemy.body.setSize(14, 10);
+      enemy.patrolDir = 1;
+      enemy.patrolTimer = 0;
+    }
+    this.physics.add.collider(this.enemyGroup, this.tileGroup);
+    this.physics.add.overlap(this.player, this.enemyGroup, this.playerHit, null, this);
+
+    // Boss
+    if (map.boss) {
+      this.bossSprite = this.physics.add.sprite(map.boss.x, map.boss.y, 'boss').setScale(SCALE);
+      this.bossSprite.hp = 8;
+      this.bossSprite.maxHp = 8;
+      this.bossSprite.setCollideWorldBounds(true);
+      this.bossSprite.patrolDir = 1;
+      this.bossSprite.patrolTimer = 0;
+      this.physics.add.collider(this.bossSprite, this.tileGroup);
+      this.physics.add.overlap(this.player, this.bossSprite, this.playerHitBoss, null, this);
+    }
+
+    // Seal Crystal
+    if (map.sealCrystal && !STATE.hasSealCrystal) {
+      this.sealCrystalSprite = this.physics.add.sprite(map.sealCrystal.x, map.sealCrystal.y, 'seal_crystal').setScale(SCALE);
+      this.sealCrystalSprite.body.setAllowGravity(false);
+      this.tweens.add({ targets: this.sealCrystalSprite, y: map.sealCrystal.y - 10, duration: 1000, yoyo: true, repeat: -1 });
+      this.physics.add.overlap(this.player, this.sealCrystalSprite, this.collectSeal, null, this);
+    }
+
+    // Portals
+    this.portalGroup = this.physics.add.staticGroup();
+    this.portalData = [];
+    for (const p of (map.portals || [])) {
+      const portal = this.portalGroup.create(p.x, p.y, 'portal').setScale(SCALE);
+      portal.portalData = p;
+      // Label
+      const lbl = this.add.text(p.x, p.y - 24, p.label, {
+        fontSize: '11px', fontFamily: 'monospace', color: '#fff',
+        backgroundColor: '#00000088', padding: {x:4,y:2}
+      }).setOrigin(0.5);
+      this.portalData.push(lbl);
+    }
+    this.physics.add.overlap(this.player, this.portalGroup, this.enterPortal, null, this);
+    this.portalCooldown = 0;
+
+    // NPCs
+    this.npcGroup = this.physics.add.staticGroup();
+    for (const n of (map.npcs || [])) {
+      const npc = this.npcGroup.create(n.x, n.y, 'npc').setScale(SCALE);
+      npc.npcData = n;
+      // Quest marker
+      if (n.quest && !STATE.questActive && !STATE.questComplete) {
+        const marker = this.add.image(n.x, n.y - 28, 'quest_marker').setScale(SCALE);
+        this.tweens.add({ targets: marker, y: n.y - 34, duration: 500, yoyo: true, repeat: -1 });
+        this.questMarkers.push(marker);
+      }
+      // Name
+      this.add.text(n.x, n.y + 18, n.name, {
+        fontSize: '9px', fontFamily: 'monospace', color: '#ffdd00', align: 'center'
+      }).setOrigin(0.5);
+    }
+
+    // Dialog state
+    this.dialogActive = false;
+    this.nearNpc = null;
+
+    // Invulnerability
+    this.invulnTimer = 0;
+
+    // UI elements (re-draw)
+    this.drawUI();
+  }
+
+  drawUI() {
+    if (this.uiGroup) this.uiGroup.clear(true, true);
+    this.uiGroup = this.add.group();
+
+    // Health
+    for (let i = 0; i < STATE.maxHp; i++) {
+      const h = this.add.image(20 + i * 22, 20, 'heart').setScale(2).setScrollFactor(0).setDepth(100);
+      if (i >= STATE.hp) h.setAlpha(0.3);
+      this.uiGroup.add(h);
+    }
+
+    // Stars
+    const starIcon = this.add.image(20, 46, 'star').setScale(1.5).setScrollFactor(0).setDepth(100);
+    const starText = this.add.text(34, 39, `${STATE.stars}`, {
+      fontSize: '14px', fontFamily: 'monospace', color: '#ffdd00', fontStyle: 'bold'
+    }).setScrollFactor(0).setDepth(100);
+    this.uiGroup.add(starIcon);
+    this.uiGroup.add(starText);
+
+    // Seal Crystal indicator
+    if (STATE.hasSealCrystal) {
+      const sc = this.add.image(20, 68, 'seal_crystal').setScale(2).setScrollFactor(0).setDepth(100);
+      const sct = this.add.text(34, 61, 'Seal Crystal', {
+        fontSize: '10px', fontFamily: 'monospace', color: '#cc88ff'
+      }).setScrollFactor(0).setDepth(100);
+      this.uiGroup.add(sc); this.uiGroup.add(sct);
+    }
+
+    // Quest tracker
+    if (STATE.questActive && !STATE.questComplete) {
+      const qt = this.add.text(this.scale.width - 10, 16, `Quest: Defeat Slimes (${STATE.slimesKilled}/${STATE.slimesNeeded})`, {
+        fontSize: '11px', fontFamily: 'monospace', color: '#ffdd00', backgroundColor: '#00000099', padding: {x:6,y:3}
+      }).setOrigin(1, 0).setScrollFactor(0).setDepth(100);
+      this.uiGroup.add(qt);
+    } else if (STATE.questComplete && !STATE.bossDefeated) {
+      const qt = this.add.text(this.scale.width - 10, 16, 'Quest: Find the Sealed Dungeon!', {
+        fontSize: '11px', fontFamily: 'monospace', color: '#88ff88', backgroundColor: '#00000099', padding: {x:6,y:3}
+      }).setOrigin(1, 0).setScrollFactor(0).setDepth(100);
+      this.uiGroup.add(qt);
+    } else if (STATE.bossDefeated) {
+      const qt = this.add.text(this.scale.width - 10, 16, '★ DUNGEON CLEARED! ★', {
+        fontSize: '12px', fontFamily: 'monospace', color: '#ffdd00', backgroundColor: '#00000099', padding: {x:6,y:3}
+      }).setOrigin(1, 0).setScrollFactor(0).setDepth(100);
+      this.uiGroup.add(qt);
+    }
+
+    // Map name
+    const mn = this.add.text(this.scale.width / 2, 16, MAPS[STATE.currentMap].name, {
+      fontSize: '13px', fontFamily: 'monospace', color: '#ffffff', backgroundColor: '#00000066', padding: {x:8,y:3}
+    }).setOrigin(0.5, 0).setScrollFactor(0).setDepth(100);
+    this.uiGroup.add(mn);
+  }
+
+  collectStar(player, star) {
+    star.destroy();
+    STATE.stars++;
+    this.addRecord(`Collected Star (Total: ${STATE.stars})`);
+    this.drawUI();
+  }
+
+  collectSeal(player, crystal) {
+    crystal.destroy();
+    this.sealCrystalSprite = null;
+    STATE.hasSealCrystal = true;
+    this.addRecord('Obtained Seal Crystal!');
+    this.showNotification('Seal Crystal Acquired!\nYou can now enter Sealed Dungeons.');
+    this.drawUI();
+  }
+
+  playerHit(player, enemy) {
+    if (this.invulnTimer > 0) return;
+    STATE.hp--;
+    this.invulnTimer = 60;
+    player.setTint(0xff0000);
+    this.time.delayedCall(200, () => player.clearTint());
+    if (STATE.hp <= 0) this.respawn();
+    this.drawUI();
+  }
+
+  playerHitBoss(player, boss) {
+    if (this.invulnTimer > 0) return;
+    STATE.hp -= 2;
+    this.invulnTimer = 90;
+    player.setTint(0xff0000);
+    this.time.delayedCall(200, () => player.clearTint());
+    if (STATE.hp <= 0) this.respawn();
+    this.drawUI();
+  }
+
+  enterPortal(player, portal) {
+    if (this.portalCooldown > 0) return;
+    const pd = portal.portalData;
+    if (pd.requireSeal && !STATE.hasSealCrystal) {
+      this.showNotification('This dungeon is sealed.\nFind the Seal Crystal first!');
+      this.portalCooldown = 60;
+      return;
+    }
+    this.portalCooldown = 60;
+    this.cameras.main.fadeOut(300);
+    this.time.delayedCall(350, () => {
+      this.loadMap(pd.target, pd.spawnX, pd.spawnY);
+      this.cameras.main.fadeIn(300);
+    });
+  }
+
+  respawn() {
+    STATE.hp = STATE.maxHp;
+    this.cameras.main.fadeOut(200);
+    this.time.delayedCall(250, () => {
+      const map = MAPS[STATE.currentMap];
+      this.player.setPosition(map.playerSpawn.x, map.playerSpawn.y);
+      this.cameras.main.fadeIn(200);
+      this.drawUI();
+    });
+  }
+
+  attack() {
+    if (this.isAttacking) return;
+    this.isAttacking = true;
+
+    const dir = this.player.facingRight ? 1 : -1;
+    const sx = this.player.x + dir * 24;
+    const sy = this.player.y;
+    const slash = this.add.image(sx, sy, 'slash').setScale(SCALE).setFlipX(!this.player.facingRight).setDepth(9);
+    this.time.delayedCall(150, () => { slash.destroy(); this.isAttacking = false; });
+
+    // Hit enemies
+    const attackRect = new Phaser.Geom.Rectangle(sx - 20, sy - 12, 40, 24);
+    this.enemyGroup.getChildren().forEach(enemy => {
+      if (Phaser.Geom.Rectangle.Contains(attackRect, enemy.x, enemy.y)) {
+        enemy.hp--;
+        enemy.setTint(0xff0000);
+        this.time.delayedCall(100, () => enemy.clearTint());
+        if (enemy.hp <= 0) {
+          enemy.destroy();
+          STATE.slimesKilled++;
+          this.addRecord(`Slime Defeated (Total: ${STATE.slimesKilled})`);
+          if (STATE.questActive && STATE.slimesKilled >= STATE.slimesNeeded && !STATE.questComplete) {
+            STATE.questComplete = true;
+            this.showNotification('Quest Complete!\nReturn to Elder Mira, or\nexplore the Sealed Dungeon!');
+            this.addRecord('Quest Complete: Defeat Slimes');
+          }
+          this.drawUI();
+        }
+      }
+    });
+
+    // Hit boss
+    if (this.bossSprite && Phaser.Geom.Rectangle.Contains(attackRect, this.bossSprite.x, this.bossSprite.y)) {
+      this.bossSprite.hp--;
+      this.bossSprite.setTint(0xff0000);
+      this.time.delayedCall(100, () => { if(this.bossSprite) this.bossSprite.clearTint(); });
+      if (this.bossSprite.hp <= 0) {
+        this.bossSprite.destroy();
+        this.bossSprite = null;
+        STATE.bossDefeated = true;
+        this.addRecord('★ Boss Defeated: Thornspire Guardian');
+        this.showNotification('★ BOSS DEFEATED! ★\nThornspire Dungeon Cleared!\n\nThanks for playing the demo!');
+        this.drawUI();
+      }
+    }
+  }
+
+  showNotification(text) {
+    const notif = this.add.text(this.scale.width/2, this.scale.height/2, text, {
+      fontSize: '14px', fontFamily: 'monospace', color: '#fff', backgroundColor: '#000000cc',
+      padding: {x:16,y:12}, align: 'center', lineSpacing: 4
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(200);
+    this.tweens.add({ targets: notif, alpha: 0, delay: 2500, duration: 500, onComplete: () => notif.destroy() });
+  }
+
+  showDialog(npc) {
+    if (this.dialogActive) return;
+    this.dialogActive = true;
+    this.nearNpc = npc;
+
+    let text = npc.npcData.dialog;
+    if (npc.npcData.quest && !STATE.questActive && !STATE.questComplete) {
+      STATE.questActive = true;
+      this.addRecord('Quest Accepted: Defeat 3 Slimes');
+      this.drawUI();
+    }
+    if (npc.npcData.quest && STATE.questComplete) {
+      text = "Well done, adventurer!\nYou've proven your strength.\nNow seek the Sealed Dungeon!";
+    }
+
+    const w = this.scale.width;
+    this.dialogBox = this.add.rectangle(w/2, this.scale.height - 60, w - 40, 90, 0x000000, 0.85)
+      .setScrollFactor(0).setDepth(150).setStrokeStyle(2, 0xffffff);
+    this.dialogText = this.add.text(40, this.scale.height - 96, `[${npc.npcData.name}]\n${text}\n\n(Press Z to close)`, {
+      fontSize: '11px', fontFamily: 'monospace', color: '#fff', lineSpacing: 3, wordWrap: {width: w - 80}
+    }).setScrollFactor(0).setDepth(151);
+  }
+
+  closeDialog() {
+    if (!this.dialogActive) return;
+    this.dialogActive = false;
+    if (this.dialogBox) { this.dialogBox.destroy(); this.dialogBox = null; }
+    if (this.dialogText) { this.dialogText.destroy(); this.dialogText = null; }
+  }
+
+  addRecord(text) {
+    const time = new Date().toLocaleTimeString();
+    STATE.records.unshift({ text, time, map: MAPS[STATE.currentMap].name });
+    if (STATE.records.length > 20) STATE.records.pop();
+  }
+
+  showQuestGuide() {
+    STATE.showQuest = !STATE.showQuest;
+    if (this.questPanel) { this.questPanel.forEach(e => e.destroy()); this.questPanel = null; }
+    if (!STATE.showQuest) return;
+
+    const w = this.scale.width, h = this.scale.height;
+    const panel = [];
+    panel.push(this.add.rectangle(w/2, h/2, 320, 280, 0x111133, 0.95).setScrollFactor(0).setDepth(180).setStrokeStyle(2, 0x6a5acd));
+    let y = h/2 - 120;
+    panel.push(this.add.text(w/2, y, '— QUEST GUIDE —', {
+      fontSize: '14px', fontFamily: 'monospace', color: '#ffdd00', fontStyle: 'bold'
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(181));
+    y += 30;
+
+    const quests = [];
+    if (!STATE.questActive) quests.push({t:'Talk to Elder Mira in Aethoria Town', s:'○'});
+    else if (!STATE.questComplete) quests.push({t:`Defeat Slimes (${STATE.slimesKilled}/${STATE.slimesNeeded})`, s:'◐'});
+    else quests.push({t:'Defeat Slimes — Complete!', s:'●'});
+
+    if (!STATE.hasSealCrystal) quests.push({t:'Find the Seal Crystal', s: STATE.hasSealCrystal ? '●' : '○'});
+    else quests.push({t:'Seal Crystal — Obtained!', s:'●'});
+
+    quests.push({t:'Defeat Thornspire Boss', s: STATE.bossDefeated ? '●' : '○'});
+    quests.push({t:`Collect Stars (${STATE.stars} found)`, s:'◐'});
+
+    for (const q of quests) {
+      panel.push(this.add.text(w/2 - 130, y, `${q.s} ${q.t}`, {
+        fontSize: '11px', fontFamily: 'monospace', color: q.s === '●' ? '#88ff88' : '#cccccc'
+      }).setScrollFactor(0).setDepth(181));
+      y += 22;
+    }
+
+    panel.push(this.add.text(w/2, h/2 + 120, '(Press Q to close)', {
+      fontSize: '10px', fontFamily: 'monospace', color: '#888'
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(181));
+
+    this.questPanel = panel;
+  }
+
+  showMinimapPanel() {
+    STATE.showMinimap = !STATE.showMinimap;
+    if (this.minimapPanel) { this.minimapPanel.forEach(e => e.destroy()); this.minimapPanel = null; }
+    if (!STATE.showMinimap) return;
+
+    const w = this.scale.width, h = this.scale.height;
+    const panel = [];
+    panel.push(this.add.rectangle(w/2, h/2, 340, 200, 0x111111, 0.95).setScrollFactor(0).setDepth(180).setStrokeStyle(2, 0x44aaff));
+    panel.push(this.add.text(w/2, h/2 - 85, '— WORLD MAP —', {
+      fontSize: '14px', fontFamily: 'monospace', color: '#44aaff', fontStyle: 'bold'
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(181));
+
+    // Town
+    const townC = STATE.mapsVisited.has('town') ? 0x88ccff : 0x444444;
+    panel.push(this.add.rectangle(w/2 - 100, h/2, 80, 40, townC, 0.7).setScrollFactor(0).setDepth(181).setStrokeStyle(1, 0xffffff));
+    panel.push(this.add.text(w/2 - 100, h/2, 'Aethoria\nTown', {fontSize:'9px',fontFamily:'monospace',color:'#fff',align:'center'}).setOrigin(0.5).setScrollFactor(0).setDepth(182));
+
+    // Arrow
+    panel.push(this.add.text(w/2 - 48, h/2, '→', {fontSize:'16px',color:'#888'}).setOrigin(0.5).setScrollFactor(0).setDepth(181));
+
+    // Forest
+    const forC = STATE.mapsVisited.has('forest') ? 0x446633 : 0x444444;
+    panel.push(this.add.rectangle(w/2, h/2, 80, 40, forC, 0.7).setScrollFactor(0).setDepth(181).setStrokeStyle(1, 0xffffff));
+    panel.push(this.add.text(w/2, h/2, 'Enchanted\nForest', {fontSize:'9px',fontFamily:'monospace',color:'#fff',align:'center'}).setOrigin(0.5).setScrollFactor(0).setDepth(182));
+
+    // Arrow
+    panel.push(this.add.text(w/2 + 52, h/2, '→', {fontSize:'16px',color:'#888'}).setOrigin(0.5).setScrollFactor(0).setDepth(181));
+
+    // Dungeon
+    const dunC = STATE.mapsVisited.has('dungeon') ? 0x8844aa : 0x444444;
+    panel.push(this.add.rectangle(w/2 + 100, h/2, 80, 40, dunC, 0.7).setScrollFactor(0).setDepth(181).setStrokeStyle(1, STATE.hasSealCrystal ? 0xaa44ff : 0x666666));
+    panel.push(this.add.text(w/2 + 100, h/2, STATE.hasSealCrystal || STATE.mapsVisited.has('dungeon') ? 'Sealed\nDungeon' : '???', {fontSize:'9px',fontFamily:'monospace',color:'#fff',align:'center'}).setOrigin(0.5).setScrollFactor(0).setDepth(182));
+
+    // Player indicator
+    const mapX = STATE.currentMap === 'town' ? w/2-100 : STATE.currentMap === 'forest' ? w/2 : w/2+100;
+    panel.push(this.add.text(mapX, h/2 - 28, '▼ YOU', {fontSize:'9px',fontFamily:'monospace',color:'#ffdd00'}).setOrigin(0.5).setScrollFactor(0).setDepth(182));
+
+    panel.push(this.add.text(w/2, h/2 + 80, '(Press M to close)', {
+      fontSize: '10px', fontFamily: 'monospace', color: '#888'
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(181));
+
+    this.minimapPanel = panel;
+  }
+
+  showRecordsPanel() {
+    STATE.showRecords = !STATE.showRecords;
+    if (this.recordsPanel) { this.recordsPanel.forEach(e => e.destroy()); this.recordsPanel = null; }
+    if (!STATE.showRecords) return;
+
+    const w = this.scale.width, h = this.scale.height;
+    const panel = [];
+    panel.push(this.add.rectangle(w/2, h/2, 360, 320, 0x111111, 0.95).setScrollFactor(0).setDepth(180).setStrokeStyle(2, 0xff6b9d));
+    panel.push(this.add.text(w/2, h/2 - 145, '— RECORDS —', {
+      fontSize: '14px', fontFamily: 'monospace', color: '#ff6b9d', fontStyle: 'bold'
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(181));
+
+    let y = h/2 - 118;
+    const displayRecords = STATE.records.slice(0, 12);
+    for (const r of displayRecords) {
+      panel.push(this.add.text(w/2 - 160, y, `[${r.time}] ${r.text}`, {
+        fontSize: '10px', fontFamily: 'monospace', color: '#cccccc', wordWrap: {width: 320}
+      }).setScrollFactor(0).setDepth(181));
+      y += 18;
+    }
+    if (STATE.records.length === 0) {
+      panel.push(this.add.text(w/2, h/2, 'No records yet.\nExplore the world!', {
+        fontSize: '11px', fontFamily: 'monospace', color: '#666', align: 'center'
+      }).setOrigin(0.5).setScrollFactor(0).setDepth(181));
+    }
+
+    // Stats
+    y = h/2 + 110;
+    panel.push(this.add.text(w/2 - 160, y, `Maps: ${STATE.mapsVisited.size}/3  |  Stars: ${STATE.stars}  |  Slimes: ${STATE.slimesKilled}  |  Boss: ${STATE.bossDefeated?'✓':'—'}`, {
+      fontSize: '10px', fontFamily: 'monospace', color: '#888'
+    }).setScrollFactor(0).setDepth(181));
+
+    panel.push(this.add.text(w/2, h/2 + 145, '(Press Tab to close)', {
+      fontSize: '10px', fontFamily: 'monospace', color: '#888'
+    }).setOrigin(0.5).setScrollFactor(0).setDepth(181));
+
+    this.recordsPanel = panel;
+  }
+
+  update(time, delta) {
+    if (!this.player || !this.player.body) return;
+
+    this.portalCooldown = Math.max(0, this.portalCooldown - 1);
+    this.invulnTimer = Math.max(0, this.invulnTimer - 1);
+
+    // Blinking when invulnerable
+    if (this.invulnTimer > 0) {
+      this.player.setAlpha(Math.floor(this.invulnTimer / 4) % 2 === 0 ? 0.3 : 1);
+    } else {
+      this.player.setAlpha(1);
+    }
+
+    // Input (if dialog or panel open, only allow close)
+    if (this.dialogActive) {
+      if (Phaser.Input.Keyboard.JustDown(this.keys.z)) this.closeDialog();
+      return;
+    }
+
+    // Toggle panels
+    if (Phaser.Input.Keyboard.JustDown(this.keys.q)) this.showQuestGuide();
+    if (Phaser.Input.Keyboard.JustDown(this.keys.m)) this.showMinimapPanel();
+    if (Phaser.Input.Keyboard.JustDown(this.keys.tab)) { this.showRecordsPanel(); return; }
+
+    // Movement
+    const left = this.cursors.left.isDown || this.keys.a.isDown;
+    const right = this.cursors.right.isDown || this.keys.d.isDown;
+    const jump = Phaser.Input.Keyboard.JustDown(this.cursors.up) ||
+                 Phaser.Input.Keyboard.JustDown(this.keys.w) ||
+                 Phaser.Input.Keyboard.JustDown(this.keys.space);
+
+    if (left) {
+      this.player.setVelocityX(-PLAYER_SPEED);
+      this.player.setFlipX(true);
+      this.player.facingRight = false;
+    } else if (right) {
+      this.player.setVelocityX(PLAYER_SPEED);
+      this.player.setFlipX(false);
+      this.player.facingRight = true;
+    } else {
+      this.player.setVelocityX(0);
+    }
+
+    if (jump && this.player.body.blocked.down) {
+      this.player.setVelocityY(JUMP_VELOCITY);
+    }
+
+    // Attack
+    if (Phaser.Input.Keyboard.JustDown(this.keys.z)) {
+      // Check NPC proximity first
+      let talkingToNpc = false;
+      this.npcGroup.getChildren().forEach(npc => {
+        if (Phaser.Math.Distance.Between(this.player.x, this.player.y, npc.x, npc.y) < 48) {
+          this.showDialog(npc);
+          talkingToNpc = true;
+        }
+      });
+      if (!talkingToNpc) this.attack();
+    }
+
+    // Enemy AI (simple patrol)
+    this.enemyGroup.getChildren().forEach(enemy => {
+      enemy.patrolTimer++;
+      if (enemy.patrolTimer > 120) { enemy.patrolDir *= -1; enemy.patrolTimer = 0; }
+      enemy.setVelocityX(enemy.patrolDir * 40);
+      enemy.setFlipX(enemy.patrolDir < 0);
+
+      // Chase player if close
+      const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, enemy.x, enemy.y);
+      if (dist < 150) {
+        const dir = this.player.x < enemy.x ? -1 : 1;
+        enemy.setVelocityX(dir * 60);
+      }
+    });
+
+    // Boss AI
+    if (this.bossSprite && this.bossSprite.body) {
+      this.bossSprite.patrolTimer++;
+      if (this.bossSprite.patrolTimer > 80) { this.bossSprite.patrolDir *= -1; this.bossSprite.patrolTimer = 0; }
+      const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.bossSprite.x, this.bossSprite.y);
+      if (dist < 200) {
+        const dir = this.player.x < this.bossSprite.x ? -1 : 1;
+        this.bossSprite.setVelocityX(dir * 80);
+      } else {
+        this.bossSprite.setVelocityX(this.bossSprite.patrolDir * 50);
+      }
+
+      // Boss HP bar
+      if (this.bossHpBar) this.bossHpBar.forEach(e => e.destroy());
+      this.bossHpBar = [];
+      const bx = this.bossSprite.x, by = this.bossSprite.y - 32;
+      const bgBar = this.add.rectangle(bx, by, 48, 6, 0x333333).setDepth(50);
+      const hpW = 48 * (this.bossSprite.hp / this.bossSprite.maxHp);
+      const hpBar = this.add.rectangle(bx - (48-hpW)/2, by, hpW, 6, 0xff3344).setDepth(51);
+      const bossLabel = this.add.text(bx, by - 10, 'THORNSPIRE', {
+        fontSize: '8px', fontFamily: 'monospace', color: '#ff6666'
+      }).setOrigin(0.5).setDepth(51);
+      this.bossHpBar.push(bgBar, hpBar, bossLabel);
+    }
+  }
+}
+
+// ---- Boot ----
+const config = {
+  type: Phaser.AUTO,
+  width: 800,
+  height: 480,
+  parent: 'game-container',
+  backgroundColor: '#0a0a12',
+  physics: {
+    default: 'arcade',
+    arcade: { gravity: { y: GRAVITY }, debug: false }
+  },
+  scene: [GameScene],
+  pixelArt: true,
+  scale: {
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER_BOTH,
+  }
+};
+
+// Animate loading bar
+const fill = document.getElementById('load-fill');
+let progress = 0;
+const loadInterval = setInterval(() => {
+  progress += Math.random() * 30;
+  if (progress >= 100) { progress = 100; clearInterval(loadInterval); }
+  fill.style.width = progress + '%';
+}, 100);
+
+const game = new Phaser.Game(config);
+</script>
+</body>
+</html>
