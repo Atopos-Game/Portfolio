@@ -650,7 +650,7 @@
         </div>
       </div>
       <div class="hero-desc-block">
-        Sole designer on <strong>Chronomaze</strong> at <strong>Neon Studio</strong> — a Metroidvania-style mobile MMORPG with ability-gated world progression (<strong>627K views</strong> on Bilibili PV). Before that, event &amp; economy design at <strong>Crowngames</strong> lifted monthly retention by <strong>10%</strong>.
+        Sole designer on <strong>Chronomaze</strong> at <strong>Neon Studio</strong> — a Metroidvania-style mobile MMORPG with ability-gated world progression (<strong>627K views</strong> on Bilibili PV). Before that, event &amp; economy design at <strong>Crowngames</strong> lifted 7-day retention by <strong>10%</strong>.
       </div>
     </div>
   </div>
@@ -698,7 +698,7 @@
           <div class="bar-content">
             <div class="bar-role">UX / Navigation</div>
             <div class="bar-title">Map &amp; Minimap</div>
-            <div class="bar-desc">Fog-of-war, icon layering, Dimensional Gate travel across 200+ maps</div>
+            <div class="bar-desc">Fog-of-war, icon layering, Dimensional Gate travel across 211+ maps</div>
           </div>
           <div class="bar-arrow">→</div>
         </div>
@@ -837,7 +837,7 @@
     <div class="profile-bio reveal">
       <h3>Juwon <span>Lee</span></h3>
       <p>Game designer with 6 years of experience in mobile games. Sole level and systems designer on Chronomaze at Neon Studio — responsible for 211+ maps, 11 worlds, and 15 systems from concept to implementation.</p>
-      <p>Before that, CS &amp; event design at Crowngames on Slotica 5, where iterative event work helped push monthly retention up 10%.</p>
+      <p>Before that, customer support &amp; event design at Crowngames on Slotica 5, where iterative event work helped push 7-day retention up 10%.</p>
       <p>Based in Buckhurst Hill, Essex, UK. Youth Mobility Scheme visa — eligible to work in the UK until November 2027, no sponsorship needed.</p>
 
       <!-- Career Timeline -->
@@ -849,7 +849,7 @@
           <div class="tl-desc">Chronomaze — sole level &amp; systems designer</div>
         </div>
         <div class="tl-item">
-          <div class="tl-role">Event Designer &amp; CS</div>
+          <div class="tl-role">Event Designer &amp; Customer Support</div>
           <div class="tl-company">Crowngames · Seoul, South Korea</div>
           <div class="tl-period">Feb 2019 – May 2021 · 2 yrs</div>
           <div class="tl-desc">Slotica 5 — event planning &amp; retention</div>
@@ -972,14 +972,14 @@ const overlayData = {
       <tr><th>World</th><th>Role</th><th>Ability Unlocked</th><th>Key Hazards / Gimmicks</th></tr>
       <tr><td>Hermit\'s Forest</td><td>Tutorial zone</td><td>—</td><td>Linear path, basic combat intro</td></tr>
       <tr><td>Knight\'s Garden</td><td>First open zone</td><td>Double Jump</td><td>Branching paths, levers, hidden destructible walls</td></tr>
-      <tr><td>Dante Village</td><td>Central hub</td><td>—</td><td>NPC shops, social hub, Season Pass vendor</td></tr>
+      <tr><td>Dante Town</td><td>Central hub</td><td>—</td><td>NPC shops, social hub, Season Pass vendor</td></tr>
       <tr><td>Spring Waterway</td><td>Multi-layer vertical</td><td>Swimming</td><td>Water columns, submerged hidden rooms, elevators</td></tr>
       <tr><td>Salt Mine</td><td>Mid-game challenge</td><td>Pickaxe (break rocks)</td><td>Minecart rails, cave-ins, environmental hazards</td></tr>
-      <tr><td>Wicca Village</td><td>Secondary hub</td><td>—</td><td>Advanced crafting, Sealed Zone access</td></tr>
-      <tr><td>Mansion of Syllek</td><td>Puzzle exploration</td><td>Gliding</td><td>Investigation gimmicks, hidden rooms, locked doors</td></tr>
-      <tr><td>Windy Valley</td><td>Gliding mastery</td><td>—</td><td>Extended glide routes, wind updrafts</td></tr>
-      <tr><td>Burning Forge</td><td>Endgame gauntlet</td><td>Wall Climb</td><td>Lava floor gimmicks, wall-mounted paths</td></tr>
-      <tr><td>Library of Sage</td><td>Final zone</td><td>Gravity Reversal</td><td>Inverted levers, ceiling traversal, boss arenas</td></tr>
+      <tr><td>Wica Town</td><td>Secondary hub</td><td>—</td><td>Advanced crafting, Sealed Zone access</td></tr>
+      <tr><td>Silak\'s Mansion</td><td>Puzzle exploration</td><td>Gliding</td><td>Investigation gimmicks, hidden rooms, locked doors</td></tr>
+      <tr><td>Wind Valley</td><td>Gliding mastery</td><td>—</td><td>Extended glide routes, wind updrafts</td></tr>
+      <tr><td>Burning Furnace</td><td>Endgame gauntlet</td><td>Wall Climb</td><td>Lava floor gimmicks, wall-mounted paths</td></tr>
+      <tr><td>Sage\'s Library</td><td>Final zone</td><td>Gravity Reversal</td><td>Inverted levers, ceiling traversal, boss arenas</td></tr>
     </table>
     <p style="font-size:12px;color:#7d8290;margin-top:8px;">Ability-gating example: Knight\'s Garden has a flooded section that players walk past early on — but can\'t actually enter until they learn Swimming in Spring Waterway, hours later. Coming back to unlock it is the reward.</p>`,
     flowDiagram: `<div class="flow-diagram">
@@ -995,8 +995,8 @@ const overlayData = {
     </div>`,
     designNotes: [
       'Each world is gated by a traversal ability. Later worlds combine multiple abilities — for instance, Knight\'s Garden has a flooded area that only opens once you learn Swimming in Spring Waterway. Players have to backtrack, and that backtrack unlocks exclusive exploration missions and rewards.',
-      'Some specific examples: Windy Valley has cliffs you can only reach by riding wind updrafts with the glide ability. Salt Mine hides treasure chests behind breakable walls that need the pickaxe. Knight\'s Garden has a jump-pad chain across a lake. Every zone uses its ability both as a gate and as a puzzle element.',
-      'I built a custom Excel tool that auto-balanced monster stats across 200+ maps, which cut placement time by roughly 40%. When 63+ Sealed Zone stages were added mid-production, I reverse-engineered the existing design patterns and extended the content while keeping everything consistent.'
+      'Some specific examples: Wind Valley has cliffs you can only reach by riding wind updrafts with the glide ability. Salt Mine hides treasure chests behind breakable walls that need the pickaxe. Knight\'s Garden has a jump-pad chain across a lake. Every zone uses its ability both as a gate and as a puzzle element.',
+      'I built a custom Excel tool that auto-balanced monster stats across 211+ maps, which cut placement time by roughly 40%. When 63+ Sealed Zone stages were added mid-production, I reverse-engineered the existing design patterns and extended the content while keeping everything consistent.'
     ],
     icon: '🗺️',
     images: [{src:'img/world_overview_layout.jpg', caption:'Full world map — 11 regions with ability-gate dependencies'}, {src:'img/world_adventure_map.jpg', caption:'Unity editor: adventure map showing all worlds and zone connectivity'}, {src:'img/world_full_layout.jpg', caption:'Complete level layout — colour-coded markers for dimension gates, quest bosses, hunting zones, and corridors'}],
@@ -1036,10 +1036,10 @@ const overlayData = {
     dataTable: `<table class="overlay-table">
       <tr><th>Pillar</th><th>What It Tracks</th><th>Entries</th><th>Why It Exists</th></tr>
       <tr><td>Achievements</td><td>Progression milestones</td><td class="num">299</td><td>"What should I do next?" — core motivation loop</td></tr>
-      <tr><td>Adventure Log</td><td>Story journal &amp; world lore</td><td class="num">417</td><td>Gives narrative players a reason to explore</td></tr>
-      <tr><td>Constellations</td><td>Character bonds</td><td class="num">236</td><td>Social progression with stat bonuses attached</td></tr>
+      <tr><td>Adventure Journal</td><td>Story journal &amp; world lore</td><td class="num">417</td><td>Gives narrative players a reason to explore</td></tr>
+      <tr><td>Constellation of Bonds</td><td>Character bonds</td><td class="num">236</td><td>Social progression with stat bonuses attached</td></tr>
       <tr><td>Monster Codex</td><td>Bestiary with weaknesses &amp; spawns</td><td class="num">89</td><td>Actually useful — players check this before boss fights</td></tr>
-      <tr><td>Character Codex</td><td>Hero profiles &amp; dialogues</td><td class="num">398</td><td>Collection incentive for gacha characters</td></tr>
+      <tr><td>Star\'s Apostle Codex</td><td>Hero profiles &amp; dialogues</td><td class="num">398</td><td>Collection incentive for gacha characters</td></tr>
     </table>
     <p style="font-size:12px;color:#7d8290;margin-top:8px;">1,439 total entries across 46+ record types. Five pillars, one system.</p>`,
     flowDiagram: '',
@@ -1099,8 +1099,8 @@ const overlayData = {
       <tr><td>Knight\'s Garden</td><td class="num">58</td><td>Read diaries, open chests</td><td>400 💎</td><td>700 💎</td></tr>
       <tr><td>Spring Waterway</td><td class="num">62</td><td>Submerged exploration, levers</td><td>400 💎</td><td>700 💎</td></tr>
       <tr><td>Salt Mine</td><td class="num">71</td><td>Ore caches, hazard routes</td><td>400 💎</td><td>700 💎</td></tr>
-      <tr><td>Mansion of Syllek</td><td class="num">54</td><td>Investigation clues, hidden rooms</td><td>400 💎</td><td>700 💎</td></tr>
-      <tr><td>Burning Forge</td><td class="num">68</td><td>Lava routes, wall-climb paths</td><td>400 💎</td><td>700 💎</td></tr>
+      <tr><td>Silak\'s Mansion</td><td class="num">54</td><td>Investigation clues, hidden rooms</td><td>400 💎</td><td>700 💎</td></tr>
+      <tr><td>Burning Furnace</td><td class="num">68</td><td>Lava routes, wall-climb paths</td><td>400 💎</td><td>700 💎</td></tr>
     </table>
     <p style="font-size:12px;color:#7d8290;margin-top:8px;">Every mission uses narrative-specific objectives — "read the diary hidden behind the waterfall", not "kill 10 mobs". Even corridor and transition zones have missions so no area feels empty.</p>`,
     flowDiagram: '',
@@ -1117,7 +1117,7 @@ const overlayData = {
     tag: 'UX / Navigation · Neon Studio',
     title: 'Map & Minimap',
     meta: 'Chronomaze · Sole Designer · 2021–2025',
-    overview: 'Navigation system for 200+ interconnected maps. Players have a HUD minimap for immediate surroundings and a full-screen Adventure Map for planning routes, tracking fog-of-war progress, and fast-travelling via Dimensional Gates.',
+    overview: 'Navigation system for 211+ interconnected maps. Players have a HUD minimap for immediate surroundings and a full-screen Adventure Map for planning routes, tracking fog-of-war progress, and fast-travelling via Dimensional Gates.',
     process: 'Two layers: the world map handles macro planning (where do I go next?), while the minimap handles moment-to-moment play (where\'s the nearest enemy?). Fog-of-war visibility is driven by XML data — I configured which areas are revealed, how much fog lifts per zone, and what triggers reveal events. The art team provided one full-colour map image per zone, and the fog system handles the rest.',
     dataTable: `<table class="overlay-table">
       <tr><th>Layer</th><th>Minimap</th><th>World Map</th></tr>
@@ -1134,7 +1134,7 @@ const overlayData = {
     designNotes: [
       'Fog-of-war is XML-driven. I set up the reveal data — which zones unlock, how much fog clears, what player actions trigger reveals — and worked with a programmer to verify it in the Unity scene. One art asset per zone, no duplicate fogged/unfogged versions needed.',
       'When players go indoors (dungeons, buildings), the world map pins their icon to the last outdoor warp point. This solves the "where am I?" problem for spaces that don\'t exist on the world graph.',
-      'Dimensional Gates let players fast-travel between any two unlocked points across the entire world. With 200+ maps, this isn\'t a convenience feature — it\'s mandatory.'
+      'Dimensional Gates let players fast-travel between any two unlocked points across the entire world. With 211+ maps, this isn\'t a convenience feature — it\'s mandatory.'
     ],
     icon: '📍',
     images: [{src:'img/map_adventure_ui.jpg', caption:'Adventure Map UI — Dimensional Gate network and zone navigation'}, {src:'img/map_dimensional_gates.jpg', caption:'Dimensional Gate — cross-region fast-travel system'}],
@@ -1156,7 +1156,7 @@ const overlayData = {
     </table>`,
     flowDiagram: '',
     designNotes: [
-      'Contributed to a 10% monthly retention improvement across the Crowngames event portfolio.',
+      'Contributed to a 10% improvement in 7-day retention across the Crowngames event portfolio.',
       'The format is designed to be reusable — swap the theme, adjust the numbers, and it runs again with minimal extra design work. We ran it multiple times with different skins.'
     ],
     icon: '🎯',
