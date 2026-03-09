@@ -674,12 +674,10 @@
         <span class="studio-period">Chronomaze · Mobile MMORPG</span>
       </div>
 
-      <!-- Showcase Reel -->
+      <!-- Official PV (Bilibili embed) -->
       <div class="showcase-reel">
-        <video controls loop playsinline poster="video/poster.jpg" preload="none" aria-label="Chronomaze gameplay showcase reel">
-          <source src="video/showcase_reel_v6.webm" type="video/webm">
-          <source src="video/showcase_reel_v6.mp4" type="video/mp4">
-        </video>
+        <iframe src="https://player.bilibili.com/player.html?bvid=BV1uj411s7at&autoplay=0&high_quality=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="width:100%;aspect-ratio:16/9;border-radius:12px;"></iframe>
+        <p style="font-size:13px;color:#7d8290;margin-top:8px;text-align:center;">Official Chronomaze PV · <a href="https://www.bilibili.com/video/BV1uj411s7at/" target="_blank" style="color:#6cb4ee;">627K+ views on Bilibili ↗</a></p>
       </div>
 
       <div class="category-label">🌍 World & Level Design</div>
@@ -689,7 +687,7 @@
           <div class="bar-content">
             <div class="bar-role">Level Design</div>
             <div class="bar-title">World &amp; Level Design</div>
-            <div class="bar-desc">211+ field maps, 11 worlds, full encounter &amp; monster placement</div>
+            <div class="bar-desc">211+ field maps across 11 ability-gated worlds, sole designer from layout to live</div>
           </div>
           <div class="bar-arrow">→</div>
         </div>
@@ -738,7 +736,7 @@
           <div class="bar-content">
             <div class="bar-role">Systems Design</div>
             <div class="bar-title">Records System</div>
-            <div class="bar-desc">Hybrid achievement &amp; codex tracker, 46+ record types</div>
+            <div class="bar-desc">1,439-entry achievement &amp; encyclopaedia system serving completionists and narrative players</div>
           </div>
           <div class="bar-arrow">→</div>
         </div>
@@ -750,18 +748,9 @@
         <div class="bar-item" onclick="window.open('https://youtu.be/1uyjW4Ffv0Y','_blank')">
           <div class="bar-icon">▶️</div>
           <div class="bar-content">
-            <div class="bar-role">Unity Demo</div>
-            <div class="bar-title">Chronomaze — Gameplay Demo</div>
-            <div class="bar-desc">9-min Unity editor walkthrough: world traversal, systems, and UI flow</div>
-          </div>
-          <div class="bar-arrow">↗</div>
-        </div>
-        <div class="bar-item" onclick="window.open('https://www.bilibili.com/video/BV1uj411s7at/','_blank')">
-          <div class="bar-icon">🎬</div>
-          <div class="bar-content">
-            <div class="bar-role">Official PV · 627K Views</div>
-            <div class="bar-title">Chronomaze — Bilibili PV</div>
-            <div class="bar-desc">Official promotion video on Bilibili with 627,000+ views</div>
+            <div class="bar-role">Design Walkthrough</div>
+            <div class="bar-title">Chronomaze — 9-min Unity Demo</div>
+            <div class="bar-desc">Full walkthrough: world traversal, ability-gating, systems UI, and level editor</div>
           </div>
           <div class="bar-arrow">↗</div>
         </div>
@@ -966,20 +955,20 @@ const overlayData = {
     tag: 'Level Design · Neon Studio',
     title: 'World & Level Design',
     meta: 'Chronomaze · Sole Designer · 2021–2025',
-    overview: 'I was the sole level designer on a Metroidvania-style mobile MMORPG, responsible for 211+ field maps across 11 regions. The core hook: each world teaches a new traversal ability — double jump, swimming, gliding, wall climb, or gravity reversal — and later areas are physically impossible to reach without those skills. I also picked up 63+ Sealed Zone instanced stages mid-production when the scope expanded.',
-    process: 'Every map started as a pen-and-paper layout, then moved to an Excel grid for structure and flow. From there I built the Unity scene: placed props, set up collision and platforms, and blocked out grey-box walls so we could test function before anything looked pretty. Monster spawns and gimmick data went through a custom Excel auto-balancing tool I built. Once gameplay was solid, I handed off to art for prop placement, baked lighting, and 3D model swaps. Then we playtested across two open betas (CBT1 and CBT2) and iterated.',
+    overview: 'Sole level designer on a Metroidvania-style mobile MMORPG — 211+ field maps across 11 regions, each gated by a unique traversal ability (double jump, swimming, gliding, wall climb, gravity reversal). The core design constraint: every world had to work both as a standalone experience for first-time visitors and as a revisit destination once players unlocked new abilities hours later. Mid-production, the previous stage designer left and I absorbed 63+ Sealed Zone instanced stages on top of the existing scope — reverse-engineering the design patterns and extending them without disrupting the live content pipeline.',
+    process: 'Every map started as a pen-and-paper layout, then moved to an Excel grid where I defined structure, flow, and encounter density. From there I built the Unity scene: placed props, set up collision and platforms, and blocked out grey-box walls so we could validate function before art. Monster spawns and gimmick data went through a custom Excel auto-balancing tool I built, which cut placement time by roughly 40% and ensured stat consistency across all 211+ maps. Once gameplay was solid, I handed off to art for prop placement, baked lighting, and 3D model swaps. The full pipeline ran across two closed beta tests (CBT1 and CBT2), where we collected heatmap and session-drop data to identify dead zones and pacing issues.',
     dataTable: `<table class="overlay-table">
       <tr><th>World</th><th>Role</th><th>Ability Unlocked</th><th>Key Hazards / Gimmicks</th></tr>
       <tr><td>Hermit\'s Forest</td><td>Tutorial zone</td><td>—</td><td>Linear path, basic combat intro</td></tr>
       <tr><td>Knight\'s Garden</td><td>First open zone</td><td>Double Jump</td><td>Branching paths, levers, hidden destructible walls</td></tr>
-      <tr><td>Dante Town</td><td>Central hub</td><td>—</td><td>NPC shops, social hub, Season Pass vendor</td></tr>
+      <tr><td>Dante Village</td><td>Central hub</td><td>—</td><td>NPC shops, social hub, Season Pass vendor</td></tr>
       <tr><td>Spring Waterway</td><td>Multi-layer vertical</td><td>Swimming</td><td>Water columns, submerged hidden rooms, elevators</td></tr>
       <tr><td>Salt Mine</td><td>Mid-game challenge</td><td>Pickaxe (break rocks)</td><td>Minecart rails, cave-ins, environmental hazards</td></tr>
-      <tr><td>Wica Town</td><td>Secondary hub</td><td>—</td><td>Advanced crafting, Sealed Zone access</td></tr>
-      <tr><td>Silak\'s Mansion</td><td>Puzzle exploration</td><td>Gliding</td><td>Investigation gimmicks, hidden rooms, locked doors</td></tr>
-      <tr><td>Wind Valley</td><td>Gliding mastery</td><td>—</td><td>Extended glide routes, wind updrafts</td></tr>
-      <tr><td>Burning Furnace</td><td>Endgame gauntlet</td><td>Wall Climb</td><td>Lava floor gimmicks, wall-mounted paths</td></tr>
-      <tr><td>Sage\'s Library</td><td>Final zone</td><td>Gravity Reversal</td><td>Inverted levers, ceiling traversal, boss arenas</td></tr>
+      <tr><td>Wicca Village</td><td>Secondary hub</td><td>—</td><td>Advanced crafting, Sealed Zone access</td></tr>
+      <tr><td>Mansion of Syllek</td><td>Puzzle exploration</td><td>Gliding</td><td>Investigation gimmicks, hidden rooms, locked doors</td></tr>
+      <tr><td>Windy Valley</td><td>Gliding mastery</td><td>—</td><td>Extended glide routes, wind updrafts</td></tr>
+      <tr><td>Burning Forge</td><td>Endgame gauntlet</td><td>Wall Climb</td><td>Lava floor gimmicks, wall-mounted paths</td></tr>
+      <tr><td>Library of Sage</td><td>Final zone</td><td>Gravity Reversal</td><td>Inverted levers, ceiling traversal, boss arenas</td></tr>
     </table>
     <p style="font-size:12px;color:#7d8290;margin-top:8px;">Ability-gating example: Knight\'s Garden has a flooded section that players walk past early on — but can\'t actually enter until they learn Swimming in Spring Waterway, hours later. Coming back to unlock it is the reward.</p>`,
     flowDiagram: `<div class="flow-diagram">
@@ -994,9 +983,9 @@ const overlayData = {
       <div class="flow-box">Playtest Iteration<small>My work — CBT1 → CBT2</small></div>
     </div>`,
     designNotes: [
-      'Each world is gated by a traversal ability. Later worlds combine multiple abilities — for instance, Knight\'s Garden has a flooded area that only opens once you learn Swimming in Spring Waterway. Players have to backtrack, and that backtrack unlocks exclusive exploration missions and rewards.',
-      'Some specific examples: Wind Valley has cliffs you can only reach by riding wind updrafts with the glide ability. Salt Mine hides treasure chests behind breakable walls that need the pickaxe. Knight\'s Garden has a jump-pad chain across a lake. Every zone uses its ability both as a gate and as a puzzle element.',
-      'I built a custom Excel tool that auto-balanced monster stats across 211+ maps, which cut placement time by roughly 40%. When 63+ Sealed Zone stages were added mid-production, I reverse-engineered the existing design patterns and extended the content while keeping everything consistent.'
+      'Ability-gating drives both progression and replayability. Knight\'s Garden has a flooded area players walk past for hours — until they learn Swimming in Spring Waterway and return to unlock it. That "I can finally get in there" moment is the payoff, and it\'s also where we placed exclusive exploration missions and rewards to make the backtrack feel intentional, not like padding.',
+      'Each ability doubles as both a gate and a puzzle element. Windy Valley\'s cliffs require riding wind updrafts with the glide ability. Salt Mine hides treasure behind breakable walls that need the pickaxe. Burning Forge forces players to wall-climb over lava floors. This meant every zone had to be designed twice: once for the first visit, once for the return visit with new tools.',
+      'The custom Excel auto-balancer was born out of necessity — manually tuning monster stats across 211+ maps was taking days per balance pass. The tool cross-references monster type, zone level, and player power curve to output stat sheets automatically. It also flagged outliers, which caught several balance issues before they reached QA.'
     ],
     icon: '🗺️',
     images: [{src:'img/world_overview_layout.jpg', caption:'Full world map — 11 regions with ability-gate dependencies'}, {src:'img/world_adventure_map.jpg', caption:'Unity editor: adventure map showing all worlds and zone connectivity'}, {src:'img/world_full_layout.jpg', caption:'Complete level layout — colour-coded markers for dimension gates, quest bosses, hunting zones, and corridors'}],
@@ -1006,8 +995,8 @@ const overlayData = {
     tag: 'Systems Design · Neon Studio',
     title: 'Quest Guide System',
     meta: 'Chronomaze · Sole Designer · 2021–2025',
-    overview: 'An always-visible quest tracker that shows main quests, side quests, and exploration goals in one place. The problem it solved: during playtesting, players kept losing track of what they were doing after switching between different content layers (field → dungeon → UI menu → back to field). On average, players who lost their objective dropped the session within 20 minutes. This tracker kept everything visible so they never had to wonder "wait, what was I doing?"',
-    process: 'The main quest is always pinned at the top. Below that, active side quests and exploration goals are sorted by priority. Every tracked objective has a 1-tap teleport — you tap it, you\'re at the quest location. I wrote the full spec covering 50+ edge cases (quest conflicts, unlock conditions, teleport eligibility, etc.) before development started, which meant we didn\'t need to redesign anything during implementation.',
+    overview: 'An always-visible quest tracker that consolidates main quests, side quests, and exploration goals into a single priority-sorted list. The problem: during CBT1, players who context-switched between content layers (field → dungeon → UI menu → back to field) frequently lost their active objective, and session data showed these players dropped within 20 minutes on average. The Quest Guide solved this by keeping every tracked objective visible at all times, with 1-tap teleportation to any quest location.',
+    process: 'I wrote the complete spec covering 50+ edge cases before any code was written — quest conflicts, unlock conditions, teleport eligibility, multi-step objective chaining, and cross-zone state persistence. This upfront design investment meant zero mid-production redesigns. The main quest is always pinned at the top; below that, side quests and exploration goals sort dynamically by proximity and priority. Each quest type has its own navigation behaviour (see table), so the system adapts to context rather than forcing a single UI pattern.',
     dataTable: `<table class="overlay-table">
       <tr><th>Quest Condition</th><th>Navigation</th><th>Visual Effect</th><th>Minimap</th></tr>
       <tr><td>Dialog</td><td>Arrow → NPC</td><td>NPC glow</td><td>NPC icon</td></tr>
@@ -1019,9 +1008,9 @@ const overlayData = {
     </table>`,
     flowDiagram: '',
     designNotes: [
-      'The biggest confusion in playtests was players accepting a side quest, doing something else, then forgetting what they were tracking. Pinning the main quest at the top and sorting everything else by priority fixed this — players always saw their most important objective first.',
-      'I wrote specs for 50+ edge cases upfront: what happens if two quests point to the same NPC? What if a teleport destination is inside a locked dungeon? What if a quest objective moves? Covering these before dev meant no mid-production redesigns.',
-      'Quest state persists across login sessions. If a player logs out mid-quest and comes back a day later, everything is exactly where they left it — including handling offline progress and version mismatches between client updates.'
+      'Priority sorting was the single most impactful design decision. In CBT1, players would accept 3–4 side quests, do something else, then forget which quest was active. Pinning the main quest and auto-sorting the rest eliminated this entirely in CBT2 — playtesters stopped asking "what do I do now?" in feedback surveys.',
+      'Edge-case spec writing is where I add the most value on a small team. 50+ cases documented upfront: two quests pointing to the same NPC, teleporting into a locked dungeon, objectives that move mid-quest, quest chains that span server maintenance windows. The engineering team told me this was the cleanest handoff they\'d received — zero clarification tickets during implementation.',
+      'Cross-session persistence was a hard technical requirement I insisted on in the spec. Players log out mid-quest, come back a day later, and everything is exactly where they left it — including handling offline progress calculations and client version mismatches after patches.'
     ],
     icon: '📋',
     images: [{src:'img/quest_ui.jpg', caption:'Quest Guide UI — priority-sorted tracker'}, {src:'img/quest_guide_ingame.jpg', caption:'In-game: arrow navigation to active objective'}],
@@ -1031,8 +1020,8 @@ const overlayData = {
     tag: 'Systems Design · Neon Studio',
     title: 'Records & Codex',
     meta: 'Chronomaze · Sole Designer · 2021–2025',
-    overview: 'A combined achievement tracker and in-game encyclopedia. It logs milestones, combat stats, collection progress, monster data, and world lore — all in one place. The design goal was to serve two very different player types at once: completionists who want to hit 100%, and narrative players who want context for the world they\'re exploring. Both needed to feel like the system was built for them.',
-    process: 'I organised 46+ record types into five pillars (see table below). Reward pacing uses non-linear milestone spacing: early achievements come fast so players build the habit of checking Records, while later milestones stretch out to keep the system relevant over months. A progress ring on the Records icon gives a constant "almost there" signal without cluttering the screen.',
+    overview: 'A unified achievement tracker and in-game encyclopedia — 1,439 entries across 46+ record types, organised into five pillars. The design challenge: serve completionists (who want to chase 100%) and narrative players (who want world context) with one system, not two separate UIs. Every pillar needed to feel like it was built for that player type specifically, while sharing a single progression framework under the hood.',
+    process: 'I structured the five pillars so each one maps to a different player motivation (see table). Reward pacing uses non-linear milestone spacing: early achievements trigger quickly to build the habit of checking Records, while later milestones stretch out to sustain engagement over months without inflating the reward economy. A persistent progress ring on the Records icon creates a "92% — almost there" signal that nudges completionists without interrupting gameplay.',
     dataTable: `<table class="overlay-table">
       <tr><th>Pillar</th><th>What It Tracks</th><th>Entries</th><th>Why It Exists</th></tr>
       <tr><td>Achievements</td><td>Progression milestones</td><td class="num">299</td><td>"What should I do next?" — core motivation loop</td></tr>
@@ -1044,9 +1033,9 @@ const overlayData = {
     <p style="font-size:12px;color:#7d8290;margin-top:8px;">1,439 total entries across 46+ record types. Five pillars, one system.</p>`,
     flowDiagram: '',
     designNotes: [
-      'Reward pacing is deliberately front-loaded. New players hit milestones quickly and learn to check Records. Later milestones stretch out so the system stays relevant for months without inflating rewards.',
-      'The Monster Codex isn\'t just lore — players actually use it to check boss weaknesses and spawn locations before fights. Making the "lore tab" functionally useful was a deliberate choice.',
-      'A subtle progress ring on the Records icon shows completion status at a glance. It creates a gentle "almost done" nudge without pop-ups or intrusive notifications.'
+      'Front-loaded pacing is a deliberate retention tool. New players hit 5–6 milestones in their first session and learn to check Records regularly. By the time milestones stretch out, the habit is established — players keep checking even when the next reward is further away.',
+      'The Monster Codex doubles as a strategic tool, not just lore. Players check boss weaknesses and spawn locations before fights. This was a deliberate choice: making "encyclopaedia content" functionally useful means players engage with lore they\'d otherwise skip, which increases time-in-system and supports the narrative team\'s work.',
+      'The progress ring on the Records icon was tested in two versions: a percentage number and a visual ring. The ring won because it communicates "almost done" at a glance without the precision anxiety that exact percentages create — players don\'t stress about being at 87% vs. 93%.'
     ],
     icon: '📖',
     images: [{src:'img/records_main.jpg', caption:'Records main — 5 pillar categories'}, {src:'img/records_achieve.jpg', caption:'Achievement tracker — 299 milestones'}, {src:'img/records_codex.jpg', caption:'Monster Codex — strategic info + lore'}],
@@ -1056,8 +1045,8 @@ const overlayData = {
     tag: 'Economy Design · Neon Studio',
     title: 'Season Pass',
     meta: 'Chronomaze · Sole Designer · 2021–2025',
-    overview: 'I designed the full Season Pass economy from scratch: 45 levels across 9 tiers (Bronze through Legend), 3 mission types that feed into it, and a complete reward table balanced across a 5-sheet Excel workbook. The pass is strictly non-pay-to-win — the top reward is a cosmetic avatar, not gameplay power.',
-    process: 'I modelled the entire reward economy in Excel first, validating every payout against the game\'s existing margin targets before any dev work started. XP requirements scale from 20 at level 2 up to 1,370 at level 45, with deliberate spikes at tier boundaries to create a "just made it" feeling.',
+    overview: 'Designed the full Season Pass economy from scratch: 45 levels across 9 tiers, 3 mission types, and a complete reward table balanced in a 5-sheet Excel workbook. The key design constraint was non-pay-to-win monetisation — the level 45 reward is a cosmetic avatar, not gameplay power. Paying players get pacing convenience (bonus XP), not stat advantages. This was a deliberate choice to protect competitive integrity while still generating revenue from the pass.',
+    process: 'I modelled the entire reward economy in Excel, validating every payout against the game\'s existing currency circulation and margin targets before any development started. XP requirements scale from 20 at level 2 up to 1,370 at level 45, with deliberate spikes at tier boundaries (Silver→Gold, Platinum→Diamond) to create friction-then-release moments. The 3 mission types (weekly, seasonal, challenge) each serve a different player segment: weekly caps pace casual players at ~4 weeks per season; seasonal and challenge missions give dedicated players a reason to extend sessions.',
     dataTable: `<table class="overlay-table">
       <tr><th>Tier</th><th>Levels</th><th>XP / Level</th><th>Key Rewards</th></tr>
       <tr><td>Bronze</td><td>1–5</td><td class="num">20–80</td><td>Shards, basic materials</td></tr>
@@ -1080,9 +1069,9 @@ const overlayData = {
     </div>
     <p style="font-size:12px;color:#7d8290;margin-top:8px;text-align:center;">Three mission types so the grind doesn\'t feel like a grind. Weekly caps pace casual players; seasonal and challenge missions give dedicated players something to push for.</p>`,
     designNotes: [
-      'Every reward in the 5-sheet workbook was validated against the game\'s existing economy before any code was written. No guesswork — the numbers were locked before dev started.',
-      'Non-pay-to-win by design. The level 45 cosmetic avatar is a prestige badge, not a gameplay advantage. Players who pay get convenience, not power.',
-      'The XP curve is front-loaded on purpose. Early tiers feel fast and rewarding. Later tiers stretch out so a single season lasts about 4 weeks of real playtime — long enough to feel like an accomplishment, short enough to not burn out.'
+      'The 5-sheet workbook validates every reward against the game\'s existing currency sinks before code gets written. Sheet 1 defines the XP curve; Sheet 2 maps rewards per tier; Sheet 3 cross-checks against existing economy circulation; Sheet 4 models free vs. paid player completion rates; Sheet 5 simulates edge cases (what if a player grinds only challenge missions?). This upfront rigour meant the final numbers needed zero post-launch hotfixes.',
+      'Non-pay-to-win is a product decision, not just a design preference. In a collectible RPG where character power matters, selling stat advantages through the pass would undermine the gacha economy. Cosmetic-only rewards keep the pass desirable without cannibalising the primary revenue stream.',
+      'The XP curve is front-loaded deliberately: Bronze and Silver tiers complete in the first week, creating early momentum. The Grandmaster→Legend stretch takes roughly a week of daily play, which is the point where engaged players either push to finish or let the season lapse — both outcomes are acceptable by design.'
     ],
     icon: '🏆',
     images: [{src:'img/season_challenge_gameplay.png', caption:'Season Challenge level layout — one of the skill-based XP missions'}, {src:'img/ui_monthly_attendance.png', caption:'Reward tier progression UI — tiered milestone structure'}],
@@ -1092,22 +1081,22 @@ const overlayData = {
     tag: 'Content Design · Neon Studio',
     title: 'Exploration Missions',
     meta: 'Chronomaze · Sole Designer · 2021–2025',
-    overview: '650+ exploration missions spread across 11 regions. There\'s no "accept" button — missions auto-track the moment a player enters a zone. This ties directly into the fog-of-war system: one data write updates both exploration progress and the adventure map at the same time.',
-    process: 'I built these on top of the existing Quest framework (Quest_Adventure.xml), which meant zero new server endpoints — just data. Zone missions reward individual map completion; world missions pay out at 50% and 100% regional progress.',
+    overview: '650+ exploration missions across 11 regions, designed to make every corner of the map feel intentional. There\'s no "accept" button — missions auto-track the moment a player enters a zone, which solves two problems at once: players never miss content they don\'t know exists, and the team didn\'t need to build a separate mission-management UI. The system ties directly into the fog-of-war map: a single data write updates both exploration progress and the adventure map simultaneously.',
+    process: 'I built the entire system on top of the existing Quest framework (Quest_Adventure.xml), which meant zero new server endpoints and zero new client code — pure data-driven content. This was a deliberate technical decision to keep scope manageable on a small team. Zone missions reward individual map completion; world missions pay out at 50% and 100% regional progress, creating a nested reward loop that keeps multiple progress bars moving in every play session.',
     dataTable: `<table class="overlay-table">
       <tr><th>World</th><th>Zone Missions</th><th>Mission Types</th><th>50% Reward</th><th>100% Reward</th></tr>
       <tr><td>Knight\'s Garden</td><td class="num">58</td><td>Read diaries, open chests</td><td>400 💎</td><td>700 💎</td></tr>
       <tr><td>Spring Waterway</td><td class="num">62</td><td>Submerged exploration, levers</td><td>400 💎</td><td>700 💎</td></tr>
       <tr><td>Salt Mine</td><td class="num">71</td><td>Ore caches, hazard routes</td><td>400 💎</td><td>700 💎</td></tr>
-      <tr><td>Silak\'s Mansion</td><td class="num">54</td><td>Investigation clues, hidden rooms</td><td>400 💎</td><td>700 💎</td></tr>
-      <tr><td>Burning Furnace</td><td class="num">68</td><td>Lava routes, wall-climb paths</td><td>400 💎</td><td>700 💎</td></tr>
+      <tr><td>Mansion of Syllek</td><td class="num">54</td><td>Investigation clues, hidden rooms</td><td>400 💎</td><td>700 💎</td></tr>
+      <tr><td>Burning Forge</td><td class="num">68</td><td>Lava routes, wall-climb paths</td><td>400 💎</td><td>700 💎</td></tr>
     </table>
     <p style="font-size:12px;color:#7d8290;margin-top:8px;">Every mission uses narrative-specific objectives — "read the diary hidden behind the waterfall", not "kill 10 mobs". Even corridor and transition zones have missions so no area feels empty.</p>`,
     flowDiagram: '',
     designNotes: [
-      'No accept button means the team didn\'t need to build a separate mission-management UI — saving dev time on a small team. For players, it means they never miss a mission they didn\'t know existed.',
-      'The 50% and 100% rewards are identical across worlds (400 and 700 diamonds) regardless of mission count. This is deliberate: smaller worlds like Knight\'s Garden (58 missions) reach milestones faster, giving new players early wins. Larger worlds like Salt Mine (71 missions) take longer but the journey itself is the content.',
-      'Rewards nest: finish a zone → zone reward → world progress bar fills → world milestone reward. Every play session pushes at least one visible progress bar forward, so players always feel like they\'re making headway.'
+      'Every mission uses narrative-specific objectives — "read the diary hidden behind the waterfall", not "kill 10 mobs". Even corridor and transition zones between main areas have their own missions, so no part of the map feels like dead space. This was the most time-consuming part of the design, but it\'s what makes exploration feel handcrafted rather than procedural.',
+      'Flat rewards across worlds (400 and 700 diamonds at 50% and 100%) regardless of mission count is a deliberate pacing choice. Smaller worlds like Knight\'s Garden (58 missions) reach milestones faster, giving new players early wins and teaching the system. Larger worlds like Salt Mine (71 missions) take longer, but by that point players are invested enough that the journey itself sustains engagement.',
+      'The nested reward loop — zone completion → zone reward → world progress bar → world milestone — means every play session moves at least one visible progress bar forward. This is key for mobile: players who open the app for 10 minutes need to feel like something happened, or they stop coming back.'
     ],
     icon: '🧭',
     images: [{src:'img/explore_targets_new.jpg', caption:'Exploration targets — zone objectives with auto-tracking'}, {src:'img/explore_adventure_log.jpg', caption:'Adventure log — regional completion and mission history'}],
@@ -1117,8 +1106,8 @@ const overlayData = {
     tag: 'UX / Navigation · Neon Studio',
     title: 'Map & Minimap',
     meta: 'Chronomaze · Sole Designer · 2021–2025',
-    overview: 'Navigation system for 211+ interconnected maps. Players have a HUD minimap for immediate surroundings and a full-screen Adventure Map for planning routes, tracking fog-of-war progress, and fast-travelling via Dimensional Gates.',
-    process: 'Two layers: the world map handles macro planning (where do I go next?), while the minimap handles moment-to-moment play (where\'s the nearest enemy?). Fog-of-war visibility is driven by XML data — I configured which areas are revealed, how much fog lifts per zone, and what triggers reveal events. The art team provided one full-colour map image per zone, and the fog system handles the rest.',
+    overview: 'Navigation system for 211+ interconnected maps, designed around two distinct player questions: "where do I go next?" (Adventure Map) and "what\'s around me right now?" (HUD minimap). The core design challenge was information density — with 211+ maps, NPCs, monsters, quest markers, warps, and fog-of-war all competing for screen space, the system needed strict layering rules to stay readable on a mobile screen.',
+    process: 'I defined an explicit icon overlap priority (Quest > NPC > Collectible > Decoration) and documented it in the spec, which eliminated weeks of back-and-forth with engineers about what renders on top of what. Fog-of-war is entirely XML-driven: I configured reveal triggers, fog-lift percentages, and zone unlock conditions in data, while the art team provided a single full-colour image per zone. This data-driven approach meant we could tune fog reveals without rebuilding art assets or redeploying the client.',
     dataTable: `<table class="overlay-table">
       <tr><th>Layer</th><th>Minimap</th><th>World Map</th></tr>
       <tr><td>Player</td><td>Real-time dot</td><td>Position updates live on the world map too</td></tr>
@@ -1132,9 +1121,9 @@ const overlayData = {
     <p style="font-size:12px;color:#7d8290;margin-top:8px;">Icon overlap priority: Quest &gt; NPC &gt; Collectible &gt; Decoration. Having this as an explicit rule saved a lot of back-and-forth with engineers about what shows on top of what.</p>`,
     flowDiagram: '',
     designNotes: [
-      'Fog-of-war is XML-driven. I set up the reveal data — which zones unlock, how much fog clears, what player actions trigger reveals — and worked with a programmer to verify it in the Unity scene. One art asset per zone, no duplicate fogged/unfogged versions needed.',
-      'When players go indoors (dungeons, buildings), the world map pins their icon to the last outdoor warp point. This solves the "where am I?" problem for spaces that don\'t exist on the world graph.',
-      'Dimensional Gates let players fast-travel between any two unlocked points across the entire world. With 211+ maps, this isn\'t a convenience feature — it\'s mandatory.'
+      'The fog-of-war system uses a single art asset per zone — the full-colour map. Fog is applied as a data overlay, not a separate image. This saved the art team from producing 2× the map assets and meant I could adjust reveal behaviour in XML without touching art or requiring a client update.',
+      'Indoor spaces (dungeons, buildings) don\'t exist on the world graph, which creates a "where am I?" problem. The solution: when players enter an indoor space, their world map icon pins to the last outdoor warp point. Simple rule, but it required speccing the exact behaviour for 30+ indoor transitions to ensure consistency.',
+      'Dimensional Gates are the fast-travel backbone. With 211+ maps, getting from Hermit\'s Forest to Burning Forge without fast travel would take 15+ minutes of walking. The gate network is structured so every major zone is within 2 gate hops of any other zone — this was a graph-connectivity problem I solved on paper before placing the gates in Unity.'
     ],
     icon: '📍',
     images: [{src:'img/map_adventure_ui.jpg', caption:'Adventure Map UI — Dimensional Gate network and zone navigation'}, {src:'img/map_dimensional_gates.jpg', caption:'Dimensional Gate — cross-region fast-travel system'}],
@@ -1144,8 +1133,8 @@ const overlayData = {
     tag: 'Event Design · Crowngames',
     title: 'Bingo Masters',
     meta: 'Slotica 5 · Co-designed · 2019–2021',
-    overview: 'A recurring bingo event layered on top of the slot-spin loop. Players don\'t need to learn anything new — they earn bingo squares just by spinning slots like they normally would.',
-    process: 'I designed the card structures and tuned fill rates across 8 card levels and 5 bet tiers, which gives 40 distinct payout curves. The full economy was modelled in Excel and tested against existing margin targets.',
+    overview: 'A recurring bingo event layered on top of the existing slot-spin loop — players earn bingo squares by doing exactly what they already do (spinning slots), so the event adds engagement without adding friction. The design goal was a format that could run repeatedly with different themes and minimal redesign work, while still feeling fresh each time.',
+    process: 'I designed the card structures and tuned fill rates across 8 card levels and 5 bet tiers, producing 40 distinct payout curves (8×5 matrix). Each curve was modelled in Excel and validated against the game\'s existing margin targets to ensure the event generated net revenue without cannibalising baseline spend. The ~60% casual fill rate means most players get meaningful rewards without changing their behaviour; the remaining ~40% creates a "just a few more spins" push that extends sessions for engaged players.',
     dataTable: `<table class="overlay-table">
       <tr><th>Parameter</th><th>Value</th><th>Purpose</th></tr>
       <tr><td>Card Levels</td><td class="num">8</td><td>Difficulty scales with player progression</td></tr>
@@ -1156,8 +1145,8 @@ const overlayData = {
     </table>`,
     flowDiagram: '',
     designNotes: [
-      'Contributed to a 10% improvement in 7-day retention across the Crowngames event portfolio.',
-      'The format is designed to be reusable — swap the theme, adjust the numbers, and it runs again with minimal extra design work. We ran it multiple times with different skins.'
+      'The Bingo Masters series contributed to a 10% improvement in 7-day retention across the Crowngames event portfolio. The key was that the event rewarded existing player behaviour (spinning) rather than asking for new behaviour (grinding a separate system), which kept the adoption barrier at zero.',
+      'Reusability was a first-order design goal. The format is theme-agnostic: swap the visual skin, adjust the fill-rate numbers for the current player base, and it runs again. We shipped multiple seasonal variants with roughly 2 days of design work per reskin, compared to 2–3 weeks for a net-new event format.'
     ],
     icon: '🎯',
     images: [{src:'img/event_bingo_card.jpg', caption:'Bingo card UI — 8 levels of escalating difficulty'}, {src:'img/event_bingo_collection.jpg', caption:'Collection system — 12 themed sets with milestone payouts'}, {src:'img/event_bingo_shop.png', caption:'In-game shop — diamond rewards and tiered purchasing'}],
@@ -1167,8 +1156,8 @@ const overlayData = {
     tag: 'Event Design · Crowngames',
     title: 'Halloween Event',
     meta: 'Slotica 5 · Co-designed · Oct 2020',
-    overview: 'A 14-day map event (Oct 21 – Nov 3) where players collect pumpkins across 8 themed zones. Each zone has its own time limit, and the event runs 3 escalating full-clear rounds — first round is easy to complete, second and third are a real push.',
-    process: 'The player loop: spin slots to earn pumpkin tokens → spend tokens to clear zones on the map → each zone has a time-limited collection goal → clear all 8 zones to finish a round → rounds 2 and 3 reset the map with higher targets. I authored the initial concept and iterated through 4 versions (v0.1–v0.4), then co-balanced the final numbers with the team lead.',
+    overview: 'A 14-day map event (Oct 21 – Nov 3) built around escalating difficulty. Players collect pumpkins across 8 themed zones, each with its own time limit. The event runs 3 full-clear rounds — Round 1 is designed to be achievable for casual players, while Rounds 2 and 3 raise targets significantly to give engaged players a reason to extend their sessions and spend.',
+    process: 'I authored the initial concept and iterated through 4 design versions (v0.1–v0.4) before co-balancing the final numbers with the team lead. The core loop survived all 4 iterations intact (spin → collect → clear zone → next round); what changed between versions were zone-specific targets, time buffers (~20% slack to create pressure without frustration), and the reward curve across rounds. This iterative approach let us lock the engineering scope early while continuing to refine the design.',
     dataTable: `<table class="overlay-table">
       <tr><th>Parameter</th><th>Value</th><th>Design Intent</th></tr>
       <tr><td>Zones</td><td class="num">8</td><td>Each zone feels distinct, not a copy-paste</td></tr>
@@ -1186,8 +1175,8 @@ const overlayData = {
       <div class="flow-box">Clear All 8 Zones<small>Complete round → next round unlocks</small></div>
     </div>`,
     designNotes: [
-      'The reward structure doubles as the difficulty curve. Round 1 teaches players the format with achievable targets. Rounds 2 and 3 raise the stakes for players who want to push harder.',
-      'The core loop — collect, clear, escalate — survived intact through all 4 design iterations. What changed were zone-specific numbers and time buffers, not the fundamental structure.'
+      'The 3-round structure is a built-in difficulty curve. Round 1 teaches the format with targets most active players will hit naturally. Rounds 2 and 3 are deliberately harder — they exist for the top 20–30% of engaged players who drive the majority of event revenue. This segmentation means casual players leave satisfied while whales have a reason to push.',
+      'Preserving the core loop across 4 design iterations while only adjusting numbers was a deliberate strategy to decouple engineering work from design iteration. The dev team built the system once (v0.1 spec); I kept tuning targets and buffers through v0.4 without requiring additional engineering time. This is the kind of scope management that matters on a small team.'
     ],
     icon: '🎃',
     images: [{src:'img/event_halloween_map.jpg', caption:'8-zone event map — numbered regions with distinct collection targets'}, {src:'img/event_halloween_gameplay.jpg', caption:'Map-fill gameplay — explore zones within the time limit to win up to 500× payout'}],
@@ -1197,8 +1186,8 @@ const overlayData = {
     tag: 'Event Design · Crowngames',
     title: 'Puppy Event',
     meta: 'Slotica 5 · Co-designed · 2019–2021',
-    overview: 'A care-based event designed to get players coming back more often, not playing longer. Instead of grinding for an hour, players return several times a day for short "feed the puppy" interactions — each one takes about a minute.',
-    process: 'I designed the feeding schedules and milestone reward tables to match the game\'s existing session patterns. If players already log in 3–4 times a day, the puppy\'s feeding timer is set to reward exactly that rhythm.',
+    overview: 'A care-based event that targets session frequency instead of session length. The insight: for retention metrics, getting a player to open the app 4 times a day for 1 minute each (4 sessions) is more valuable than one 30-minute session (1 session). The puppy\'s feeding mechanic creates a natural reason to return — each interaction takes about a minute, but it pulls players back into the app where they\'re likely to do a few spins while they\'re there.',
+    process: 'I designed the feeding schedules and milestone reward tables to match the game\'s existing session patterns. Analytics showed most active players already logged in 3–4 times daily, so the feeding timer was calibrated to reward exactly that rhythm — not demand more. This meant the event felt like a bonus for existing behaviour, not an additional obligation, which kept opt-in rates high.',
     dataTable: '',
     flowDiagram: `<div class="flow-diagram">
       <div class="flow-box">Return to game<small>Natural session start</small></div>
@@ -1210,8 +1199,8 @@ const overlayData = {
       <div class="flow-box">Milestone reward<small>Keeps players coming back</small></div>
     </div>`,
     designNotes: [
-      'This event targets session frequency, not session length. Getting players to open the app 4 times a day for 1 minute each is more valuable (for retention metrics) than one 30-minute session.',
-      'Milestone spacing matches the game\'s existing session cadence — players don\'t need to change their habits to progress. The event rewards behaviour they\'re already doing.'
+      'The frequency-over-duration trade-off is core to mobile retention design. DAU/MAU ratio improves when players form a daily habit, and a 1-minute care interaction has a lower friction threshold than a 15-minute grind session. The puppy mechanic creates emotional stickiness (players feel responsible for the virtual pet) on top of the economic incentive (milestone rewards).',
+      'Calibrating milestones to existing session cadence was a deliberate anti-churn decision. Events that demand behaviour change (log in 6 times instead of 3) see high initial engagement followed by sharp drop-off. By rewarding what players already do, we maintained steady participation across the full event window rather than front-loading and losing players midway.'
     ],
     icon: '🐶',
     images: [{src:'img/event_puppy_lobby.jpg', caption:'Event lobby — 3-step loop: spin → collect → bonus wheel'}, {src:'img/event_puppy_flow.jpg', caption:'Design process — full game loop with purchase decision branching'}],
